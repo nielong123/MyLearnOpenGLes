@@ -126,7 +126,6 @@ public class HockeyRenderer3 implements GLSurfaceView.Renderer {
         if (mallet.isPressed) {
             Log.d(TAG, "handleTouchDown: " + mallet.isPressed);
         }
-
     }
 
 

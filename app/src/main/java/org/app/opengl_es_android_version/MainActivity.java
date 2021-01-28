@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             return false;
         }
         final float normalizedX = (event.getX() / v.getWidth()) * 2 - 1;
-        final float normalizedY = (-(event.getY() / v.getHeight()) * 2 - 1);
+        final float normalizedY = -((event.getY() / v.getHeight()) * 2 - 1);
 
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             glSurfaceView.queueEvent(new Runnable() {
