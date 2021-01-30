@@ -121,7 +121,6 @@ public class HockeyRenderer3 implements GLSurfaceView.Renderer {
 
         Geometry.Ray ray = convertNormalized2DPointToRay(normalizedX, normalizedY);
 
-
         mallet.isPressed = Geometry.intersects(ray, malletBoundingSphere);
         if (mallet.isPressed) {
             Log.d(TAG, "handleTouchDown: " + mallet.isPressed);
@@ -130,17 +129,19 @@ public class HockeyRenderer3 implements GLSurfaceView.Renderer {
 
 
     public void handleTouchMove(float normalizedX, float normalizedY) {
-        Log.d(TAG, "handleTouchMove normalizedX*normalizedY == " + normalizedX + " " + normalizedY);
         if (mallet.isPressed) {
+            // 保存前一刻木槌的位置信息
             mallet.previousPosition = mallet.position;
             // 根据屏幕触碰点 和 视图投影矩阵 产生三维射线
             Geometry.Ray ray = convertNormalized2DPointToRay(normalizedX, normalizedY);
-            // 定义桌子的平面,观察平面的点为(0,0,0)
-            Geometry.Plane tablePlane = new Geometry.Plane(new Geometry.Point(0, 0, 0), new Geometry.Vector(0, 0, 0));
-            // 射线平米相交测试
-            Geometry.Point touchPoint = Geometry.intersectionPoint(ray, tablePlane);
+            // 定义的桌子平面，观察平面的点为（0，0，0）
+            Geometry.Plane tablePlane = new Geometry.Plane(new Geometry.Point(0, 0, 0), new Geometry.Vector(0, 1, 0));
+            // 进行射线-平面 相交测试
+            Geometry.Point touchedPoint = Geometry.intersectionPoint(ray, tablePlane);
             // 根据相交点 更新木槌位置
-            mallet.position = new Geometry.Point(touchPoint.x, touchPoint.y, touchPoint.z);
+            mallet.position = new Geometry.Point(touchedPoint.x, mallet.height / 2f, touchedPoint.z);
+            Matrix.setIdentityM(mallet.modelMatrix, 0);
+            Matrix.translateM(mallet.modelMatrix, 0, mallet.position.x, mallet.position.y, mallet.position.z);
         }
     }
 
