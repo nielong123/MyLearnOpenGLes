@@ -143,6 +143,7 @@ public class HockeyRenderer3 implements GLSurfaceView.Renderer {
             Matrix.setIdentityM(mallet.modelMatrix, 0);
             Matrix.translateM(mallet.modelMatrix, 0, mallet.position.x, mallet.position.y, mallet.position.z);
         }
+
     }
 
 
