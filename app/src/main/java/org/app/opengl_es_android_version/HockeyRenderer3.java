@@ -57,8 +57,10 @@ public class HockeyRenderer3 implements GLSurfaceView.Renderer {
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
         table = new Table();
-        mallet = new Mallet(0.08f, 0.15f, 32);
-        puck = new Puck(0.03f, 0.01f, 32);
+//        mallet = new Mallet(0.08f, 0.15f, 32);
+        mallet = new Mallet(0.2f, 0.3f);
+//        puck = new Puck(0.03f, 0.01f, 32);
+        puck = new Puck(0.3f, 0.3f);
 
         textureShaderProgram = new TextureShaderProgram(context);
         colorShaderProgram = new ColorShaderProgram(context);

@@ -96,6 +96,27 @@ public class ObjectBuilder {
         return builder.build();
     }
 
+    public static GeneratedData createPuck(float centerX, float centerY, float centerZ,
+                                           float radius, float height) {
+        int numPoints = 32;
+
+        Geometry.Cylinder puck = new Geometry.Cylinder(new Geometry.Point(centerX, centerY, centerZ), radius, height);
+
+        int size = sizeOfCircleInVertices(numPoints) +
+                sizeOfCylinderInVertices(numPoints);
+
+        ObjectBuilder builder = new ObjectBuilder(size);
+
+        Geometry.Circle puckTop = new Geometry.Circle(
+                puck.center.translateY(puck.height / 2),
+                puck.radius);
+
+        builder.createCircle(puckTop, numPoints);
+        builder.createCylinder(puck, numPoints);
+
+        return builder.build();
+    }
+
     public static GeneratedData createMallet(Geometry.Point center, float radius, float height, int numPoints) {
 
         int size = (sizeOfCircleInVertices(numPoints) + sizeOfCylinderInVertices(numPoints)) * 2;
@@ -115,6 +136,44 @@ public class ObjectBuilder {
         objectBuilder.createCircle(baseCircle, numPoints);
         objectBuilder.createCylinder(baseCylinder, numPoints);
 
+        //上半部分
+        float handleHeight = height * 0.75f;
+        float handleRadius = radius / 3f;
+        Geometry.Circle handleCircle = new Geometry.Circle(
+                center.translateY(height * 0.5f),
+                handleRadius
+        );
+        Geometry.Cylinder handleCylinder = new Geometry.Cylinder(
+                baseCircle.center.translateY(handleHeight / 2f),
+                handleRadius,
+                handleHeight
+        );
+        objectBuilder.createCircle(handleCircle, numPoints);
+        objectBuilder.createCylinder(handleCylinder, numPoints);
+
+        return objectBuilder.build();
+    }
+
+    public static GeneratedData createMallet(float centerX, float centerY, float centerZ,
+                                             float radius, float height) {
+        int numPoints = 32;
+        int size = (sizeOfCircleInVertices(numPoints) + sizeOfCylinderInVertices(numPoints)) * 2;
+        ObjectBuilder objectBuilder = new ObjectBuilder(size);
+
+        Geometry.Point center = new Geometry.Point(centerX, centerY, centerZ);
+        //底座部分
+        float baseHeight = height * 0.25f;
+        Geometry.Circle baseCircle = new Geometry.Circle(
+                center.translateY(-baseHeight),
+                radius
+        );
+        Geometry.Cylinder baseCylinder = new Geometry.Cylinder(
+                baseCircle.center.translateY(-baseHeight / 2f),
+                radius,
+                baseHeight
+        );
+        objectBuilder.createCircle(baseCircle, numPoints);
+        objectBuilder.createCylinder(baseCylinder, numPoints);
         //上半部分
         float handleHeight = height * 0.75f;
         float handleRadius = radius / 3f;
