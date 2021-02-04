@@ -52,17 +52,18 @@ public class Mallet {
         Matrix.setIdentityM(modelMatrix, 0);
     }
 
-    public Mallet(float centerX, float centerY) {
-
-        float centerZ = 0f;
-        this.radius = 0.08f;
-        this.height = 0.15f;
-        ObjectBuilder.GeneratedData mallet = ObjectBuilder.createMallet(centerX, centerY, centerZ, radius, height);
-
-        vertexArray = new VertexArray(mallet.vertexData);
-        drawCommandList = mallet.drawCommanList;
-        Matrix.setIdentityM(modelMatrix, 0);
-    }
+//    public Mallet(float centerX, float centerY) {
+//
+//        float centerZ = 0f;
+//        this.radius = 0.08f;
+//        this.height = 0.15f;
+//        ObjectBuilder.GeneratedData mallet = ObjectBuilder.createMallet(centerX, centerY, centerZ, radius, height);
+//
+//        vertexArray = new VertexArray(mallet.vertexData);
+//        drawCommandList = mallet.drawCommanList;
+//        Matrix.setIdentityM(modelMatrix, 0);
+////        Matrix.translateM(modelMatrix, 0, centerX, centerY, centerZ);
+//    }
 
     public void bindData(ColorShaderProgram shaderProgram) {
         vertexArray.setVertexAttributePointer(

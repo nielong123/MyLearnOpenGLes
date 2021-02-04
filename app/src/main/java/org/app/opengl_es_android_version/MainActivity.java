@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
+public class MainActivity extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener {
 
     private GLSurfaceView glSurfaceView;
     private boolean rendererSet = false;
@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-        glSurfaceView = new GLSurfaceView(this);
+        setContentView(R.layout.activity_main);
+        glSurfaceView = findViewById(R.id.gLSurfaceView);
         glSurfaceView.setOnTouchListener(this);
         ActivityManager activityManager =
                 (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         } else {
             Toast.makeText(this, "不支持openGL es 2.0", Toast.LENGTH_SHORT).show();
         }
-        setContentView(glSurfaceView);
+//        setContentView(glSurfaceView);
     }
 
 
@@ -97,6 +97,14 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             return false;
         }
         return true;
+    }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnTest1:
+                hockeyRenderer.startRotationCareraView();
+                return;
+        }
     }
 }

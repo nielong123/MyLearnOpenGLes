@@ -36,21 +36,19 @@ public class Puck {
         Matrix.setIdentityM(modelMatrix,0);
     }
 
-    public Puck(float centerX, float centerY) {
-
-        float centerZ = 0f;
-        this.radius = 0.03f;
-        this.height = 0.06f;
-
-        ObjectBuilder.GeneratedData puck = ObjectBuilder.createPuck(centerX, centerY, centerZ, radius, height);
-//                new Geometry.Cylinder(new Geometry.Point(0f, 0f, 0f), radius, height),
-//                numPointsAroundPuck);
-
-        vertexArray = new VertexArray(puck.vertexData);
-        drawList = puck.drawCommanList;
-
-        Matrix.setIdentityM(modelMatrix, 0);
-    }
+//    public Puck(float centerX, float centerY) {
+//
+//        float centerZ = 0f;
+//        this.radius = 0.03f;
+//        this.height = 0.06f;
+//
+//        ObjectBuilder.GeneratedData puck = ObjectBuilder.createPuck(centerX, centerY, centerZ, radius, height);
+//
+//        vertexArray = new VertexArray(puck.vertexData);
+//        drawList = puck.drawCommanList;
+//
+//        Matrix.setIdentityM(modelMatrix, 0);
+//    }
 
     public void bindData(ColorShaderProgram colorShaderProgram) {
         vertexArray.setVertexAttributePointer(
