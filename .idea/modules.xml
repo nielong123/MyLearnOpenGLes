@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/OpenGL_ES_ANDROID_VERSION.iml" filepath="$PROJECT_DIR$/.idea/modules/OpenGL_ES_ANDROID_VERSION.iml" group="OpenGL_ES_ANDROID_VERSION" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="OpenGL_ES_ANDROID_VERSION/app" />
+    </modules>
+  </component>
+</project>
