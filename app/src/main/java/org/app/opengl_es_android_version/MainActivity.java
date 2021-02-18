@@ -17,7 +17,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private GLSurfaceView glSurfaceView;
     private boolean rendererSet = false;
 
-    HockeyRenderer3 hockeyRenderer = new HockeyRenderer3(this);
+//    HockeyRenderer3 hockeyRenderer = new HockeyRenderer3(this);
+    CubeRenderer cubeRenderer = new CubeRenderer(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 || Build.MODEL.contains("Android SDK built for x86")));
         if (supportEs2) {
             glSurfaceView.setEGLContextClientVersion(2);
-            glSurfaceView.setRenderer(hockeyRenderer);
+            glSurfaceView.setRenderer(cubeRenderer);
+//            glSurfaceView.setRenderer(hockeyRenderer);
             rendererSet = true;
         } else {
             Toast.makeText(this, "不支持openGL es 2.0", Toast.LENGTH_SHORT).show();
@@ -73,29 +75,29 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
      */
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        if (event == null) {
-            return false;
-        }
-        final float normalizedX = (event.getX() / v.getWidth()) * 2 - 1;
-        final float normalizedY = -((event.getY() / v.getHeight()) * 2 - 1);
-
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            glSurfaceView.queueEvent(new Runnable() {
-                @Override
-                public void run() {
-                    hockeyRenderer.handleTouchDown(normalizedX, normalizedY);
-                }
-            });
-        } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-            glSurfaceView.queueEvent(new Runnable() {
-                @Override
-                public void run() {
-                    hockeyRenderer.handleTouchMove(normalizedX, normalizedY);
-                }
-            });
-        } else {
-            return false;
-        }
+//        if (event == null) {
+//            return false;
+//        }
+//        final float normalizedX = (event.getX() / v.getWidth()) * 2 - 1;
+//        final float normalizedY = -((event.getY() / v.getHeight()) * 2 - 1);
+//
+//        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+//            glSurfaceView.queueEvent(new Runnable() {
+//                @Override
+//                public void run() {
+//                    hockeyRenderer.handleTouchDown(normalizedX, normalizedY);
+//                }
+//            });
+//        } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+//            glSurfaceView.queueEvent(new Runnable() {
+//                @Override
+//                public void run() {
+//                    hockeyRenderer.handleTouchMove(normalizedX, normalizedY);
+//                }
+//            });
+//        } else {
+//            return false;
+//        }
         return true;
     }
 
@@ -103,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnTest1:
-                hockeyRenderer.startRotationCareraView();
+//                hockeyRenderer.startRotationCareraView();
                 return;
         }
     }
