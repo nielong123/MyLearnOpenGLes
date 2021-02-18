@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.app.opengl_es_android_version.activity.CubeActivity;
+import org.app.opengl_es_android_version.activity.HockeyActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -20,14 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    /***
-     * 我们在着色器中需要使用归一化设备坐标，因此我们需要把触控事件坐标转换回归一化设备坐标。
-     * 因为安卓设备的屏幕竖直向下为y的正方向，这和OpenGL向上为正相反，这需要把y轴反转，并把每个坐标按比例映射到范围[-1，1]内。
-     * （把实际触碰横坐标 event.getX 除以 视图的宽 得出 量化后的值 再乘以2 表示-1~0 和 0~1的两端范围，减1是把值控制在少于1的范围）
-     * @param v
-     * @param event
-     * @return
-     */
+
 //    @Override
 //    public boolean onTouch(View v, MotionEvent event) {
 //        if (event == null) {
@@ -65,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 return;
             case R.id.btnTest2:
-                intent.setClass(this, CubeActivity.class);
+                intent.setClass(this, HockeyActivity.class);
                 startActivity(intent);
                 return;
         }

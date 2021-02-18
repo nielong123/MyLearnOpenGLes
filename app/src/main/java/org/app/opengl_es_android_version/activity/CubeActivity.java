@@ -12,8 +12,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.app.opengl_es_android_version.renderer.CubeRenderer;
 import org.app.opengl_es_android_version.R;
+import org.app.opengl_es_android_version.renderer.CubeRenderer;
 
 public class CubeActivity extends AppCompatActivity implements View.OnTouchListener {
 
@@ -26,8 +26,8 @@ public class CubeActivity extends AppCompatActivity implements View.OnTouchListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hockey);
-        glSurfaceView = findViewById(R.id.gLSurfaceView);
+        setContentView(R.layout.activity_cube);
+        glSurfaceView = findViewById(R.id.glSurfaceView);
         ActivityManager activityManager =
                 (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         ConfigurationInfo deviceConfigurationInfo =
