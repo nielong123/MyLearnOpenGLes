@@ -1,71 +1,22 @@
 package org.app.opengl_es_android_version;
 
 import android.content.Intent;
-import android.opengl.GLSurfaceView;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.app.opengl_es_android_version.activity.HockeyActivity;
-import org.app.opengl_es_android_version.renderer.CubeRenderer;
+import org.app.opengl_es_android_version.activity.CubeActivity;
 
-public class MainActivity extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private GLSurfaceView glSurfaceView;
-    private boolean rendererSet = false;
-
-
-    private Button btnTest1;
-
-    //    HockeyRenderer3 hockeyRenderer = new HockeyRenderer3(this);
-    CubeRenderer cubeRenderer = new CubeRenderer(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findViewById(R.id.btnTest1).setOnClickListener(this);
-//        glSurfaceView = findViewById(R.id.gLSurfaceView);
-//        glSurfaceView.setOnTouchListener(this);
-//        ActivityManager activityManager =
-//                (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-//        ConfigurationInfo deviceConfigurationInfo =
-//                activityManager.getDeviceConfigurationInfo();
-//        final boolean supportEs2 = deviceConfigurationInfo.reqGlEsVersion >= 0x20000 || (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1
-//                && (Build.FINGERPRINT.startsWith("generic")
-//                || Build.FINGERPRINT.startsWith("unknown")
-//                || Build.MODEL.contains("google_sdk")
-//                || Build.MODEL.contains("Emulator")
-//                || Build.MODEL.contains("Android SDK built for x86")));
-//        if (supportEs2) {
-//            glSurfaceView.setEGLContextClientVersion(2);
-//            glSurfaceView.setRenderer(cubeRenderer);
-////            glSurfaceView.setRenderer(hockeyRenderer);
-//            rendererSet = true;
-//        } else {
-//            Toast.makeText(this, "不支持openGL es 2.0", Toast.LENGTH_SHORT).show();
-//        }
-//        setContentView(glSurfaceView);
-    }
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (rendererSet) {
-            glSurfaceView.onResume();
-        }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (rendererSet) {
-            glSurfaceView.onPause();
-        }
+        findViewById(R.id.btnTest2).setOnClickListener(this);
     }
 
 
@@ -77,8 +28,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
      * @param event
      * @return
      */
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
+//    @Override
+//    public boolean onTouch(View v, MotionEvent event) {
 //        if (event == null) {
 //            return false;
 //        }
@@ -102,15 +53,19 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 //        } else {
 //            return false;
 //        }
-        return true;
-    }
-
+//        return true;
+//    }
     @Override
     public void onClick(View v) {
+
+        Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.btnTest1:
-                Intent intent = new Intent();
-                intent.setClass(this, HockeyActivity.class);
+                intent.setClass(this, CubeActivity.class);
+                startActivity(intent);
+                return;
+            case R.id.btnTest2:
+                intent.setClass(this, CubeActivity.class);
                 startActivity(intent);
                 return;
         }
