@@ -1,10 +1,11 @@
-package org.app.opengl_es_android_version;
+package org.app.opengl_es_android_version.renderer;
 
 import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 
+import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.util.MatrixHelper;
 import org.app.opengl_es_android_version.util.ShaderHelper;
 import org.app.opengl_es_android_version.util.TextResourceReader;

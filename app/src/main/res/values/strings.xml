@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">OpenGL_ES_ANDROID_VERSION</string>
+    <string name="title_activity_hockey">HockeyActivity</string>
+
 </resources>

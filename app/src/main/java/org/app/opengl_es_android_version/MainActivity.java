@@ -1,49 +1,53 @@
 package org.app.opengl_es_android_version;
 
-import android.app.ActivityManager;
-import android.content.Context;
-import android.content.pm.ConfigurationInfo;
+import android.content.Intent;
 import android.opengl.GLSurfaceView;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.app.opengl_es_android_version.activity.HockeyActivity;
+import org.app.opengl_es_android_version.renderer.CubeRenderer;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener {
 
     private GLSurfaceView glSurfaceView;
     private boolean rendererSet = false;
 
-//    HockeyRenderer3 hockeyRenderer = new HockeyRenderer3(this);
+
+    private Button btnTest1;
+
+    //    HockeyRenderer3 hockeyRenderer = new HockeyRenderer3(this);
     CubeRenderer cubeRenderer = new CubeRenderer(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        glSurfaceView = findViewById(R.id.gLSurfaceView);
-        glSurfaceView.setOnTouchListener(this);
-        ActivityManager activityManager =
-                (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        ConfigurationInfo deviceConfigurationInfo =
-                activityManager.getDeviceConfigurationInfo();
-        final boolean supportEs2 = deviceConfigurationInfo.reqGlEsVersion >= 0x20000 || (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1
-                && (Build.FINGERPRINT.startsWith("generic")
-                || Build.FINGERPRINT.startsWith("unknown")
-                || Build.MODEL.contains("google_sdk")
-                || Build.MODEL.contains("Emulator")
-                || Build.MODEL.contains("Android SDK built for x86")));
-        if (supportEs2) {
-            glSurfaceView.setEGLContextClientVersion(2);
-            glSurfaceView.setRenderer(cubeRenderer);
-//            glSurfaceView.setRenderer(hockeyRenderer);
-            rendererSet = true;
-        } else {
-            Toast.makeText(this, "不支持openGL es 2.0", Toast.LENGTH_SHORT).show();
-        }
+        findViewById(R.id.btnTest1).setOnClickListener(this);
+//        glSurfaceView = findViewById(R.id.gLSurfaceView);
+//        glSurfaceView.setOnTouchListener(this);
+//        ActivityManager activityManager =
+//                (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+//        ConfigurationInfo deviceConfigurationInfo =
+//                activityManager.getDeviceConfigurationInfo();
+//        final boolean supportEs2 = deviceConfigurationInfo.reqGlEsVersion >= 0x20000 || (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1
+//                && (Build.FINGERPRINT.startsWith("generic")
+//                || Build.FINGERPRINT.startsWith("unknown")
+//                || Build.MODEL.contains("google_sdk")
+//                || Build.MODEL.contains("Emulator")
+//                || Build.MODEL.contains("Android SDK built for x86")));
+//        if (supportEs2) {
+//            glSurfaceView.setEGLContextClientVersion(2);
+//            glSurfaceView.setRenderer(cubeRenderer);
+////            glSurfaceView.setRenderer(hockeyRenderer);
+//            rendererSet = true;
+//        } else {
+//            Toast.makeText(this, "不支持openGL es 2.0", Toast.LENGTH_SHORT).show();
+//        }
 //        setContentView(glSurfaceView);
     }
 
@@ -105,7 +109,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnTest1:
-//                hockeyRenderer.startRotationCareraView();
+                Intent intent = new Intent();
+                intent.setClass(this, HockeyActivity.class);
+                startActivity(intent);
                 return;
         }
     }

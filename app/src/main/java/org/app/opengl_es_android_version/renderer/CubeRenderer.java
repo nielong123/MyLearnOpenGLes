@@ -1,4 +1,4 @@
-package org.app.opengl_es_android_version;
+package org.app.opengl_es_android_version.renderer;
 
 import android.content.Context;
 import android.opengl.GLES20;
