@@ -4,12 +4,13 @@ import android.opengl.Matrix;
 
 import org.app.opengl_es_android_version.data.VertexArray;
 import org.app.opengl_es_android_version.program.ColorShaderProgram;
+import org.app.opengl_es_android_version.program.TextureShaderProgram;
 import org.app.opengl_es_android_version.util.Geometry;
 import org.app.opengl_es_android_version.util.ObjectBuilder;
 
 import java.util.List;
 
-public class Puck {
+public class Puck implements Object {
 
     private static final int POSITION_COMPONENT_COUNT = 3;
 
@@ -22,10 +23,10 @@ public class Puck {
 
 
     public Puck(float radius, float height, int numPointsAroundPuck) {
-        
+
         ObjectBuilder.GeneratedData puck = ObjectBuilder.createPuck(
                 new Geometry.Cylinder(new Geometry.Point(0f, 0f, 0f), radius, height),
-				 numPointsAroundPuck);
+                numPointsAroundPuck);
 
         vertexArray = new VertexArray(puck.vertexData);
         drawList = puck.drawCommanList;
@@ -33,22 +34,13 @@ public class Puck {
         this.radius = radius;
         this.height = height;
 
-        Matrix.setIdentityM(modelMatrix,0);
+        Matrix.setIdentityM(modelMatrix, 0);
     }
 
-//    public Puck(float centerX, float centerY) {
-//
-//        float centerZ = 0f;
-//        this.radius = 0.03f;
-//        this.height = 0.06f;
-//
-//        ObjectBuilder.GeneratedData puck = ObjectBuilder.createPuck(centerX, centerY, centerZ, radius, height);
-//
-//        vertexArray = new VertexArray(puck.vertexData);
-//        drawList = puck.drawCommanList;
-//
-//        Matrix.setIdentityM(modelMatrix, 0);
-//    }
+    @Override
+    public void bindData(TextureShaderProgram shaderProgram) {
+
+    }
 
     public void bindData(ColorShaderProgram colorShaderProgram) {
         vertexArray.setVertexAttributePointer(

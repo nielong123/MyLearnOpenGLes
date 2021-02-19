@@ -1,6 +1,15 @@
 # MyLearnOpenGles
+名词解释:
+VAO：Vertex Array Object (顶点数组对象)
+VBO: Vertex Buffer Object (顶点缓存对象)  
 
-本代码的日志
+
+
+代码的日志
+
+2021-2-18
+加入了绘制立方体的代码
+
 
 2021-2-3
 修改了复杂模型（冰球和装锤）的初始化代码和ObjectBuilder类的相关代码，测试发现直接改变点的x/y坐标后可以改变视觉位置，

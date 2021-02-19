@@ -4,11 +4,12 @@ import android.opengl.GLES20;
 import android.opengl.Matrix;
 
 import org.app.opengl_es_android_version.data.VertexArray;
+import org.app.opengl_es_android_version.program.ColorShaderProgram;
 import org.app.opengl_es_android_version.program.TextureShaderProgram;
 
 import static org.app.opengl_es_android_version.contant.Constants.BYTES_PER_FLOAT;
 
-public class Table {
+public class Table implements Object {
 
     private static final int POSITION_COMPONENT_COUNT = 2;
     private static final int TEXTURE_COORDINATES_COMPONENT_COUNT = 2;
@@ -34,6 +35,7 @@ public class Table {
         Matrix.setIdentityM(modelMatrix, 0);
     }
 
+    @Override
     public void bindData(TextureShaderProgram shaderProgram) {
         vertexArray.setVertexAttributePointer(
                 shaderProgram.aPositionLocation,
@@ -49,6 +51,12 @@ public class Table {
         );
     }
 
+    @Override
+    public void bindData(ColorShaderProgram colorShaderProgram) {
+
+    }
+
+    @Override
     public void draw() {
         GLES20.glDrawArrays(GLES20.GL_TRIANGLE_FAN, 0, 6);
     }

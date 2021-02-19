@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.app.opengl_es_android_version.activity.CubeActivity;
 import org.app.opengl_es_android_version.activity.HockeyActivity;
+import org.app.opengl_es_android_version.activity.My2DActivity;
+import org.app.opengl_es_android_version.activity.PanoramaActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -18,37 +20,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         findViewById(R.id.btnTest1).setOnClickListener(this);
         findViewById(R.id.btnTest2).setOnClickListener(this);
+        findViewById(R.id.btnTest3).setOnClickListener(this);
+        findViewById(R.id.btnTest4).setOnClickListener(this);
     }
 
-
-
-//    @Override
-//    public boolean onTouch(View v, MotionEvent event) {
-//        if (event == null) {
-//            return false;
-//        }
-//        final float normalizedX = (event.getX() / v.getWidth()) * 2 - 1;
-//        final float normalizedY = -((event.getY() / v.getHeight()) * 2 - 1);
-//
-//        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-//            glSurfaceView.queueEvent(new Runnable() {
-//                @Override
-//                public void run() {
-//                    hockeyRenderer.handleTouchDown(normalizedX, normalizedY);
-//                }
-//            });
-//        } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-//            glSurfaceView.queueEvent(new Runnable() {
-//                @Override
-//                public void run() {
-//                    hockeyRenderer.handleTouchMove(normalizedX, normalizedY);
-//                }
-//            });
-//        } else {
-//            return false;
-//        }
-//        return true;
-//    }
     @Override
     public void onClick(View v) {
 
@@ -60,6 +35,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return;
             case R.id.btnTest2:
                 intent.setClass(this, HockeyActivity.class);
+                startActivity(intent);
+                return;
+            case R.id.btnTest3:
+                intent.setClass(this, PanoramaActivity.class);
+                startActivity(intent);
+                return;
+            case R.id.btnTest4:
+                intent.setClass(this, My2DActivity.class);
                 startActivity(intent);
                 return;
         }
