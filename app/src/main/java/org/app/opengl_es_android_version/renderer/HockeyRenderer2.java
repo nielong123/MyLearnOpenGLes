@@ -60,7 +60,7 @@ public class HockeyRenderer2 implements GLSurfaceView.Renderer {
         textureShaderProgram = new TextureShaderProgram(context);
         colorShaderProgram = new ColorShaderProgram(context);
 
-        textureId = TextureHelper.loadTexture(context, R.drawable.ic_launcher_background);
+        textureId = TextureHelper.loadTexture(context, R.mipmap.start);
     }
 
     @Override

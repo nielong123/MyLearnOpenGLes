@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.app.opengl_es_android_version.R;
-import org.app.opengl_es_android_version.renderer.My2DRenderer;
+import org.app.opengl_es_android_version.renderer.HockeyRenderer1;
 
 public class My2DActivity extends AppCompatActivity {
 
@@ -20,7 +20,7 @@ public class My2DActivity extends AppCompatActivity {
 
     GLSurfaceView glSurfaceView;
 
-    My2DRenderer my2DRenderer;
+    GLSurfaceView.Renderer my2DRenderer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class My2DActivity extends AppCompatActivity {
                 || Build.MODEL.contains("Android SDK built for x86")));
         if (supportEs2) {
             glSurfaceView.setEGLContextClientVersion(2);
-            my2DRenderer = new My2DRenderer(this);
+            my2DRenderer = new HockeyRenderer1(this);
             glSurfaceView.setRenderer(my2DRenderer);
             rendererSet = true;
         } else {

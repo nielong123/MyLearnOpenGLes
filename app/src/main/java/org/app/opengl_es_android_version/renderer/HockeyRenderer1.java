@@ -17,7 +17,7 @@ import java.nio.FloatBuffer;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-public class HockeyRenderer implements GLSurfaceView.Renderer {
+public class HockeyRenderer1 implements GLSurfaceView.Renderer {
 
     float[] tableVerticesWithTriangles = {
             // X, Y, Z, W, R, G, B
@@ -55,7 +55,7 @@ public class HockeyRenderer implements GLSurfaceView.Renderer {
     private float[] modelMatrix = new float[16];
     private float[] uMatrix = new float[16];
 
-    public HockeyRenderer(Context context) {
+    public HockeyRenderer1(Context context) {
 
         vertexShaderSource = TextResourceReader.readTextFileFromResource(context, R.raw.simple_vertex_shader);
         fragmentShaderSource = TextResourceReader.readTextFileFromResource(context, R.raw.simple_fragment_shader);

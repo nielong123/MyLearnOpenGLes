@@ -18,17 +18,6 @@ public class Mallet {
 
     public float[] modelMatrix = new float[16];
 
-    //private static final float[] VERTEX_DATA = {
-    //        // 两个木槌的质点位置
-    //        //x,    y,    R, G, B
-    //        0f,   -0.4f,  1f,1f,1f,
-    //        0f,    0.4f,  1f,1f,1f,
-    //};
-
-    //public Mallet(){
-    //    vertexArray = new VertexArray(VERTEX_DATA);
-    //}
-
     private final VertexArray vertexArray;
     private List<ObjectBuilder.DrawCommand> drawCommandList;
 
