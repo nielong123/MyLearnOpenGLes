@@ -121,14 +121,14 @@ public class ShaderHelper {
     /***
      * 链接glsl
      * @param context
-     * @param vertexShaderSourceRawId
-     * @param fragmentShaderSourceRawId
+     * @param vertexShaderSourceResId
+     * @param fragmentShaderSourceResId
      * @return
      */
-    public static int buildProgram(Context context, int vertexShaderSourceRawId, int fragmentShaderSourceRawId) {
+    public static int buildProgram(Context context, int vertexShaderSourceResId, int fragmentShaderSourceResId) {
         int programObjectId;
-        String vertexShaderSource = TextResourceReader.readTextFileFromResource(context, vertexShaderSourceRawId);
-        String fragmentShaderSource = TextResourceReader.readTextFileFromResource(context, fragmentShaderSourceRawId);
+        String vertexShaderSource = TextResourceReader.readTextFileFromResource(context, vertexShaderSourceResId);
+        String fragmentShaderSource = TextResourceReader.readTextFileFromResource(context, fragmentShaderSourceResId);
 
         int vertexShader = compileVertexShader(vertexShaderSource);
         int fragmentShader = compileFragmentShader(fragmentShaderSource);
