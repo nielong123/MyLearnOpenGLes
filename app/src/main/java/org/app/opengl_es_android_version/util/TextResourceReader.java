@@ -10,11 +10,12 @@ public class TextResourceReader {
 
     /**
      * 从原生文件读入glsl
+     *
      * @param context
      * @param resourceId
      * @return
      */
-    public static String readTextFileFromResource(Context context, int resourceId){
+    final public static String readTextFileFromResource(Context context, int resourceId) {
         StringBuilder builder = new StringBuilder();
 
         try {

@@ -8,4 +8,9 @@ public class Constants {
     public static final int BYTES_PER_FLOAT = 4;
 
     public static final int BYTES_PER_INT = 8;
+
+
+    public static final String U_COLOR = "u_Color";
+
+    public static final String A_POSITION = "a_Position";
 }

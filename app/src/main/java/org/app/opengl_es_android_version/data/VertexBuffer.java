@@ -22,7 +22,7 @@ public class VertexBuffer {
         GLES20.glGenBuffers(buffers.length, buffers, 0);
         if (buffers[0] == 0) {
             int i = GLES20.glGetError();
-            throw new RuntimeException("不能创建一个新的vertex buffer Object, glGetError = " + i);
+            throw new RuntimeException("不能创建一个新的vertex buffer Object3D, glGetError = " + i);
         }
         //保留缓冲期表示
         bufferId = buffers[0];

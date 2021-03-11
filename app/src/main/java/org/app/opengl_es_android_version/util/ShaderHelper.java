@@ -1,5 +1,6 @@
 package org.app.opengl_es_android_version.util;
 
+import android.content.Context;
 import android.opengl.GLES20;
 import android.util.Log;
 
@@ -12,37 +13,24 @@ import static android.opengl.GLES20.GL_LINK_STATUS;
 import static android.opengl.GLES20.GL_VALIDATE_STATUS;
 import static android.opengl.GLES20.GL_VERTEX_SHADER;
 import static android.opengl.GLES20.glAttachShader;
-import static android.opengl.GLES20.glDeleteProgram;
 import static android.opengl.GLES20.glDeleteShader;
 import static android.opengl.GLES20.glGetProgramInfoLog;
 import static android.opengl.GLES20.glGetProgramiv;
 import static android.opengl.GLES20.glGetShaderInfoLog;
 import static android.opengl.GLES20.glGetShaderiv;
 import static android.opengl.GLES20.glLinkProgram;
-import static android.opengl.GLES20.glValidateProgram;
 
 public class ShaderHelper {
 
     private static final String TAG = ShaderHelper.class.getSimpleName();
 
     public static int compileVertexShader(String shareCode) {
-//        try {
         return compileShader(GL_VERTEX_SHADER, shareCode);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return -1;
-//        }
     }
 
     public static int compileFragmentShader(String shadeCode) {
-//        try {
         return compileShader(GL_FRAGMENT_SHADER, shadeCode);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return -1;
-//        }
     }
-
 
     private static int compileShader(int type, String shaderCode) {
         final int shaderObjectId = GLES20.glCreateShader(type);
@@ -75,6 +63,12 @@ public class ShaderHelper {
         return shaderObjectId;
     }
 
+    /***
+     *  获取着色器语言的内容并加载到代码中
+     * @param vertexShaderId
+     * @param fragmentShaderId
+     * @return
+     */
     public static int linkProgram(int vertexShaderId, int fragmentShaderId) {
         final int programObjectId = GLES20.glCreateProgram();
         if (programObjectId == 0) {
@@ -94,11 +88,11 @@ public class ShaderHelper {
 
         if (LoggerConfig.ON) {
             Log.i(TAG, "Result of linking program:"
-                    + glGetProgramInfoLog(programObjectId));
+                    + GLES20.glGetProgramInfoLog(programObjectId));
         }
 
         if (linkStatus[0] == 0) {
-            glDeleteProgram(programObjectId);
+            GLES20.glDeleteProgram(programObjectId);
             if (LoggerConfig.ON) {
                 Log.w(TAG, " Warning! Linking of program failed, glGetError:" + glGetError());
             }
@@ -110,10 +104,10 @@ public class ShaderHelper {
 
     //效验程序是否可用
     public static boolean validateProgram(int programObjectId) {
-        glValidateProgram(programObjectId);
+        GLES20.glValidateProgram(programObjectId);
 
         final int[] validateStatus = new int[1];
-        glGetProgramiv(programObjectId, GL_VALIDATE_STATUS, validateStatus, 0);
+        GLES20.glGetProgramiv(programObjectId, GL_VALIDATE_STATUS, validateStatus, 0);
 
         if (LoggerConfig.ON) {
             Log.i(TAG, "Result of validating program:" + validateStatus[0]
@@ -121,6 +115,31 @@ public class ShaderHelper {
         }
 
         return validateStatus[0] != GLES20.GL_FALSE;
+    }
+
+
+    /***
+     * 链接glsl
+     * @param context
+     * @param vertexShaderSourceRawId
+     * @param fragmentShaderSourceRawId
+     * @return
+     */
+    public static int buildProgram(Context context, int vertexShaderSourceRawId, int fragmentShaderSourceRawId) {
+        int programObjectId;
+        String vertexShaderSource = TextResourceReader.readTextFileFromResource(context, vertexShaderSourceRawId);
+        String fragmentShaderSource = TextResourceReader.readTextFileFromResource(context, fragmentShaderSourceRawId);
+
+        int vertexShader = compileVertexShader(vertexShaderSource);
+        int fragmentShader = compileFragmentShader(fragmentShaderSource);
+
+        programObjectId = linkProgram(vertexShader, fragmentShader);
+
+        if (LoggerConfig.ON) {
+            validateProgram(programObjectId);
+        }
+
+        return programObjectId;
     }
 
     public static int buildProgram(String vertexShaderSource, String fragmentShaderSource) {

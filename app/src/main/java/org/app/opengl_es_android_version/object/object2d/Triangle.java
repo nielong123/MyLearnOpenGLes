@@ -1,25 +1,26 @@
 package org.app.opengl_es_android_version.object.object2d;
 
 
+import android.content.Context;
 import android.opengl.GLES20;
 
+import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.contant.Constants;
 import org.app.opengl_es_android_version.data.VertexArray;
-import org.app.opengl_es_android_version.object.Object;
-import org.app.opengl_es_android_version.program.ColorShaderProgram;
-import org.app.opengl_es_android_version.program.TextureShaderProgram;
-import org.app.opengl_es_android_version.program.TriangleTextureShaderProgram;
+import org.app.opengl_es_android_version.util.ShaderHelper;
 
 import static android.opengl.GLES20.GL_TRIANGLES;
 
-public class Triangle extends Object {
+public class Triangle implements Object2D {
 
-    private int uColorLocation;
-    private final VertexArray vertexArray;
-
-    static final int POSITION_COMPONENT_COUNT = 3;
-
+    private static final int POSITION_COMPONENT_COUNT = 3;
     private static final int STRIDE = POSITION_COMPONENT_COUNT * Constants.POSITION_COMPONENT_COUNT;
+
+
+    private int programId;
+    private int uColorLocation;
+    private int aPositionLocation;
+    private final VertexArray vertexArray;
 
     public Triangle() {
         vertexArray = new VertexArray(tableVerticesWithTriangles);
@@ -42,28 +43,27 @@ public class Triangle extends Object {
             -0.5f, 0.5f
     };
 
-    @Override
-    public void bindData(ColorShaderProgram colorShaderProgram) {
-
-    }
-
-    public void bindData(TriangleTextureShaderProgram shaderProgram) {
-        vertexArray.setVertexAttributePointer(
-                shaderProgram.aPositionLocation,
-                POSITION_COMPONENT_COUNT,
-                STRIDE,
-                0
-        );
-    }
 
     @Override
-    public void bindData(TextureShaderProgram shaderProgram) {
-
+    public void bindData(Context context) {
+        programId = ShaderHelper.buildProgram(context,
+                R.raw.simple_vertex_shader1_5, R.raw.simple_fragment_shader1_5);
+        GLES20.glUseProgram(programId);
+        //获取uniform的位置，把位置存入uColorLocation中
+        uColorLocation = GLES20.glGetUniformLocation(programId, Constants.U_COLOR);
+        //获取属性位置
+        aPositionLocation = GLES20.glGetAttribLocation(programId, Constants.A_POSITION);
+//        vertexArray.setVertexAttributePointer(
+//                shaderProgram.aPositionLocation,
+//                POSITION_COMPONENT_COUNT,
+//                STRIDE,
+//                0
+//        );
     }
 
     @Override
     public void draw() {
-        GLES20.glUniform4f(uColorLocation, 1.0f, 3.0f, 1.0f, 1.0f);
+//        GLES20.glUniform4f(uColorLocation, 1.0f, 3.0f, 1.0f, 1.0f);
         GLES20.glDrawArrays(GL_TRIANGLES, 0, 3);
     }
 

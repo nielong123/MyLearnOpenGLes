@@ -9,7 +9,7 @@ import org.app.opengl_es_android_version.program.TextureShaderProgram;
 
 import static org.app.opengl_es_android_version.contant.Constants.BYTES_PER_FLOAT;
 
-public class Table extends Object {
+public class Table extends Object3D {
 
     private static final int POSITION_COMPONENT_COUNT = 2;
     private static final int TEXTURE_COORDINATES_COMPONENT_COUNT = 2;

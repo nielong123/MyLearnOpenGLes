@@ -5,11 +5,7 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 
 import org.app.opengl_es_android_version.R;
-import org.app.opengl_es_android_version.object.object2d.Triangle;
-import org.app.opengl_es_android_version.program.ColorShaderProgram;
-import org.app.opengl_es_android_version.program.TextureShaderProgram;
 import org.app.opengl_es_android_version.util.ShaderHelper;
-import org.app.opengl_es_android_version.util.TextResourceReader;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -59,12 +55,13 @@ public class My2DRenderer implements GLSurfaceView.Renderer {
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-        String vertexShaderSource = TextResourceReader.readTextFileFromResource(context, R.raw.simple_vertex_shader1_5);
-        String fragmentShaderSource = TextResourceReader.readTextFileFromResource(context, R.raw.simple_fragment_shader1_5);
-        int vertexShader = ShaderHelper.compileVertexShader(vertexShaderSource);
-        int fragmentShader = ShaderHelper.compileFragmentShader(fragmentShaderSource);
+//        String vertexShaderSource = TextResourceReader.readTextFileFromResource(context, R.raw.simple_vertex_shader1_5);
+//        String fragmentShaderSource = TextResourceReader.readTextFileFromResource(context, R.raw.simple_fragment_shader1_5);
+//        int vertexShader = ShaderHelper.compileVertexShader(vertexShaderSource);
+//        int fragmentShader = ShaderHelper.compileFragmentShader(fragmentShaderSource);
         //链接着色器
-        program = ShaderHelper.linkProgram(vertexShader, fragmentShader);
+//        program = ShaderHelper.linkProgram(vertexShader, fragmentShader);
+        program = ShaderHelper.buildProgram(context, R.raw.simple_vertex_shader1_5, R.raw.simple_fragment_shader1_5);
         //验证程序对于opengl是否有效  debug
         ShaderHelper.validateProgram(program);
         //告诉opengl绘制任何东西到屏幕上需要使用这里定义的程序

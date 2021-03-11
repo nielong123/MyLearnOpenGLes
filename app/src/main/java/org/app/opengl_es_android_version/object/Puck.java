@@ -10,7 +10,7 @@ import org.app.opengl_es_android_version.util.ObjectBuilder;
 
 import java.util.List;
 
-public class Puck extends Object {
+public class Puck extends Object3D {
 
     private static final int POSITION_COMPONENT_COUNT = 3;
 
