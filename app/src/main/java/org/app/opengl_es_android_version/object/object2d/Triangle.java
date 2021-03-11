@@ -1,5 +1,6 @@
 package org.app.opengl_es_android_version.object.object2d;
 
+
 import android.opengl.GLES20;
 
 import org.app.opengl_es_android_version.contant.Constants;
@@ -7,9 +8,13 @@ import org.app.opengl_es_android_version.data.VertexArray;
 import org.app.opengl_es_android_version.object.Object;
 import org.app.opengl_es_android_version.program.ColorShaderProgram;
 import org.app.opengl_es_android_version.program.TextureShaderProgram;
+import org.app.opengl_es_android_version.program.TriangleTextureShaderProgram;
+
+import static android.opengl.GLES20.GL_TRIANGLES;
 
 public class Triangle extends Object {
 
+    private int uColorLocation;
     private final VertexArray vertexArray;
 
     static final int POSITION_COMPONENT_COUNT = 3;
@@ -17,6 +22,16 @@ public class Triangle extends Object {
     private static final int STRIDE = POSITION_COMPONENT_COUNT * Constants.POSITION_COMPONENT_COUNT;
 
     public Triangle() {
+        vertexArray = new VertexArray(tableVerticesWithTriangles);
+    }
+
+    public Triangle(float x1, float y1, float x2, float y2, float x3, float y3) {
+        tableVerticesWithTriangles[0] = x1;
+        tableVerticesWithTriangles[1] = y1;
+        tableVerticesWithTriangles[2] = x2;
+        tableVerticesWithTriangles[3] = y2;
+        tableVerticesWithTriangles[4] = x3;
+        tableVerticesWithTriangles[5] = y3;
         vertexArray = new VertexArray(tableVerticesWithTriangles);
     }
 
@@ -32,8 +47,7 @@ public class Triangle extends Object {
 
     }
 
-    @Override
-    public void bindData(TextureShaderProgram shaderProgram) {
+    public void bindData(TriangleTextureShaderProgram shaderProgram) {
         vertexArray.setVertexAttributePointer(
                 shaderProgram.aPositionLocation,
                 POSITION_COMPONENT_COUNT,
@@ -43,8 +57,14 @@ public class Triangle extends Object {
     }
 
     @Override
+    public void bindData(TextureShaderProgram shaderProgram) {
+
+    }
+
+    @Override
     public void draw() {
-        GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, POSITION_COMPONENT_COUNT);
+        GLES20.glUniform4f(uColorLocation, 1.0f, 3.0f, 1.0f, 1.0f);
+        GLES20.glDrawArrays(GL_TRIANGLES, 0, 3);
     }
 
 }

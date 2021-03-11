@@ -21,18 +21,14 @@ import javax.microedition.khronos.opengles.GL10;
 import static android.opengl.GLES20.GL_FLOAT;
 import static android.opengl.GLES20.GL_TRIANGLES;
 
+
+/***
+ * 绘制一个三角形，可运行版本
+ */
+
 public class My2DRenderer implements GLSurfaceView.Renderer {
 
     private final Context context;
-    private final float[] modelViewProjectMatrix = new float[16];
-    private final float[] viewProjectMatrix = new float[16];
-    private final float[] projectMatrix = new float[16];
-    private final float[] viewMatrix = new float[16];
-
-    TextureShaderProgram textureShaderProgram;
-    ColorShaderProgram colorShaderProgram;
-
-    Triangle triangle;
 
     private final FloatBuffer vertexData;
     private static final int POSITION_COMPONENT_COUNT = 2;
@@ -44,18 +40,11 @@ public class My2DRenderer implements GLSurfaceView.Renderer {
     private int aPositionLocation;
 
 
-
     public My2DRenderer(Context context) {
         this.context = context;
 
-//        triangle = new Triangle();
-
-//        Matrix.setIdentityM(projectMatrix, 0);
-//        Matrix.setIdentityM(viewMatrix, 0);
-//        Matrix.setIdentityM(viewProjectMatrix, 0);
-//        Matrix.setIdentityM(modelViewProjectMatrix, 0);
-
         float[] triangleVertices = {
+                // 第一个三角形
                 0f, 0.5f,
                 -0.5f, 0f,
                 0.5f, 0
@@ -68,12 +57,10 @@ public class My2DRenderer implements GLSurfaceView.Renderer {
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-        GLES20.glClearColor(0, 0, 0, 0);
-        textureShaderProgram = new TextureShaderProgram(context);
-        colorShaderProgram = new ColorShaderProgram(context);
+        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-        String vertexShaderSource = TextResourceReader.readTextFileFromResource(context, R.raw.simple_vertex_shader);
-        String fragmentShaderSource = TextResourceReader.readTextFileFromResource(context, R.raw.simple_fragment_shader);
+        String vertexShaderSource = TextResourceReader.readTextFileFromResource(context, R.raw.simple_vertex_shader1_5);
+        String fragmentShaderSource = TextResourceReader.readTextFileFromResource(context, R.raw.simple_fragment_shader1_5);
         int vertexShader = ShaderHelper.compileVertexShader(vertexShaderSource);
         int fragmentShader = ShaderHelper.compileFragmentShader(fragmentShaderSource);
         //链接着色器
@@ -99,19 +86,16 @@ public class My2DRenderer implements GLSurfaceView.Renderer {
 
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
-//        GLES20.glViewport(0, 0, width, height);
+        GLES20.glViewport(0, 0, width, height);
     }
 
     @Override
     public void onDrawFrame(GL10 gl) {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
-
-        //绘制桌子
+//        //绘制桌子
         GLES20.glUniform4f(uColorLocation, 1.0f, 1.0f, 1.0f, 1.0f);
         //画个三角形，每个三角形有三个顶点，2个三角形6个顶点
         GLES20.glDrawArrays(GL_TRIANGLES, 0, 3);
 
-//        triangle.bindData(textureShaderProgram);
-//        triangle.draw();
     }
 }

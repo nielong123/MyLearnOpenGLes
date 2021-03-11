@@ -1,6 +1,7 @@
 package org.app.opengl_es_android_version.data;
 
 import android.opengl.GLES20;
+import android.util.Log;
 
 import org.app.opengl_es_android_version.contant.Constants;
 
@@ -10,6 +11,7 @@ import java.nio.FloatBuffer;
 
 public class VertexArray {
 
+
     private final FloatBuffer floatBuffer;
 
     public VertexArray(float[] vertexData) {
@@ -17,10 +19,11 @@ public class VertexArray {
                 .order(ByteOrder.nativeOrder())
                 .asFloatBuffer()
                 .put(vertexData);
+        Log.e("TAG", "VertexArray: ");
     }
 
     public void setVertexAttributePointer(int attributeLocation,
-                                       int componentCount, int stride, int dataOffset) {
+                                          int componentCount, int stride, int dataOffset) {
         floatBuffer.position(dataOffset);
         GLES20.glVertexAttribPointer(attributeLocation, componentCount, GLES20.GL_FLOAT,
                 false, stride, floatBuffer);

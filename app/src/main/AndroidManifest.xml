@@ -30,6 +30,7 @@
         <activity android:name=".activity.HockeyActivity" />
         <activity android:name=".activity.PanoramaActivity" />
         <activity android:name=".activity.My2DActivity" />
+        <activity android:name=".activity.Ball3DActivity" />
     </application>
 
 </manifest>

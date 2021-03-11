@@ -6,6 +6,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.app.opengl_es_android_version.activity.Ball3DActivity;
 import org.app.opengl_es_android_version.activity.CubeActivity;
 import org.app.opengl_es_android_version.activity.HockeyActivity;
 import org.app.opengl_es_android_version.activity.My2DActivity;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btnTest2).setOnClickListener(this);
         findViewById(R.id.btnTest3).setOnClickListener(this);
         findViewById(R.id.btnTest4).setOnClickListener(this);
+        findViewById(R.id.btnTest5).setOnClickListener(this);
     }
 
     @Override
@@ -43,6 +45,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return;
             case R.id.btnTest4:
                 intent.setClass(this, My2DActivity.class);
+                startActivity(intent);
+                return;
+            case R.id.btnTest5:
+                intent.setClass(this, Ball3DActivity.class);
                 startActivity(intent);
                 return;
         }

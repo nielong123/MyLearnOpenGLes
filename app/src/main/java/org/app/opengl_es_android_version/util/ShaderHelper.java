@@ -12,9 +12,6 @@ import static android.opengl.GLES20.GL_LINK_STATUS;
 import static android.opengl.GLES20.GL_VALIDATE_STATUS;
 import static android.opengl.GLES20.GL_VERTEX_SHADER;
 import static android.opengl.GLES20.glAttachShader;
-import static android.opengl.GLES20.glCompileShader;
-import static android.opengl.GLES20.glCreateProgram;
-import static android.opengl.GLES20.glCreateShader;
 import static android.opengl.GLES20.glDeleteProgram;
 import static android.opengl.GLES20.glDeleteShader;
 import static android.opengl.GLES20.glGetProgramInfoLog;
@@ -22,7 +19,6 @@ import static android.opengl.GLES20.glGetProgramiv;
 import static android.opengl.GLES20.glGetShaderInfoLog;
 import static android.opengl.GLES20.glGetShaderiv;
 import static android.opengl.GLES20.glLinkProgram;
-import static android.opengl.GLES20.glShaderSource;
 import static android.opengl.GLES20.glValidateProgram;
 
 public class ShaderHelper {
@@ -49,16 +45,16 @@ public class ShaderHelper {
 
 
     private static int compileShader(int type, String shaderCode) {
-        final int shaderObjectId = glCreateShader(type);
+        final int shaderObjectId = GLES20.glCreateShader(type);
         if (shaderObjectId == 0) {
             if (LoggerConfig.ON) {
                 Log.w(TAG, "Warning! Could not create new shader, glGetError:" + glGetError());
             }
             return 0;
         }
-        glShaderSource(shaderObjectId, shaderCode);
+        GLES20.glShaderSource(shaderObjectId, shaderCode);
 
-        glCompileShader(shaderObjectId);
+        GLES20.glCompileShader(shaderObjectId);
 
         final int[] compileStatus = new int[1];
         glGetShaderiv(shaderObjectId, GL_COMPILE_STATUS, compileStatus, 0);
@@ -80,7 +76,7 @@ public class ShaderHelper {
     }
 
     public static int linkProgram(int vertexShaderId, int fragmentShaderId) {
-        final int programObjectId = glCreateProgram();
+        final int programObjectId = GLES20.glCreateProgram();
         if (programObjectId == 0) {
             if (LoggerConfig.ON) {
                 Log.w(TAG, " Warning! Could not create new program, glGetError:" + glGetError());
@@ -112,6 +108,7 @@ public class ShaderHelper {
         return programObjectId;
     }
 
+    //效验程序是否可用
     public static boolean validateProgram(int programObjectId) {
         glValidateProgram(programObjectId);
 

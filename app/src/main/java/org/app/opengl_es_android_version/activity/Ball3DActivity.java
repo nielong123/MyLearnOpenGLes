@@ -8,23 +8,21 @@ import android.os.Build;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.app.opengl_es_android_version.R;
-import org.app.opengl_es_android_version.renderer.My2DRenderer_1;
+import org.app.opengl_es_android_version.renderer.BallRenderer;
 
-public class My2DActivity extends AppCompatActivity {
+public class Ball3DActivity extends AppCompatActivity {
 
-    boolean rendererSet;
+    private GLSurfaceView glSurfaceView;
 
-    GLSurfaceView glSurfaceView;
+    private boolean rendererSet = false;
 
-    //    HockeyRenderer my2DRenderer;
-    My2DRenderer_1 my2DRenderer;
+    private BallRenderer ballRenderer;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cube);
         glSurfaceView = findViewById(R.id.glSurfaceView);
@@ -40,15 +38,14 @@ public class My2DActivity extends AppCompatActivity {
                 || Build.MODEL.contains("Android SDK built for x86")));
         if (supportEs2) {
             glSurfaceView.setEGLContextClientVersion(2);
-            my2DRenderer = new My2DRenderer_1(this);
-//            my2DRenderer = new HockeyRenderer(this);
-            glSurfaceView.setRenderer(my2DRenderer);
+            ballRenderer = new BallRenderer(this);
+            glSurfaceView.setRenderer(ballRenderer);
+            glSurfaceView.setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
             rendererSet = true;
         } else {
             Toast.makeText(this, "不支持openGL es 2.0", Toast.LENGTH_SHORT).show();
         }
     }
-
 
     @Override
     protected void onResume() {
