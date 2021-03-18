@@ -18,7 +18,6 @@ public class VertexArray {
                 .order(ByteOrder.nativeOrder())
                 .asFloatBuffer()
                 .put(vertexData);
-        Log.e("TAG", "VertexArray: ");
     }
 
     public void setVertexAttributePointer(int attributeLocation,

@@ -14,7 +14,7 @@ import org.app.opengl_es_android_version.util.ShaderHelper;
  */
 public class Rectangle implements Object2D {
 
-    private static final int POSITION_COMPONENT_COUNT = 3;
+    private static final int POSITION_COMPONENT_COUNT = 2;
     private static final int STRIDE = POSITION_COMPONENT_COUNT * Constants.POSITION_COMPONENT_COUNT;
 
     private int programId;
@@ -29,7 +29,7 @@ public class Rectangle implements Object2D {
 
     public Rectangle() {
         Geometry.Point point = new Geometry.Point(0f, 0f, 0f);
-        rectangle = new Geometry.Rectangle(point, 0.8f, 0.7f);
+        rectangle = new Geometry.Rectangle(point, 0.5f, 0.6f);
         vertexArray = new VertexArray(getVertexWithRectangle(rectangle));
         count = vertexArray.getFloatBuffer().limit() / 2;
     }
@@ -38,20 +38,21 @@ public class Rectangle implements Object2D {
     private float[] getVertexWithRectangle(Geometry.Rectangle rectangle) {
 
         float[] vertexs = new float[8];
-        //右上角
-        vertexs[0] = rectangle.point.x + rectangle.width / 2;
-        vertexs[1] = rectangle.point.y + rectangle.height / 2;
-
-        //右下角
-        vertexs[2] = vertexs[0];
-        vertexs[3] = rectangle.point.y - rectangle.height / 2;
 
         //左下角
-        vertexs[4] = vertexs[3];
-        vertexs[5] = rectangle.point.x - rectangle.width / 2;
+        vertexs[0] = rectangle.point.x - rectangle.width / 2;
+        vertexs[1] = rectangle.point.y - rectangle.height / 2;
+
+        //右下角
+        vertexs[2] = rectangle.point.x + rectangle.width / 2;
+        vertexs[3] = vertexs[1];
+
+        //右上角
+        vertexs[4] = rectangle.point.x + rectangle.width / 2;
+        vertexs[5] = rectangle.point.y + rectangle.height / 2;
 
         //左上角
-        vertexs[6] = vertexs[1];
+        vertexs[6] = vertexs[0];
         vertexs[7] = vertexs[5];
 
         return vertexs;
@@ -74,14 +75,14 @@ public class Rectangle implements Object2D {
         vertexArray.setVertexAttributePointer(
                 0,
                 POSITION_COMPONENT_COUNT,
-                STRIDE,
+                0,
                 0
         );
     }
 
     @Override
     public void draw() {
-        GLES20.glUniform4f(uColorLocation, 1.0f, 3.0f, 1.0f, 1.0f);
+        GLES20.glUniform4f(uColorLocation, 1.0f, 2.0f, 1.0f, 1.0f);
         GLES20.glDrawArrays(GLES20.GL_LINE_LOOP, 0, count);
     }
 }

@@ -1,4 +1,4 @@
-package org.app.opengl_es_android_version.object.object2d;
+package org.app.opengl_es_android_version.object.object2d.demo;
 
 
 import android.content.Context;
@@ -7,6 +7,7 @@ import android.opengl.GLES20;
 import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.contant.Constants;
 import org.app.opengl_es_android_version.data.VertexArray;
+import org.app.opengl_es_android_version.object.object2d.Object2D;
 import org.app.opengl_es_android_version.util.ShaderHelper;
 
 import static android.opengl.GLES20.GL_TRIANGLES;
