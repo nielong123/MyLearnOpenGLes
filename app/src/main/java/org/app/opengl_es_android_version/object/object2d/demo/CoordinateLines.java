@@ -1,4 +1,4 @@
-package org.app.opengl_es_android_version.object.object2d;
+package org.app.opengl_es_android_version.object.object2d.demo;
 
 import android.content.Context;
 import android.opengl.GLES20;
@@ -6,6 +6,7 @@ import android.opengl.GLES20;
 import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.contant.Constants;
 import org.app.opengl_es_android_version.data.VertexArray;
+import org.app.opengl_es_android_version.object.object2d.Object2D;
 import org.app.opengl_es_android_version.util.Geometry;
 import org.app.opengl_es_android_version.util.ShaderHelper;
 
@@ -14,7 +15,7 @@ import static android.opengl.GLES20.GL_FLOAT;
 /***
  * 用折线来绘制一个圆形
  */
-public class Rectangle implements Object2D {
+public class CoordinateLines implements Object2D {
 
     private static final int POSITION_COMPONENT_COUNT = 2;
     private static final int STRIDE = POSITION_COMPONENT_COUNT * Constants.POSITION_COMPONENT_COUNT;
@@ -29,36 +30,19 @@ public class Rectangle implements Object2D {
 
     VertexArray vertexArray;
 
-    public Rectangle() {
-        Geometry.Point point = new Geometry.Point(0f, 0f, 0f);
-        rectangle = new Geometry.Rectangle(point, 0.6f, 0.6f);
-        vertexArray = new VertexArray(getVertexWithRectangle(rectangle));
+    public CoordinateLines() {
+        vertexArray = new VertexArray(CoordinateLines);
         count = vertexArray.getFloatBuffer().limit() / 2;
     }
 
+    float r = 2f;
 
-    private float[] getVertexWithRectangle(Geometry.Rectangle rectangle) {
-
-        float[] vertexs = new float[8];
-
-        //左下角
-        vertexs[0] = rectangle.point.x - rectangle.width / 2;
-        vertexs[1] = rectangle.point.y - rectangle.height / 2;
-
-        //右下角
-        vertexs[2] = rectangle.point.x + rectangle.width / 2;
-        vertexs[3] = vertexs[1];
-
-        //右上角
-        vertexs[4] = rectangle.point.x + rectangle.width / 2;
-        vertexs[5] = rectangle.point.y + rectangle.height / 2;
-
-        //左上角
-        vertexs[6] = vertexs[0];
-        vertexs[7] = vertexs[5];
-
-        return vertexs;
-    }
+    private float[] CoordinateLines = {
+            -r, 0f,
+            r, 0f,
+            0, r,
+            0, -r
+    };
 
 
     @Override
@@ -80,7 +64,7 @@ public class Rectangle implements Object2D {
 
     @Override
     public void draw() {
-        GLES20.glUniform4f(uColorLocation, 1.0f, 0.0f, 2.0f, 0.0f);
-        GLES20.glDrawArrays(GLES20.GL_LINE_LOOP, 0, count);
+        GLES20.glUniform4f(uColorLocation, 1.0f, 1.0f, 1.0f, 0.0f);
+        GLES20.glDrawArrays(GLES20.GL_LINES, 0, count);
     }
 }

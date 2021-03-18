@@ -1,7 +1,6 @@
 package org.app.opengl_es_android_version.data;
 
 import android.opengl.GLES20;
-import android.util.Log;
 
 import org.app.opengl_es_android_version.contant.Constants;
 
@@ -20,6 +19,14 @@ public class VertexArray {
                 .put(vertexData);
     }
 
+    /**
+     * 这个方法最好不要随便改。。。。在冰球部分要用的
+     *
+     * @param attributeLocation
+     * @param componentCount
+     * @param stride
+     * @param dataOffset
+     */
     public void setVertexAttributePointer(int attributeLocation,
                                           int componentCount, int stride, int dataOffset) {
         floatBuffer.position(dataOffset);

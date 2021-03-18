@@ -6,7 +6,7 @@ import android.opengl.GLSurfaceView;
 
 import org.app.opengl_es_android_version.object.object2d.Object2D;
 import org.app.opengl_es_android_version.object.object2d.Rectangle;
-import org.app.opengl_es_android_version.object.object2d.demo.Triangle;
+import org.app.opengl_es_android_version.object.object2d.demo.CoordinateLines;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,10 +23,11 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
     public My2DRenderer_1(Context context) {
         this.context = context;
 
+        drawObjectList.add(new CoordinateLines());
         drawObjectList.add(new Rectangle());
 //        drawObjectList.add(new Circle());
 //        drawObjectList.add(new Polyline());
-        drawObjectList.add(new Triangle());
+//        drawObjectList.add(new Triangle());
 //        drawObjectList.add(new Square());
     }
 
