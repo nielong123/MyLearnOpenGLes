@@ -4,8 +4,8 @@ import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 
+import org.app.opengl_es_android_version.object.object2d.Circle;
 import org.app.opengl_es_android_version.object.object2d.Object2D;
-import org.app.opengl_es_android_version.object.object2d.Triangle;
 import org.app.opengl_es_android_version.program.ColorShaderProgram;
 
 import java.util.ArrayList;
@@ -22,21 +22,17 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
 
     ColorShaderProgram colorShaderProgram;
 
-//    Triangle triangle, triangle1;
-
-
     public My2DRenderer_1(Context context) {
         this.context = context;
 
-        drawObjectList.add(new Triangle());
+        drawObjectList.add(new Circle());
+//        drawObjectList.add(new Polyline());
+//        drawObjectList.add(new Triangle());
     }
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-        for (Object2D object2D : drawObjectList) {
-            object2D.bindData(context);
-        }
     }
 
     @Override
@@ -49,6 +45,7 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
 
         for (Object2D object : drawObjectList) {
+            object.bindData(context);
             object.draw();
         }
     }

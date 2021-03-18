@@ -37,6 +37,7 @@ public class Geometry {
     public static class Circle {
         public final Point center;
         public final float radius;
+        public final float angdeg = 30;
 
         public Circle(Point center, float radius) {
             this.center = center;
@@ -73,6 +74,22 @@ public class Geometry {
         public Sphere(Point center, float radius) {
             this.center = center;
             this.radius = radius;
+        }
+    }
+
+    /***
+     * 矩形，中心点 + 高 + 宽
+     */
+    public static class Rectangle {
+
+        public final Point point;
+        public final float height;
+        public final float width;
+
+        public Rectangle(Point point, float height, float width) {
+            this.point = point;
+            this.height = height;
+            this.width = width;
         }
     }
 
@@ -153,9 +170,9 @@ public class Geometry {
      */
     public static Vector vectorBetween(Point from, Point to) {
         return new Vector(
-                to.x-from.x,
-                to.y-from.y,
-                to.z-from.z);
+                to.x - from.x,
+                to.y - from.y,
+                to.z - from.z);
     }
 
 

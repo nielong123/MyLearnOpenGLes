@@ -30,4 +30,7 @@ public class VertexArray {
         floatBuffer.position(0);
     }
 
+    public FloatBuffer getFloatBuffer() {
+        return floatBuffer;
+    }
 }

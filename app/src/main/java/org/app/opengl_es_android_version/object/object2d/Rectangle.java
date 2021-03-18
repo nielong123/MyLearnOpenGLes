@@ -6,13 +6,13 @@ import android.opengl.GLES20;
 import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.contant.Constants;
 import org.app.opengl_es_android_version.data.VertexArray;
+import org.app.opengl_es_android_version.util.Geometry;
 import org.app.opengl_es_android_version.util.ShaderHelper;
 
-
 /***
- * 绘制折线
+ * 用折线来绘制一个圆形
  */
-public class Polyline implements Object2D {
+public class Rectangle implements Object2D {
 
     private static final int POSITION_COMPONENT_COUNT = 3;
     private static final int STRIDE = POSITION_COMPONENT_COUNT * Constants.POSITION_COMPONENT_COUNT;
@@ -21,18 +21,41 @@ public class Polyline implements Object2D {
     private int uColorLocation;
     private int aPositionLocation;
 
+    final private int count;
+
+    Geometry.Rectangle rectangle;
+
     VertexArray vertexArray;
 
-    public Polyline() {
-        vertexArray = new VertexArray(tableVerticesWithPolyline);
+    public Rectangle() {
+        Geometry.Point point = new Geometry.Point(0f, 0f, 0f);
+        rectangle = new Geometry.Rectangle(point, 0.8f, 0.7f);
+        vertexArray = new VertexArray(getVertexWithRectangle(rectangle));
+        count = vertexArray.getFloatBuffer().limit() / 2;
     }
 
-    private float[] tableVerticesWithPolyline = {
 
-            -0.3f, -0.4f,
-            0.1f, 0.1f,
-            -0.35f, 0.5f
-    };
+    private float[] getVertexWithRectangle(Geometry.Rectangle rectangle) {
+
+        float[] vertexs = new float[8];
+        //右上角
+        vertexs[0] = rectangle.point.x + rectangle.width / 2;
+        vertexs[1] = rectangle.point.y + rectangle.height / 2;
+
+        //右下角
+        vertexs[2] = vertexs[0];
+        vertexs[3] = rectangle.point.y - rectangle.height / 2;
+
+        //左下角
+        vertexs[4] = vertexs[3];
+        vertexs[5] = rectangle.point.x - rectangle.width / 2;
+
+        //左上角
+        vertexs[6] = vertexs[1];
+        vertexs[7] = vertexs[5];
+
+        return vertexs;
+    }
 
 
     @Override
@@ -58,9 +81,7 @@ public class Polyline implements Object2D {
 
     @Override
     public void draw() {
-//        GLES20.glUniform4f(uColorLocation, 0.0f, 0.0f, 0.0f, 0.0f);
         GLES20.glUniform4f(uColorLocation, 1.0f, 3.0f, 1.0f, 1.0f);
-        GLES20.glDrawArrays(GLES20.GL_LINE_LOOP, 0, 3);
-//        GLES20.glLineWidth(3);
+        GLES20.glDrawArrays(GLES20.GL_LINE_LOOP, 0, count);
     }
 }
