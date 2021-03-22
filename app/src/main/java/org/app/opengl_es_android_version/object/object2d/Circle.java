@@ -46,13 +46,13 @@ public class Circle implements Object2D {
 
     private float[] getVertexWithCircle(Geometry.Circle circle) {
 
-        int all = 90;
+        int all = 360;
 
         int count = (int) (all / circle.angdeg) * 2;
         float[] vertexs = new float[count];
         int offset = 0;
         for (int angdeg = 0; angdeg < all; angdeg += circle.angdeg) {
-            double radians = Math.toRadians(circle.angdeg * angdeg);
+            double radians = Math.toRadians(angdeg);
 //            Log.e(TAG, "radians = " + angdeg);
             vertexs[offset++] = (float) (circle.center.x - circle.radius * Math.sin(radians));
             vertexs[offset++] = (float) (circle.center.y + circle.radius * Math.cos(radians));

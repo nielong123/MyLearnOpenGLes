@@ -35,9 +35,12 @@ public class Geometry {
      * 圆形 = 中心点+半径
      */
     public static class Circle {
+        //中心点
         public final Point center;
+        //半径
         public final float radius;
-        public final float angdeg = 2;
+        //分度值，分度越小，越像一个圆形
+        public final float angdeg = 20;
 
         public Circle(Point center, float radius) {
             this.center = center;
