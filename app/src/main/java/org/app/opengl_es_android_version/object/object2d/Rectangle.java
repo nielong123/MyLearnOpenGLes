@@ -16,6 +16,7 @@ import static android.opengl.GLES20.GL_FLOAT;
  */
 public class Rectangle implements Object2D {
 
+    //因为是x和y，所以两个值代表一个属性
     private static final int POSITION_COMPONENT_COUNT = 2;
     private static final int STRIDE = POSITION_COMPONENT_COUNT * Constants.POSITION_COMPONENT_COUNT;
 
@@ -31,7 +32,7 @@ public class Rectangle implements Object2D {
 
     public Rectangle() {
         Geometry.Point point = new Geometry.Point(0f, 0f, 0f);
-        rectangle = new Geometry.Rectangle(point, 0.6f, 0.6f);
+        rectangle = new Geometry.Rectangle(point, 1f, 1f);
         vertexArray = new VertexArray(getVertexWithRectangle(rectangle));
         count = vertexArray.getFloatBuffer().limit() / 2;
     }

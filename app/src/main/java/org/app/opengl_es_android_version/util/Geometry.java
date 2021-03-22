@@ -37,7 +37,7 @@ public class Geometry {
     public static class Circle {
         public final Point center;
         public final float radius;
-        public final float angdeg = 30;
+        public final float angdeg = 2;
 
         public Circle(Point center, float radius) {
             this.center = center;

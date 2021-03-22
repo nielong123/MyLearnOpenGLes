@@ -51,8 +51,8 @@ public class CoordinateLines implements Object2D {
         //获取属性位置
         aPositionLocation = GLES20.glGetAttribLocation(programId, Constants.A_POSITION);
         //告诉opengl从缓冲区vertextData中取数据找到属性a_Position的数据
-        GLES20.glVertexAttribPointer(
-                aPositionLocation, POSITION_COMPONENT_COUNT, GL_FLOAT, false, 0, vertexArray.getFloatBuffer());
+        GLES20.glVertexAttribPointer(aPositionLocation,
+                POSITION_COMPONENT_COUNT, GL_FLOAT, false, 0, vertexArray.getFloatBuffer());
         //使能顶点数组
         GLES20.glEnableVertexAttribArray(aPositionLocation);
         vertexArray.getFloatBuffer().position(0);

@@ -57,13 +57,10 @@ public class Triangle implements Object2D {
         //告诉opengl从缓冲区vertextData中取数据找到属性a_Position的数据
 //        GLES20.glVertexAttribPointer(aPositionLocation, POSITION_COMPONENT_COUNT, GL_FLOAT, false, 0, vertexData);
         //使能顶点数组
+        GLES20.glVertexAttribPointer(aPositionLocation, 2, GLES20.GL_FLOAT,
+                false, 0, vertexArray.getFloatBuffer());
         GLES20.glEnableVertexAttribArray(aPositionLocation);
-        vertexArray.setVertexAttributePointer(
-                0,
-                POSITION_COMPONENT_COUNT,
-                STRIDE,
-                0
-        );
+        vertexArray.getFloatBuffer().position(0);
     }
 
     @Override

@@ -14,7 +14,9 @@ import org.app.opengl_es_android_version.util.ShaderHelper;
  */
 public class Circle implements Object2D {
 
-    private static final int POSITION_COMPONENT_COUNT = 3;
+    private String TAG = this.getClass().getSimpleName();
+
+    private static final int POSITION_COMPONENT_COUNT = 2;
     private static final int STRIDE = POSITION_COMPONENT_COUNT * Constants.POSITION_COMPONENT_COUNT;
 
     private int programId;
@@ -30,28 +32,30 @@ public class Circle implements Object2D {
     public Circle() {
         Geometry.Point point = new Geometry.Point(0f, 0f, 0f);
         circle = new Geometry.Circle(point, 0.5f);
-//        vertexArray = new VertexArray(tableVerticesWithPolyline);
+//        vertexArray = new VertexArray(testData);
         vertexArray = new VertexArray(getVertexWithCircle(circle));
         count = vertexArray.getFloatBuffer().limit() / 2;
     }
 
-    private float[] tableVerticesWithPolyline = {
-
-            -0.5f, -0.5f,
-            0.5f, 0.5f,
-            -0.35f, 0.5f
+    float[] testData = new float[]{
+            0f, 0.5f,
+            -0.15f, 0.375f,
+            -0.25f, 0.25f,
+            -0.5f, 0f
     };
-
 
     private float[] getVertexWithCircle(Geometry.Circle circle) {
 
-        int count = (int) (360 / circle.angdeg) * 2;
+        int all = 90;
+
+        int count = (int) (all / circle.angdeg) * 2;
         float[] vertexs = new float[count];
         int offset = 0;
-        for (int i = 1; i < 360 / circle.angdeg; i++) {
-            double radians = Math.toRadians(circle.angdeg * i);
-            vertexs[offset++] = (float) (circle.center.x + circle.radius * Math.cos(radians));
-            vertexs[offset++] = (float) (circle.center.y + circle.radius * Math.sin(radians));
+        for (int angdeg = 0; angdeg < all; angdeg += circle.angdeg) {
+            double radians = Math.toRadians(circle.angdeg * angdeg);
+//            Log.e(TAG, "radians = " + angdeg);
+            vertexs[offset++] = (float) (circle.center.x - circle.radius * Math.sin(radians));
+            vertexs[offset++] = (float) (circle.center.y + circle.radius * Math.cos(radians));
         }
 
         return vertexs;
@@ -68,15 +72,11 @@ public class Circle implements Object2D {
         //获取属性位置
         aPositionLocation = GLES20.glGetAttribLocation(programId, Constants.A_POSITION);
         //告诉opengl从缓冲区vertextData中取数据找到属性a_Position的数据
-//        GLES20.glVertexAttribPointer(aPositionLocation, POSITION_COMPONENT_COUNT, GL_FLOAT, false, 0, vertexData);
+        GLES20.glVertexAttribPointer(aPositionLocation,
+                POSITION_COMPONENT_COUNT, GLES20.GL_FLOAT, false, 0, vertexArray.getFloatBuffer());
         //使能顶点数组
         GLES20.glEnableVertexAttribArray(aPositionLocation);
-        vertexArray.setVertexAttributePointer(
-                0,
-                POSITION_COMPONENT_COUNT,
-                STRIDE,
-                0
-        );
+        vertexArray.getFloatBuffer().position(0);
     }
 
     @Override
