@@ -7,7 +7,6 @@ import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.contant.Constants;
 import org.app.opengl_es_android_version.data.VertexArray;
 import org.app.opengl_es_android_version.object.object2d.Object2D;
-import org.app.opengl_es_android_version.util.Geometry;
 import org.app.opengl_es_android_version.util.ShaderHelper;
 
 import static android.opengl.GLES20.GL_FLOAT;
@@ -18,15 +17,12 @@ import static android.opengl.GLES20.GL_FLOAT;
 public class CoordinateLines implements Object2D {
 
     private static final int POSITION_COMPONENT_COUNT = 2;
-    private static final int STRIDE = POSITION_COMPONENT_COUNT * Constants.POSITION_COMPONENT_COUNT;
 
     private int programId;
     private int uColorLocation;
     private int aPositionLocation;
 
     final private int count;
-
-    Geometry.Rectangle rectangle;
 
     VertexArray vertexArray;
 
@@ -35,7 +31,7 @@ public class CoordinateLines implements Object2D {
         count = vertexArray.getFloatBuffer().limit() / 2;
     }
 
-    float r = 2f;
+    float r = 1.0f;
 
     private float[] CoordinateLines = {
             -r, 0f,
