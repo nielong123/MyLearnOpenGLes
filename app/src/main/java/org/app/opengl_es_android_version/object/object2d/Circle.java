@@ -37,13 +37,6 @@ public class Circle implements Object2D {
         count = vertexArray.getFloatBuffer().limit() / 2;
     }
 
-    float[] testData = new float[]{
-            0f, 0.5f,
-            -0.15f, 0.375f,
-            -0.25f, 0.25f,
-            -0.5f, 0f
-    };
-
     private float[] getVertexWithCircle(Geometry.Circle circle) {
 
         int all = 360;
@@ -53,7 +46,6 @@ public class Circle implements Object2D {
         int offset = 0;
         for (int angdeg = 0; angdeg < all; angdeg += circle.angdeg) {
             double radians = Math.toRadians(angdeg);
-//            Log.e(TAG, "radians = " + angdeg);
             vertexs[offset++] = (float) (circle.center.x - circle.radius * Math.sin(radians));
             vertexs[offset++] = (float) (circle.center.y + circle.radius * Math.cos(radians));
         }
