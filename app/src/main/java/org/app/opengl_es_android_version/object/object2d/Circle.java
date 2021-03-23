@@ -29,22 +29,23 @@ public class Circle implements Object2D {
 
     VertexArray vertexArray;
 
-    public Circle() {
+    public Circle(Context context) {
         Geometry.Point point = new Geometry.Point(0f, 0f, 0f);
         circle = new Geometry.Circle(point, 0.5f);
 //        vertexArray = new VertexArray(testData);
         vertexArray = new VertexArray(getVertexWithCircle(circle));
         count = vertexArray.getFloatBuffer().limit() / 2;
+
     }
 
     private float[] getVertexWithCircle(Geometry.Circle circle) {
 
         int all = 360;
 
-        int count = (int) (all / circle.angdeg) * 2;
+        int count = (int) (all / circle.angle) * 2;
         float[] vertexs = new float[count];
         int offset = 0;
-        for (int angdeg = 0; angdeg < all; angdeg += circle.angdeg) {
+        for (int angdeg = 0; angdeg < all; angdeg += circle.angle) {
             double radians = Math.toRadians(angdeg);
             vertexs[offset++] = (float) (circle.center.x - circle.radius * Math.sin(radians));
             vertexs[offset++] = (float) (circle.center.y + circle.radius * Math.cos(radians));

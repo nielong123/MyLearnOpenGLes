@@ -34,9 +34,13 @@ public class HockeyRenderer3 implements GLSurfaceView.Renderer {
 
     int textureId;
 
+    //模型，视图，投影矩阵的乘积
     private final float[] modelViewProjectionMatrix = new float[16];
+    //视图，投影乘积
     private final float[] viewProjectionMatrix = new float[16];
+    //投影矩阵
     private final float[] projectionMatrix = new float[16];
+    //观察（视图）矩阵
     private final float[] viewMatrix = new float[16];
 
     //倒置视图投影矩阵

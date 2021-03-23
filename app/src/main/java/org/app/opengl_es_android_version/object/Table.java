@@ -26,6 +26,7 @@ public class Table extends Object3D {
             -0.5f, -0.8f, 0f, 0.9f,
     };
 
+    //模型矩阵
     public float[] modelMatrix = new float[16];
 
     private final VertexArray vertexArray;

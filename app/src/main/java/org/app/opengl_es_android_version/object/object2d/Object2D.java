@@ -4,6 +4,8 @@ import android.content.Context;
 
 public interface Object2D {
 
+    float[] modelMatrix = new float[16];
+
     /**
      * 这个类中绑定纹理
      */
