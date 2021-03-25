@@ -31,6 +31,7 @@
         <activity android:name=".activity.PanoramaActivity" />
         <activity android:name=".activity.My2DActivity" />
         <activity android:name=".activity.Ball3DActivity" />
+        <activity android:name=".activity.PictureTextureActivity" />
     </application>
 
 </manifest>
