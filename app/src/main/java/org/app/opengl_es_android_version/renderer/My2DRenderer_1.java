@@ -11,6 +11,8 @@ import org.app.opengl_es_android_version.object.object2d.Polyline;
 import org.app.opengl_es_android_version.object.object2d.Rectangle;
 import org.app.opengl_es_android_version.object.object2d.Star5P;
 import org.app.opengl_es_android_version.object.object2d.demo.CoordinateLines;
+import org.app.opengl_es_android_version.object.object2d.demo.Square;
+import org.app.opengl_es_android_version.object.object2d.demo.Triangle;
 
 import java.util.ArrayList;
 import java.util.List;

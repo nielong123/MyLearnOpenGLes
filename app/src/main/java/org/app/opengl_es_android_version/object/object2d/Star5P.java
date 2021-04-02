@@ -35,7 +35,7 @@ public class Star5P implements Object2D {
 
 
     public Star5P() {
-        Geometry.Point point = new Geometry.Point(0f, 0f, 0f);
+        Geometry.Point point = new Geometry.Point(0.2f, 0.1f, 0f);
         Geometry.Star5Points start = new Geometry.Star5Points(point, 0.6f);
         vertexArray = new VertexArray(getVertexWithStart(start));
         count = vertexArray.getFloatBuffer().limit() / 2;
@@ -71,7 +71,7 @@ public class Star5P implements Object2D {
         //告诉opengl从缓冲区vertextData中取数据找到属性a_Position的数据
         vertexArray.getFloatBuffer().position(0);
         GLES20.glVertexAttribPointer(aPositionLocation,
-                POSITION_COMPONENT_COUNT, GLES20.GL_FLOAT, false, 8, vertexArray.getFloatBuffer());
+                POSITION_COMPONENT_COUNT, GLES20.GL_FLOAT, false, 0, vertexArray.getFloatBuffer());
         //使能顶点数组
         GLES20.glEnableVertexAttribArray(aPositionLocation);
         //vertexArray.getFloatBuffer().position(0);
@@ -80,7 +80,7 @@ public class Star5P implements Object2D {
     @Override
     public void draw() {
         GLES20.glUniform4f(uColorLocation, 1.0f, 3.0f, 1.0f, 1.0f);
-        GLES20.glDrawElements(GLES20.GL_LINE_LOOP, 5, GLES20.GL_UNSIGNED_BYTE, indexArray);
+        GLES20.glDrawElements(GLES20.GL_LINE_LOOP, count, GLES20.GL_UNSIGNED_BYTE, indexArray);
         GLES20.glDrawArrays(GLES20.GL_LINE_LOOP, 0, count);
     }
 }
