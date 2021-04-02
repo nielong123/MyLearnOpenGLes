@@ -31,193 +31,160 @@ public class PictureRenderer implements GLSurfaceView.Renderer {
 
             //这里的适配问题需要dp和px的转化
             {
-//                    0.0f, 600f, 0.0f,
-//                    0.0f, 0f, 0.0f,
-//                    600f, 0f, 0.0f,
-//                    600f, 600f, 0.0f,
-                    0.0f,1184f,0.0f,
-                    0.0f,928f,0.0f,
-                    256f,928f,0.0f,
-                    256f,1184f,0.0f,
+                    0.0f, 1184f, 0.0f,
+                    0.0f, 928f, 0.0f,
+                    256f, 928f, 0.0f,
+                    256f, 1184f, 0.0f,
             };
     //第二张图片所对应的位置数组
     public static float vertices1[] = new float[]
             {
-//                    350f, 1184f, 0.0f,
-//                    350f, 700f, 0.0f,
-//                    720f, 700f, 0.0f,
-//                    720f, 1184f, 0.0f,
-                    256f,1184f,0.0f,
-                    256f,928f,0.0f,
-                    512f,928f,0.0f,
-                    512f,1184f,0.0f,
+                    256f, 1184f, 0.0f,
+                    256f, 928f, 0.0f,
+                    512f, 928f, 0.0f,
+                    512f, 1184f, 0.0f,
             };
 
 
     //第三张图片所对应的位置数组
     public static float vertices2[] = new float[]
             {
-//                    0f,700f,0.0f,
-//                   0f,0f,0f,
-//                   240f,0f,0f,
-//                   240f,700f,0f
-                    512f,1184f,0.0f,
-                    512f,928f,0.0f,
-                    768f,928f,0.0f,
-                    768f,1184f,0.0f,
+                    512f, 1184f, 0.0f,
+                    512f, 928f, 0.0f,
+                    768f, 928f, 0.0f,
+                    768f, 1184f, 0.0f,
             };
 
 
     //第四张图片所对应的位置数组
     public static float vertices3[] = new float[]
             {
-                    0.0f,928f,0.0f,
-                    0.0f,672f,0.0f,
-                    256f,672f,0.0f,
-                    256f,928f,0.0f,
+                    0.0f, 928f, 0.0f,
+                    0.0f, 672f, 0.0f,
+                    256f, 672f, 0.0f,
+                    256f, 928f, 0.0f,
             };
 
 
     //第五张图片所对应的位置数组
     public static float vertices4[] = new float[]
             {
-                    256f,928f,0.0f,
-                    256f,672f,0.0f,
-                    512f,672f,0.0f,
-                    512f,928f,0.0f,
+                    256f, 928f, 0.0f,
+                    256f, 672f, 0.0f,
+                    512f, 672f, 0.0f,
+                    512f, 928f, 0.0f,
             };
 
     //第六张图片所对应的位置数组
     public static float vertices5[] = new float[]
             {
-                    512f,928f,0.0f,
-                    512f,672f,0.0f,
-                    768f,672f,0.0f,
-                    768f,928f,0.0f,
+                    512f, 928f, 0.0f,
+                    512f, 672f, 0.0f,
+                    768f, 672f, 0.0f,
+                    768f, 928f, 0.0f,
             };
 
     //第7张图片所对应的位置数组
     public static float vertices6[] = new float[]
             {
-                    0f,672f,0.0f,
-                    0f,416f,0.0f,
-                    256f,416f,0.0f,
-                    256f,672f,0.0f,
+                    0f, 672f, 0.0f,
+                    0f, 416f, 0.0f,
+                    256f, 416f, 0.0f,
+                    256f, 672f, 0.0f,
             };
 
     //第8张图片所对应的位置数组
     public static float vertices7[] = new float[]
             {
-                    256f,672f,0.0f,
-                    256f,416f,0.0f,
-                    512f,416f,0.0f,
-                    512f,672f,0.0f,
+                    256f, 672f, 0.0f,
+                    256f, 416f, 0.0f,
+                    512f, 416f, 0.0f,
+                    512f, 672f, 0.0f,
             };
 
     //第9张图片所对应的位置数组
     public static float vertices8[] = new float[]
             {
-                    512f,672f,0.0f,
-                    512f,416f,0.0f,
-                    768f,416f,0.0f,
-                    768f,672f,0.0f,
+                    512f, 672f, 0.0f,
+                    512f, 416f, 0.0f,
+                    768f, 416f, 0.0f,
+                    768f, 672f, 0.0f,
             };
 
     //第10张图片所对应的位置数组
     public static float vertices9[] = new float[]
             {
-                    0.0f,416f,0.0f,
-                    0.0f,160f,0.0f,
-                    256f,160f,0.0f,
-                    256f,416f,0.0f,
+                    0.0f, 416f, 0.0f,
+                    0.0f, 160f, 0.0f,
+                    256f, 160f, 0.0f,
+                    256f, 416f, 0.0f,
             };
 
     //第11张图片所对应的位置数组
     public static float vertices10[] = new float[]
             {
-                    256f,416f,0.0f,
-                    256f,160f,0.0f,
-                    512f,160f,0.0f,
-                    512f,416f,0.0f,
+                    256f, 416f, 0.0f,
+                    256f, 160f, 0.0f,
+                    512f, 160f, 0.0f,
+                    512f, 416f, 0.0f,
             };
 
     //第12张图片所对应的位置数组
     public static float vertices11[] = new float[]
             {
-                    512f,416f,0.0f,
-                    512f,160f,0.0f,
-                    768f,160f,0.0f,
-                    768f,416f,0.0f,
+                    512f, 416f, 0.0f,
+                    512f, 160f, 0.0f,
+                    768f, 160f, 0.0f,
+                    768f, 416f, 0.0f,
             };
 
     //第13张图片所对应的位置数组
     public static float vertices12[] = new float[]
             {
-                    0.0f,160f,0.0f,
-                    0.0f,-96f,0.0f,
-                    256f,-96f,0.0f,
-                    256f,160f,0.0f,
+                    0.0f, 160f, 0.0f,
+                    0.0f, -96f, 0.0f,
+                    256f, -96f, 0.0f,
+                    256f, 160f, 0.0f,
             };
 
     //第14张图片所对应的位置数组
     public static float vertices13[] = new float[]
             {
-                    256f,160f,0.0f,
-                    256f,-96f,0.0f,
-                    512f,-96f,0.0f,
-                    512f,160f,0.0f,
+                    256f, 160f, 0.0f,
+                    256f, -96f, 0.0f,
+                    512f, -96f, 0.0f,
+                    512f, 160f, 0.0f,
             };
 
     //第15张图片所对应的位置数组
     public static float vertices14[] = new float[]
             {
-                    512f,160f,0.0f,
-                    512f,-96f,0.0f,
-                    768f,-96f,0.0f,
-                    768f,160f,0.0f,
+                    512f, 160f, 0.0f,
+                    512f, -96f, 0.0f,
+                    768f, -96f, 0.0f,
+                    768f, 160f, 0.0f,
             };
-
-
-
 
 
     public static short indices[];
 
-    //    public static short indices1[];
-//    public static float vertices1[];
     public static float uvs[];
     public FloatBuffer vertexBuffer;
-    //    public FloatBuffer vertexBuffer1;
     public ShortBuffer drawListBuffer;
-    //    public ShortBuffer drawListBuffer1;
     public FloatBuffer uvBuffer;
-//    public FloatBuffer uvBuffer1;
 
-//    private int program;
-//    private int uColorLocation;
-//    private int aPositionLocation;
-//    private static final String U_COLOR = "u_Color";
-//    private static final String A_POSITION = "a_Position";
-
-
-    // Our screenresolution
     float mScreenWidth = 1280;
     float mScreenHeight = 768;
 
     // Misc
     Context mContext;
     long mLastTime;
-    int mProgram;
     private FloatBuffer mUvBuffer1;
     private FloatBuffer mVerticeBuffer;
 
     public PictureRenderer(Context c) {
         mContext = c;
         mLastTime = System.currentTimeMillis() + 100;
-    }
-
-    public void onPause() {
-        /* Do stuff to pause the renderer */
     }
 
     public void onResume() {
@@ -256,74 +223,8 @@ public class PictureRenderer implements GLSurfaceView.Renderer {
 
 //        // get handle to vertex shader's vPosition member
         int mPositionHandle = GLES20.glGetAttribLocation(riGraphicTools.sp_Image, "vPosition");
-//
-//        // Enable generic vertex attribute array
-//        GLES20.glEnableVertexAttribArray(mPositionHandle);
-//
-//        // Prepare the triangle coordinate data
-//        GLES20.glVertexAttribPointer(mPositionHandle, 3,
-//                GLES20.GL_FLOAT, false,
-//                0, vertexBuffer);
-//
 //        // Get handle to texture coordinates location
         int mTexCoordLoc = GLES20.glGetAttribLocation(riGraphicTools.sp_Image, "a_texCoord");
-//
-//        // Enable generic vertex attribute array
-//        GLES20.glEnableVertexAttribArray(mTexCoordLoc);
-//
-//        // Prepare the texturecoordinates
-//        GLES20.glVertexAttribPointer(mTexCoordLoc, 2, GLES20.GL_FLOAT,
-//                false,
-//                0, mUvBuffer1);
-//
-//        // Get handle to shape's transformation matrix
-//        int mtrxhandle = GLES20.glGetUniformLocation(riGraphicTools.sp_Image, "uMVPMatrix");
-//
-//        // Apply the projection and view transformation
-//        GLES20.glUniformMatrix4fv(mtrxhandle, 1, false, m, 0);
-//
-//        // Get handle to textures locations
-//        int mSamplerLoc = GLES20.glGetUniformLocation(riGraphicTools.sp_Image, "s_texture");
-
-
-        // TODO
-//        String vertexShaderSource = TextResourceReader
-//                .readTextFileFromResource(mContext, R.raw.simple_vertex_shader);
-//        String fragmentShaderSource = TextResourceReader
-//                .readTextFileFromResource(mContext, R.raw.simple_fragment_shader);
-//
-//        int vertexShader = ShaderHelper.compileVertexShader(vertexShaderSource);
-//        int fragmentShader = ShaderHelper.compileFragmentShader(fragmentShaderSource);
-//
-//        program = ShaderHelper.linkProgram(vertexShader, fragmentShader);
-//
-//        if (LoggerConfig.ON) {
-//            ShaderHelper.validateProgram(program);
-//        }
-//
-//        glUseProgram(program);
-//
-//        uColorLocation = glGetUniformLocation(program, U_COLOR);
-//
-//        aPositionLocation = glGetAttribLocation(program, A_POSITION);
-
-
-        // Set the sampler texture unit to 0, where we have saved the texture.
-//        GLES20.glUniform1i(mSamplerLoc, 0);
-
-        //设置绘制平面图形的颜色
-        //GLES20.glUniform4f(uColorLocation,1.0f,1.0f,1.0f,1.0f);
-
-//        GLES20.glUniform4f(mtrxhandle,1.0f,1.0f,1.0f,1.0f);
-
-        // Draw the triangle
-//        GLES20.glDrawElements(GLES20.GL_TRIANGLES, indices.length,
-//                GLES20.GL_UNSIGNED_SHORT, drawListBuffer);
-//
-//        // Disable vertex array
-//        GLES20.glDisableVertexAttribArray(mPositionHandle);
-//        GLES20.glDisableVertexAttribArray(mTexCoordLoc);
-
         //绘制第二张图片
         // get handle to vertex shader's vPosition member
         //拼接图片  one
@@ -421,10 +322,6 @@ public class PictureRenderer implements GLSurfaceView.Renderer {
         FloatBuffer uvBuffer14 = setupImage(R.drawable.map1);
 
         drawBitmap(m, mPositionHandle, mTexCoordLoc, VertexPositionBuffer14, uvBuffer14, indices);
-
-
-
-
     }
 
     private void drawBitmap(float[] m, int mPositionHandle, int mTexCoordLoc, FloatBuffer vertexBufferPosition, FloatBuffer uvBuffer1, short[] shortsIndices) {
@@ -482,11 +379,9 @@ public class PictureRenderer implements GLSurfaceView.Renderer {
         GLES20.glViewport(0, 0, (int) width, (int) height);
 
         // Clear our matrices
-        for (int i = 0; i < 16; i++) {
-            mtrxProjection[i] = 0.0f;
-            mtrxView[i] = 0.0f;
-            mtrxProjectionAndView[i] = 0.0f;
-        }
+        Matrix.setIdentityM(mtrxProjection, 0);
+        Matrix.setIdentityM(mtrxView, 0);
+        Matrix.setIdentityM(mtrxProjectionAndView, 0);
         //矩阵的偏移
         // Setup our screen width and height for normal sprite translation.
         Matrix.orthoM(mtrxProjection, 0, 0f, mScreenWidth, 0.0f, mScreenHeight, 0, 50);
@@ -500,8 +395,6 @@ public class PictureRenderer implements GLSurfaceView.Renderer {
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-
-
 
         // Set the clear color to black
         GLES20.glClearColor(1.0f, 1.0f, 1.0f, 1);
@@ -524,11 +417,8 @@ public class PictureRenderer implements GLSurfaceView.Renderer {
         GLES20.glAttachShader(riGraphicTools.sp_Image, fragmentShader); // add the fragment shader to program
         GLES20.glLinkProgram(riGraphicTools.sp_Image);                  // creates OpenGL ES program executables
 
-
         // Set our shader programm
         GLES20.glUseProgram(riGraphicTools.sp_Image);
-
-
     }
 
     public FloatBuffer setupImage(int id) {
@@ -558,7 +448,7 @@ public class PictureRenderer implements GLSurfaceView.Renderer {
 
         BitmapFactory.Options opts = new BitmapFactory.Options();
         opts.inPreferredConfig = Bitmap.Config.ARGB_8888;
-        Bitmap bmp = BitmapFactory.decodeResource(mContext.getResources(), id,opts);
+        Bitmap bmp = BitmapFactory.decodeResource(mContext.getResources(), id, opts);
 
         // Bind texture to texturename
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
@@ -571,7 +461,7 @@ public class PictureRenderer implements GLSurfaceView.Renderer {
         // Load the bitmap into the bound texture.
         GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bmp, 0);
         //开启gl的两个功能 使图片变成透明的
-        GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA,GLES20.GL_ONE_MINUS_SRC_ALPHA);
+        GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA);
         GLES20.glEnable(GLES20.GL_BLEND);
 
         // We are done using the bitmap so we should recycle it.
@@ -582,19 +472,6 @@ public class PictureRenderer implements GLSurfaceView.Renderer {
     }
 
     public FloatBuffer setupTriangle(float[] verticesPosition) {
-
-        // We have to create the vertices of our triangle.
-//        vertices = new float[]
-//                {       400.0f, 300f, 0.0f,
-//                        400.0f, 200f, 0.0f,
-//                        500f, 200f, 0.0f,
-//                        500f, 300f, 0.0f,
-//                };
-
-//                0.0f, 0.0f, 0.0f,
-//                0f, 1280f, 0.0f,
-//                720f, 1280f, 0.0f,
-//                7200f, 0.0f, 0.0f,
 
         indices = new short[]{0, 1, 2, 0, 2, 3}; // The order of vertexrendering.
 
@@ -612,32 +489,6 @@ public class PictureRenderer implements GLSurfaceView.Renderer {
         drawListBuffer.put(indices);
         drawListBuffer.position(0);
 
-
-        // We have to create the vertices of our triangle.
-//        vertices1 = new float[]
-//                {       600.0f, 200f, 0.0f,
-//                        600.0f, 100f, 0.0f,
-//                        700f, 100f, 0.0f,
-//                        700f, 200f, 0.0f,
-//                };
-//
-//        indices1 = new short[]{0, 1, 2, 0, 2, 3}; // The order of vertexrendering.
-//
-//        // The vertex buffer.
-//        ByteBuffer bb1 = ByteBuffer.allocateDirect(vertices1.length * 4);
-//        bb1.order(ByteOrder.nativeOrder());
-//        vertexBuffer1 = bb1.asFloatBuffer();
-//        vertexBuffer1.put(vertices1);
-//        vertexBuffer1.position(0);
-//
-//        // initialize byte buffer for the draw list
-//        ByteBuffer dlb1 = ByteBuffer.allocateDirect(indices1.length * 2);
-//        dlb1.order(ByteOrder.nativeOrder());
-//        drawListBuffer1 = dlb.asShortBuffer();
-//        drawListBuffer1.put(indices1);
-//        drawListBuffer1.position(0);
         return vertexBuffer;
-
     }
-
 }

@@ -9,6 +9,7 @@ import org.app.opengl_es_android_version.object.object2d.Circle;
 import org.app.opengl_es_android_version.object.object2d.Object2D;
 import org.app.opengl_es_android_version.object.object2d.Polyline;
 import org.app.opengl_es_android_version.object.object2d.Rectangle;
+import org.app.opengl_es_android_version.object.object2d.Star5P;
 import org.app.opengl_es_android_version.object.object2d.demo.CoordinateLines;
 
 import java.util.ArrayList;
@@ -35,9 +36,10 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         drawObjectList.add(new CoordinateLines());
-        drawObjectList.add(new Rectangle());
-        drawObjectList.add(new Circle(context));
-        drawObjectList.add(new Polyline());
+//        drawObjectList.add(new Rectangle());
+//        drawObjectList.add(new Circle());
+//        drawObjectList.add(new Polyline());
+        drawObjectList.add(new Star5P());
 //        drawObjectList.add(new Triangle());
 //        drawObjectList.add(new Square());
     }

@@ -96,6 +96,20 @@ public class Geometry {
         }
     }
 
+    /***
+     * 五角星，中心点 + 中心点到五个端点的距离
+     */
+    public static class Star5Points {
+
+        public final Point center;
+        public final float radius;
+
+        public Star5Points(Point point, float radius) {
+            this.center = point;
+            this.radius = radius;
+        }
+    }
+
     /**
      * 方向 向量
      */

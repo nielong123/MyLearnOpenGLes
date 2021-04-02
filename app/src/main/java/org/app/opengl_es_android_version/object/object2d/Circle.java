@@ -29,7 +29,7 @@ public class Circle implements Object2D {
 
     VertexArray vertexArray;
 
-    public Circle(Context context) {
+    public Circle() {
         Geometry.Point point = new Geometry.Point(0f, 0f, 0f);
         circle = new Geometry.Circle(point, 0.5f);
 //        vertexArray = new VertexArray(testData);
@@ -41,7 +41,7 @@ public class Circle implements Object2D {
     private float[] getVertexWithCircle(Geometry.Circle circle) {
 
         int all = 360;
-
+        //这个count是vertexs数组的长度，因为是二维，每2个float表示一组行，y，所以要用360/分度，再乘以2
         int count = (int) (all / circle.angle) * 2;
         float[] vertexs = new float[count];
         int offset = 0;
