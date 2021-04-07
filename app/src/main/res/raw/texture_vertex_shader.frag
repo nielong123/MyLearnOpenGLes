@@ -8,3 +8,10 @@ void main(){
     v_TextureCoordinates = a_TextureCoordinates;
     gl_Position = u_Matrix * a_Position;   
 }
+
+
+//uniform    mat4        uMVPMatrix;
+//attribute  vec4        vPosition;
+//void main() {
+//    gl_Position = uMVPMatrix * vPosition;
+//}

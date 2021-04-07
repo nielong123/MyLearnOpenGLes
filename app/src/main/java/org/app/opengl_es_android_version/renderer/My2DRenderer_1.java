@@ -5,14 +5,10 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 
-import org.app.opengl_es_android_version.object.object2d.Circle;
 import org.app.opengl_es_android_version.object.object2d.Object2D;
-import org.app.opengl_es_android_version.object.object2d.Polyline;
-import org.app.opengl_es_android_version.object.object2d.Rectangle;
+import org.app.opengl_es_android_version.object.object2d.RectangleWithTexture;
 import org.app.opengl_es_android_version.object.object2d.Star5P;
 import org.app.opengl_es_android_version.object.object2d.demo.CoordinateLines;
-import org.app.opengl_es_android_version.object.object2d.demo.Square;
-import org.app.opengl_es_android_version.object.object2d.demo.Triangle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +38,7 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
 //        drawObjectList.add(new Circle());
 //        drawObjectList.add(new Polyline());
         drawObjectList.add(new Star5P());
+        drawObjectList.add(new RectangleWithTexture(context));
 //        drawObjectList.add(new Triangle());
 //        drawObjectList.add(new Square());
     }

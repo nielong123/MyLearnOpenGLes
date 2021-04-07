@@ -36,134 +36,134 @@ public class PictureRenderer implements GLSurfaceView.Renderer {
                     256f, 928f, 0.0f,
                     256f, 1184f, 0.0f,
             };
-    //第二张图片所对应的位置数组
-    public static float vertices1[] = new float[]
-            {
-                    256f, 1184f, 0.0f,
-                    256f, 928f, 0.0f,
-                    512f, 928f, 0.0f,
-                    512f, 1184f, 0.0f,
-            };
-
-
-    //第三张图片所对应的位置数组
-    public static float vertices2[] = new float[]
-            {
-                    512f, 1184f, 0.0f,
-                    512f, 928f, 0.0f,
-                    768f, 928f, 0.0f,
-                    768f, 1184f, 0.0f,
-            };
-
-
-    //第四张图片所对应的位置数组
-    public static float vertices3[] = new float[]
-            {
-                    0.0f, 928f, 0.0f,
-                    0.0f, 672f, 0.0f,
-                    256f, 672f, 0.0f,
-                    256f, 928f, 0.0f,
-            };
-
-
-    //第五张图片所对应的位置数组
-    public static float vertices4[] = new float[]
-            {
-                    256f, 928f, 0.0f,
-                    256f, 672f, 0.0f,
-                    512f, 672f, 0.0f,
-                    512f, 928f, 0.0f,
-            };
-
-    //第六张图片所对应的位置数组
-    public static float vertices5[] = new float[]
-            {
-                    512f, 928f, 0.0f,
-                    512f, 672f, 0.0f,
-                    768f, 672f, 0.0f,
-                    768f, 928f, 0.0f,
-            };
-
-    //第7张图片所对应的位置数组
-    public static float vertices6[] = new float[]
-            {
-                    0f, 672f, 0.0f,
-                    0f, 416f, 0.0f,
-                    256f, 416f, 0.0f,
-                    256f, 672f, 0.0f,
-            };
-
-    //第8张图片所对应的位置数组
-    public static float vertices7[] = new float[]
-            {
-                    256f, 672f, 0.0f,
-                    256f, 416f, 0.0f,
-                    512f, 416f, 0.0f,
-                    512f, 672f, 0.0f,
-            };
-
-    //第9张图片所对应的位置数组
-    public static float vertices8[] = new float[]
-            {
-                    512f, 672f, 0.0f,
-                    512f, 416f, 0.0f,
-                    768f, 416f, 0.0f,
-                    768f, 672f, 0.0f,
-            };
-
-    //第10张图片所对应的位置数组
-    public static float vertices9[] = new float[]
-            {
-                    0.0f, 416f, 0.0f,
-                    0.0f, 160f, 0.0f,
-                    256f, 160f, 0.0f,
-                    256f, 416f, 0.0f,
-            };
-
-    //第11张图片所对应的位置数组
-    public static float vertices10[] = new float[]
-            {
-                    256f, 416f, 0.0f,
-                    256f, 160f, 0.0f,
-                    512f, 160f, 0.0f,
-                    512f, 416f, 0.0f,
-            };
-
-    //第12张图片所对应的位置数组
-    public static float vertices11[] = new float[]
-            {
-                    512f, 416f, 0.0f,
-                    512f, 160f, 0.0f,
-                    768f, 160f, 0.0f,
-                    768f, 416f, 0.0f,
-            };
-
-    //第13张图片所对应的位置数组
-    public static float vertices12[] = new float[]
-            {
-                    0.0f, 160f, 0.0f,
-                    0.0f, -96f, 0.0f,
-                    256f, -96f, 0.0f,
-                    256f, 160f, 0.0f,
-            };
-
-    //第14张图片所对应的位置数组
-    public static float vertices13[] = new float[]
-            {
-                    256f, 160f, 0.0f,
-                    256f, -96f, 0.0f,
-                    512f, -96f, 0.0f,
-                    512f, 160f, 0.0f,
-            };
-
-    //第15张图片所对应的位置数组
-    public static float vertices14[] = new float[]
-            {
-                    512f, 160f, 0.0f,
-                    512f, -96f, 0.0f,
-                    768f, -96f, 0.0f,
-                    768f, 160f, 0.0f,
-            };
+//    //第二张图片所对应的位置数组
+//    public static float vertices1[] = new float[]
+//            {
+//                    256f, 1184f, 0.0f,
+//                    256f, 928f, 0.0f,
+//                    512f, 928f, 0.0f,
+//                    512f, 1184f, 0.0f,
+//            };
+//
+//
+//    //第三张图片所对应的位置数组
+//    public static float vertices2[] = new float[]
+//            {
+//                    512f, 1184f, 0.0f,
+//                    512f, 928f, 0.0f,
+//                    768f, 928f, 0.0f,
+//                    768f, 1184f, 0.0f,
+//            };
+//
+//
+//    //第四张图片所对应的位置数组
+//    public static float vertices3[] = new float[]
+//            {
+//                    0.0f, 928f, 0.0f,
+//                    0.0f, 672f, 0.0f,
+//                    256f, 672f, 0.0f,
+//                    256f, 928f, 0.0f,
+//            };
+//
+//
+//    //第五张图片所对应的位置数组
+//    public static float vertices4[] = new float[]
+//            {
+//                    256f, 928f, 0.0f,
+//                    256f, 672f, 0.0f,
+//                    512f, 672f, 0.0f,
+//                    512f, 928f, 0.0f,
+//            };
+//
+//    //第六张图片所对应的位置数组
+//    public static float vertices5[] = new float[]
+//            {
+//                    512f, 928f, 0.0f,
+//                    512f, 672f, 0.0f,
+//                    768f, 672f, 0.0f,
+//                    768f, 928f, 0.0f,
+//            };
+//
+//    //第7张图片所对应的位置数组
+//    public static float vertices6[] = new float[]
+//            {
+//                    0f, 672f, 0.0f,
+//                    0f, 416f, 0.0f,
+//                    256f, 416f, 0.0f,
+//                    256f, 672f, 0.0f,
+//            };
+//
+//    //第8张图片所对应的位置数组
+//    public static float vertices7[] = new float[]
+//            {
+//                    256f, 672f, 0.0f,
+//                    256f, 416f, 0.0f,
+//                    512f, 416f, 0.0f,
+//                    512f, 672f, 0.0f,
+//            };
+//
+//    //第9张图片所对应的位置数组
+//    public static float vertices8[] = new float[]
+//            {
+//                    512f, 672f, 0.0f,
+//                    512f, 416f, 0.0f,
+//                    768f, 416f, 0.0f,
+//                    768f, 672f, 0.0f,
+//            };
+//
+//    //第10张图片所对应的位置数组
+//    public static float vertices9[] = new float[]
+//            {
+//                    0.0f, 416f, 0.0f,
+//                    0.0f, 160f, 0.0f,
+//                    256f, 160f, 0.0f,
+//                    256f, 416f, 0.0f,
+//            };
+//
+//    //第11张图片所对应的位置数组
+//    public static float vertices10[] = new float[]
+//            {
+//                    256f, 416f, 0.0f,
+//                    256f, 160f, 0.0f,
+//                    512f, 160f, 0.0f,
+//                    512f, 416f, 0.0f,
+//            };
+//
+//    //第12张图片所对应的位置数组
+//    public static float vertices11[] = new float[]
+//            {
+//                    512f, 416f, 0.0f,
+//                    512f, 160f, 0.0f,
+//                    768f, 160f, 0.0f,
+//                    768f, 416f, 0.0f,
+//            };
+//
+//    //第13张图片所对应的位置数组
+//    public static float vertices12[] = new float[]
+//            {
+//                    0.0f, 160f, 0.0f,
+//                    0.0f, -96f, 0.0f,
+//                    256f, -96f, 0.0f,
+//                    256f, 160f, 0.0f,
+//            };
+//
+//    //第14张图片所对应的位置数组
+//    public static float vertices13[] = new float[]
+//            {
+//                    256f, 160f, 0.0f,
+//                    256f, -96f, 0.0f,
+//                    512f, -96f, 0.0f,
+//                    512f, 160f, 0.0f,
+//            };
+//
+//    //第15张图片所对应的位置数组
+//    public static float vertices14[] = new float[]
+//            {
+//                    512f, 160f, 0.0f,
+//                    512f, -96f, 0.0f,
+//                    768f, -96f, 0.0f,
+//                    768f, 160f, 0.0f,
+//            };
 
 
     public static short indices[];
@@ -178,40 +178,25 @@ public class PictureRenderer implements GLSurfaceView.Renderer {
 
     // Misc
     Context mContext;
-    long mLastTime;
     private FloatBuffer mUvBuffer1;
     private FloatBuffer mVerticeBuffer;
+    private Bitmap bmp;
 
     public PictureRenderer(Context c) {
         mContext = c;
-        mLastTime = System.currentTimeMillis() + 100;
+        BitmapFactory.Options opts = new BitmapFactory.Options();
+        opts.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        bmp = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.map1, opts);
     }
 
     public void onResume() {
         /* Do stuff to resume the renderer */
-        mLastTime = System.currentTimeMillis();
     }
 
     @Override
     public void onDrawFrame(GL10 unused) {
 
-        // Get the current time
-        long now = System.currentTimeMillis();
-
-        // We should make sure we are valid and sane
-        if (mLastTime > now) return;
-
-        // Get the amount of time the last frame took.
-        long elapsed = now - mLastTime;
-
-        // Update our example
-
-        // Render our example
         Render(mtrxProjectionAndView);
-
-        // Save the current time to see how long it took :).
-        mLastTime = now;
-
     }
 
     private void Render(float[] m) {
@@ -239,89 +224,89 @@ public class PictureRenderer implements GLSurfaceView.Renderer {
 
         drawBitmap(m, mPositionHandle, mTexCoordLoc, VertexPositionBuffer20, uvBuffer20, indices);
 
-        //拼接图片  two
-        FloatBuffer VertexPositionBuffer1 = setupTriangle(vertices1);
-        FloatBuffer uvBuffer1 = setupImage(R.drawable.map1);
-
-        drawBitmap(m, mPositionHandle, mTexCoordLoc, VertexPositionBuffer1, uvBuffer1, indices);
-
-        //拼接图片  three
-        FloatBuffer VertexPositionBuffer2 = setupTriangle(vertices2);
-        FloatBuffer uvBuffer2 = setupImage(R.drawable.map1);
-
-        drawBitmap(m, mPositionHandle, mTexCoordLoc, VertexPositionBuffer2, uvBuffer2, indices);
-
-        //拼接图片  four
-        FloatBuffer VertexPositionBuffer3 = setupTriangle(vertices3);
-        FloatBuffer uvBuffer3 = setupImage(R.drawable.map1);
-
-        drawBitmap(m, mPositionHandle, mTexCoordLoc, VertexPositionBuffer3, uvBuffer3, indices);
-
-        //拼接图片  five
-        FloatBuffer VertexPositionBuffer4 = setupTriangle(vertices4);
-        FloatBuffer uvBuffer4 = setupImage(R.drawable.map1);
-
-        drawBitmap(m, mPositionHandle, mTexCoordLoc, VertexPositionBuffer4, uvBuffer4, indices);
-
-        //拼接图片  six
-        FloatBuffer VertexPositionBuffer5 = setupTriangle(vertices5);
-        FloatBuffer uvBuffer5 = setupImage(R.drawable.map1);
-
-        drawBitmap(m, mPositionHandle, mTexCoordLoc, VertexPositionBuffer5, uvBuffer5, indices);
-
-        //拼接图片  7
-        FloatBuffer VertexPositionBuffer6 = setupTriangle(vertices6);
-        FloatBuffer uvBuffer6 = setupImage(R.drawable.map1);
-
-        drawBitmap(m, mPositionHandle, mTexCoordLoc, VertexPositionBuffer6, uvBuffer6, indices);
-
-        //拼接图片  8
-        FloatBuffer VertexPositionBuffer7 = setupTriangle(vertices7);
-        FloatBuffer uvBuffer7 = setupImage(R.drawable.map1);
-
-        drawBitmap(m, mPositionHandle, mTexCoordLoc, VertexPositionBuffer7, uvBuffer7, indices);
-
-        //拼接图片  9
-        FloatBuffer VertexPositionBuffer8 = setupTriangle(vertices8);
-        FloatBuffer uvBuffer8 = setupImage(R.drawable.map1);
-
-        drawBitmap(m, mPositionHandle, mTexCoordLoc, VertexPositionBuffer8, uvBuffer8, indices);
-
-        //拼接图片  10
-        FloatBuffer VertexPositionBuffer9 = setupTriangle(vertices9);
-        FloatBuffer uvBuffer9 = setupImage(R.drawable.map1);
-
-        drawBitmap(m, mPositionHandle, mTexCoordLoc, VertexPositionBuffer9, uvBuffer9, indices);
-
-        //拼接图片  11
-        FloatBuffer VertexPositionBuffer10 = setupTriangle(vertices10);
-        FloatBuffer uvBuffer10 = setupImage(R.drawable.map1);
-
-        drawBitmap(m, mPositionHandle, mTexCoordLoc, VertexPositionBuffer10, uvBuffer10, indices);
-
-        //拼接图片  12
-        FloatBuffer VertexPositionBuffer11 = setupTriangle(vertices11);
-        FloatBuffer uvBuffer11 = setupImage(R.drawable.map1);
-
-        drawBitmap(m, mPositionHandle, mTexCoordLoc, VertexPositionBuffer11, uvBuffer11, indices);
-
-        //拼接图片  13
-        FloatBuffer VertexPositionBuffer12 = setupTriangle(vertices12);
-        FloatBuffer uvBuffer12 = setupImage(R.drawable.map1);
-
-        drawBitmap(m, mPositionHandle, mTexCoordLoc, VertexPositionBuffer12, uvBuffer12, indices);
-
-        //拼接图片  14
-        FloatBuffer VertexPositionBuffer13 = setupTriangle(vertices13);
-        FloatBuffer uvBuffer13 = setupImage(R.drawable.map1);
-
-        drawBitmap(m, mPositionHandle, mTexCoordLoc, VertexPositionBuffer13, uvBuffer13, indices);
-
-        //拼接图片  15
-        FloatBuffer VertexPositionBuffer14 = setupTriangle(vertices14);
-        FloatBuffer uvBuffer14 = setupImage(R.drawable.map1);
-
-        drawBitmap(m, mPositionHandle, mTexCoordLoc, VertexPositionBuffer14, uvBuffer14, indices);
+//        //拼接图片  two
+//        FloatBuffer VertexPositionBuffer1 = setupTriangle(vertices1);
+//        FloatBuffer uvBuffer1 = setupImage(R.drawable.map1);
+//
+//        drawBitmap(m, mPositionHandle, mTexCoordLoc, VertexPositionBuffer1, uvBuffer1, indices);
+//
+//        //拼接图片  three
+//        FloatBuffer VertexPositionBuffer2 = setupTriangle(vertices2);
+//        FloatBuffer uvBuffer2 = setupImage(R.drawable.map1);
+//
+//        drawBitmap(m, mPositionHandle, mTexCoordLoc, VertexPositionBuffer2, uvBuffer2, indices);
+//
+//        //拼接图片  four
+//        FloatBuffer VertexPositionBuffer3 = setupTriangle(vertices3);
+//        FloatBuffer uvBuffer3 = setupImage(R.drawable.map1);
+//
+//        drawBitmap(m, mPositionHandle, mTexCoordLoc, VertexPositionBuffer3, uvBuffer3, indices);
+//
+//        //拼接图片  five
+//        FloatBuffer VertexPositionBuffer4 = setupTriangle(vertices4);
+//        FloatBuffer uvBuffer4 = setupImage(R.drawable.map1);
+//
+//        drawBitmap(m, mPositionHandle, mTexCoordLoc, VertexPositionBuffer4, uvBuffer4, indices);
+//
+//        //拼接图片  six
+//        FloatBuffer VertexPositionBuffer5 = setupTriangle(vertices5);
+//        FloatBuffer uvBuffer5 = setupImage(R.drawable.map1);
+//
+//        drawBitmap(m, mPositionHandle, mTexCoordLoc, VertexPositionBuffer5, uvBuffer5, indices);
+//
+//        //拼接图片  7
+//        FloatBuffer VertexPositionBuffer6 = setupTriangle(vertices6);
+//        FloatBuffer uvBuffer6 = setupImage(R.drawable.map1);
+//
+//        drawBitmap(m, mPositionHandle, mTexCoordLoc, VertexPositionBuffer6, uvBuffer6, indices);
+//
+//        //拼接图片  8
+//        FloatBuffer VertexPositionBuffer7 = setupTriangle(vertices7);
+//        FloatBuffer uvBuffer7 = setupImage(R.drawable.map1);
+//
+//        drawBitmap(m, mPositionHandle, mTexCoordLoc, VertexPositionBuffer7, uvBuffer7, indices);
+//
+//        //拼接图片  9
+//        FloatBuffer VertexPositionBuffer8 = setupTriangle(vertices8);
+//        FloatBuffer uvBuffer8 = setupImage(R.drawable.map1);
+//
+//        drawBitmap(m, mPositionHandle, mTexCoordLoc, VertexPositionBuffer8, uvBuffer8, indices);
+//
+//        //拼接图片  10
+//        FloatBuffer VertexPositionBuffer9 = setupTriangle(vertices9);
+//        FloatBuffer uvBuffer9 = setupImage(R.drawable.map1);
+//
+//        drawBitmap(m, mPositionHandle, mTexCoordLoc, VertexPositionBuffer9, uvBuffer9, indices);
+//
+//        //拼接图片  11
+//        FloatBuffer VertexPositionBuffer10 = setupTriangle(vertices10);
+//        FloatBuffer uvBuffer10 = setupImage(R.drawable.map1);
+//
+//        drawBitmap(m, mPositionHandle, mTexCoordLoc, VertexPositionBuffer10, uvBuffer10, indices);
+//
+//        //拼接图片  12
+//        FloatBuffer VertexPositionBuffer11 = setupTriangle(vertices11);
+//        FloatBuffer uvBuffer11 = setupImage(R.drawable.map1);
+//
+//        drawBitmap(m, mPositionHandle, mTexCoordLoc, VertexPositionBuffer11, uvBuffer11, indices);
+//
+//        //拼接图片  13
+//        FloatBuffer VertexPositionBuffer12 = setupTriangle(vertices12);
+//        FloatBuffer uvBuffer12 = setupImage(R.drawable.map1);
+//
+//        drawBitmap(m, mPositionHandle, mTexCoordLoc, VertexPositionBuffer12, uvBuffer12, indices);
+//
+//        //拼接图片  14
+//        FloatBuffer VertexPositionBuffer13 = setupTriangle(vertices13);
+//        FloatBuffer uvBuffer13 = setupImage(R.drawable.map1);
+//
+//        drawBitmap(m, mPositionHandle, mTexCoordLoc, VertexPositionBuffer13, uvBuffer13, indices);
+//
+//        //拼接图片  15
+//        FloatBuffer VertexPositionBuffer14 = setupTriangle(vertices14);
+//        FloatBuffer uvBuffer14 = setupImage(R.drawable.map1);
+//
+//        drawBitmap(m, mPositionHandle, mTexCoordLoc, VertexPositionBuffer14, uvBuffer14, indices);
     }
 
     private void drawBitmap(float[] m, int mPositionHandle, int mTexCoordLoc, FloatBuffer vertexBufferPosition, FloatBuffer uvBuffer1, short[] shortsIndices) {
@@ -446,9 +431,6 @@ public class PictureRenderer implements GLSurfaceView.Renderer {
         // Temporary create a bitmap
         //通过options改变图片的参数
 
-        BitmapFactory.Options opts = new BitmapFactory.Options();
-        opts.inPreferredConfig = Bitmap.Config.ARGB_8888;
-        Bitmap bmp = BitmapFactory.decodeResource(mContext.getResources(), id, opts);
 
         // Bind texture to texturename
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
@@ -465,7 +447,7 @@ public class PictureRenderer implements GLSurfaceView.Renderer {
         GLES20.glEnable(GLES20.GL_BLEND);
 
         // We are done using the bitmap so we should recycle it.
-        bmp.recycle();
+//        bmp.recycle();
 
         return uvBuffer;
 
