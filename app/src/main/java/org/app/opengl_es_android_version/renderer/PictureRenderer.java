@@ -180,13 +180,12 @@ public class PictureRenderer implements GLSurfaceView.Renderer {
     Context mContext;
     private FloatBuffer mUvBuffer1;
     private FloatBuffer mVerticeBuffer;
-    private Bitmap bmp;
 
     public PictureRenderer(Context c) {
         mContext = c;
-        BitmapFactory.Options opts = new BitmapFactory.Options();
-        opts.inPreferredConfig = Bitmap.Config.ARGB_8888;
-        bmp = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.map1, opts);
+//        BitmapFactory.Options opts = new BitmapFactory.Options();
+//        opts.inPreferredConfig = Bitmap.Config.ARGB_8888;
+//        bmp = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.map1, opts);
     }
 
     public void onResume() {
@@ -205,7 +204,6 @@ public class PictureRenderer implements GLSurfaceView.Renderer {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
 
         //绘制第一张图片的所有操作
-
 //        // get handle to vertex shader's vPosition member
         int mPositionHandle = GLES20.glGetAttribLocation(riGraphicTools.sp_Image, "vPosition");
 //        // Get handle to texture coordinates location
@@ -430,7 +428,9 @@ public class PictureRenderer implements GLSurfaceView.Renderer {
 
         // Temporary create a bitmap
         //通过options改变图片的参数
-
+        BitmapFactory.Options opts = new BitmapFactory.Options();
+        opts.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        Bitmap bmp = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.map1, opts);
 
         // Bind texture to texturename
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
@@ -447,7 +447,7 @@ public class PictureRenderer implements GLSurfaceView.Renderer {
         GLES20.glEnable(GLES20.GL_BLEND);
 
         // We are done using the bitmap so we should recycle it.
-//        bmp.recycle();
+        bmp.recycle();
 
         return uvBuffer;
 
