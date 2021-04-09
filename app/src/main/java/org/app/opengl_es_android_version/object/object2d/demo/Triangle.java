@@ -60,7 +60,7 @@ public class Triangle implements Object2D {
         GLES20.glVertexAttribPointer(aPositionLocation, 2, GLES20.GL_FLOAT,
                 false, 0, vertexArray.getFloatBuffer());
         GLES20.glEnableVertexAttribArray(aPositionLocation);
-        vertexArray.getFloatBuffer().position(0);
+//        vertexArray.getFloatBuffer().position(0);
     }
 
     @Override

@@ -75,7 +75,7 @@ public class Rectangle implements Object2D {
                 aPositionLocation, POSITION_COMPONENT_COUNT, GL_FLOAT, false, 0, vertexArray.getFloatBuffer());
         //使能顶点数组
         GLES20.glEnableVertexAttribArray(aPositionLocation);
-        vertexArray.getFloatBuffer().position(0);
+//        vertexArray.getFloatBuffer().position(0);
     }
 
     @Override

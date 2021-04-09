@@ -6,6 +6,7 @@ import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 
 import org.app.opengl_es_android_version.object.object2d.Object2D;
+import org.app.opengl_es_android_version.object.object2d.Rectangle1;
 import org.app.opengl_es_android_version.object.object2d.RectangleWithTexture;
 import org.app.opengl_es_android_version.object.object2d.Star5P;
 import org.app.opengl_es_android_version.object.object2d.demo.CoordinateLines;
@@ -24,6 +25,11 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
 
     //视角矩阵
     private final float[] viewMatrix = new float[16];
+    //投影矩阵
+    private final float[] projectMatrix = new float[16];
+
+    //
+    private final float[] mvpMatrix = new float[16];
 
     public My2DRenderer_1(Context context) {
         this.context = context;
@@ -33,23 +39,22 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        GLES20.glEnable(GLES20.GL_TEXTURE_2D);
         drawObjectList.add(new CoordinateLines());
 //        drawObjectList.add(new Rectangle());
 //        drawObjectList.add(new Circle());
 //        drawObjectList.add(new Polyline());
-        drawObjectList.add(new Star5P());
+//        drawObjectList.add(new Star5P());
         drawObjectList.add(new RectangleWithTexture(context));
+//        drawObjectList.add(new Rectangle1(context));
 //        drawObjectList.add(new Triangle());
 //        drawObjectList.add(new Square());
+
     }
 
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
         GLES20.glViewport(0, 0, width, height);
-        Matrix.setLookAtM(viewMatrix, 0,
-                0f, 3.2f, 2.2f, //eye
-                0f, 0f, 0f, //center
-                0f, 1f, 0f);    //up
     }
 
     @Override

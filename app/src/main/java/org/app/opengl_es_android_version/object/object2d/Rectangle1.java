@@ -1,47 +1,62 @@
 package org.app.opengl_es_android_version.object.object2d;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
+import android.opengl.Matrix;
 
 import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.contant.Constants;
 import org.app.opengl_es_android_version.data.VertexArray;
 import org.app.opengl_es_android_version.util.ShaderHelper;
 
+import java.nio.ByteBuffer;
+
 import static android.opengl.GLES20.GL_FLOAT;
+import static android.opengl.GLES20.GL_UNSIGNED_BYTE;
 
-
-/***
- * 绘制折线
- */
-public class Polyline implements Object2D {
+public class Rectangle1 implements Object2D {
 
     private static final int POSITION_COMPONENT_COUNT = 2;
-
-    private int programId;
     private int uColorLocation;
     private int aPositionLocation;
 
-    VertexArray vertexArray;
+    private int programId;
 
-    public Polyline() {
-        vertexArray = new VertexArray(tableVerticesWithPolyline);
-    }
+    private static final float r = 0.3f;
 
-    private float[] tableVerticesWithPolyline = {
-
-            -0.3f, -0.4f,
-            0.1f, 0.1f,
-            -0.35f, 0.5f
+    private static final float[] VERTEX_DATA = {
+            -r, -r,
+            r, -r,
+            r, r,
+            -r, r
     };
 
+    private ByteBuffer indexArray = ByteBuffer.allocateDirect(6)
+            .put(new byte[]{
+                    0, 1, 2, 2, 3, 0
+            });
+
+    //模型矩阵
+    public float[] modelMatrix = new float[16];
+
+    private final VertexArray vertexArray;
+
+    public Rectangle1(Context context) {
+        vertexArray = new VertexArray(VERTEX_DATA);
+        Matrix.setIdentityM(modelMatrix, 0);
+        indexArray.position(0);
+    }
 
     @Override
     public void bindData(Context context) {
         programId = ShaderHelper.buildProgram(context,
                 R.raw.simple_vertex_shader1_5, R.raw.simple_fragment_shader1_5);
         GLES20.glUseProgram(programId);
-        //获取uniform的位置，把位置存入uColorLocation中
+
+
+        //获取属性位置
         uColorLocation = GLES20.glGetUniformLocation(programId, Constants.U_COLOR);
         //获取属性位置
         aPositionLocation = GLES20.glGetAttribLocation(programId, Constants.A_POSITION);
@@ -54,9 +69,7 @@ public class Polyline implements Object2D {
 
     @Override
     public void draw() {
-//        GLES20.glUniform4f(uColorLocation, 0.0f, 0.0f, 0.0f, 0.0f);
-        GLES20.glUniform4f(uColorLocation, 1.0f, 3.0f, 1.0f, 1.0f);
-        GLES20.glLineWidth(3);
-        GLES20.glDrawArrays(GLES20.GL_LINE_STRIP, 0, 3);
+        GLES20.glUniform4f(uColorLocation, 1.0f, 3.0f, 0.6f, 1.0f);
+        GLES20.glDrawElements(GLES20.GL_TRIANGLE_FAN, indexArray.limit(), GL_UNSIGNED_BYTE, indexArray);
     }
 }

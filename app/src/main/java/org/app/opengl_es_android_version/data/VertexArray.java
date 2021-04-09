@@ -17,6 +17,7 @@ public class VertexArray {
                 .order(ByteOrder.nativeOrder())
                 .asFloatBuffer()
                 .put(vertexData);
+        floatBuffer.position(0);
     }
 
     /**

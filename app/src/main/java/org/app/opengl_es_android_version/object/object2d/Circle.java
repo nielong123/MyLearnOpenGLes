@@ -69,7 +69,7 @@ public class Circle implements Object2D {
                 POSITION_COMPONENT_COUNT, GLES20.GL_FLOAT, false, 0, vertexArray.getFloatBuffer());
         //使能顶点数组
         GLES20.glEnableVertexAttribArray(aPositionLocation);
-        vertexArray.getFloatBuffer().position(0);
+//        vertexArray.getFloatBuffer().position(0);
     }
 
     @Override

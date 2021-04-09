@@ -55,7 +55,6 @@ public class CoordinateLines implements Object2D {
                 POSITION_COMPONENT_COUNT, GL_FLOAT, false, 0, vertexArray.getFloatBuffer());
         //使能顶点数组
         GLES20.glEnableVertexAttribArray(aPositionLocation);
-        vertexArray.getFloatBuffer().position(0);
     }
 
     @Override

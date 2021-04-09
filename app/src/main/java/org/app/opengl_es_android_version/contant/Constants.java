@@ -13,4 +13,18 @@ public class Constants {
     public static final String U_COLOR = "u_Color";
 
     public static final String A_POSITION = "a_Position";
+
+    public static final String A_COORDINATE = "a_TexCoordinate";
+
+    public static final String V_POSITION = "vPosition";
+
+    public static final String U_TEXTURE = "u_Texture";
+
+    public static final String V_COORDINATE = "vCoordinate";
+
+    public static final String V_TEXTURE = "vTexture";
+
+    public static final String V_MATRIX = "vMatrix";
+
+
 }
