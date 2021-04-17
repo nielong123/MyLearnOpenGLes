@@ -1,8 +1,6 @@
 package org.app.opengl_es_android_version.object.object2d;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
 
@@ -60,15 +58,14 @@ public class Rectangle1 implements Object2D {
         uColorLocation = GLES20.glGetUniformLocation(programId, Constants.U_COLOR);
         //获取属性位置
         aPositionLocation = GLES20.glGetAttribLocation(programId, Constants.A_POSITION);
-        //告诉opengl从缓冲区vertextData中取数据找到属性a_Position的数据
-        GLES20.glVertexAttribPointer(aPositionLocation, POSITION_COMPONENT_COUNT, GL_FLOAT, false, 0, vertexArray.getFloatBuffer());
-//        vertexArray.getFloatBuffer().position(0);
-        //使能顶点数组
-        GLES20.glEnableVertexAttribArray(aPositionLocation);
     }
 
     @Override
     public void draw() {
+        //告诉opengl从缓冲区vertextData中取数据找到属性a_Position的数据
+        GLES20.glVertexAttribPointer(aPositionLocation, POSITION_COMPONENT_COUNT, GL_FLOAT, false, 0, vertexArray.getFloatBuffer());
+        //使能顶点数组
+        GLES20.glEnableVertexAttribArray(aPositionLocation);
         GLES20.glUniform4f(uColorLocation, 1.0f, 3.0f, 0.6f, 1.0f);
         GLES20.glDrawElements(GLES20.GL_TRIANGLE_FAN, indexArray.limit(), GL_UNSIGNED_BYTE, indexArray);
     }

@@ -31,7 +31,7 @@ public class RectangleWithTexture implements Object2D {
 
     private int textureId;
 
-    private static final float r = 0.3f;
+    private static final float r = 0.8f;
 
     private static final float[] VERTEX_DATA = {
             -r, r,   // top left
@@ -40,7 +40,7 @@ public class RectangleWithTexture implements Object2D {
             r, r  // top right
     };
 
-    private static final float c = 0.3f;
+    private static final float c = 0.8f;
 
     private static final float[] TEXTURE_DATA = {
             0.0f, 0.0f,
@@ -74,7 +74,6 @@ public class RectangleWithTexture implements Object2D {
     @Override
     public void bindData(Context context) {
         programId = ShaderHelper.buildProgram(context,
-//                R.raw.simple_vertex_shader1_5, R.raw.simple_fragment_shader1_5);
                 R.raw.texture_vertex_shader_copy, R.raw.texture_fragment_shader_copy);
 
         aTextureCoordinateLoc = GLES20.glGetAttribLocation(programId, Constants.A_COORDINATE);
@@ -82,11 +81,6 @@ public class RectangleWithTexture implements Object2D {
         //获取属性位置
         aPositionLocation = GLES20.glGetAttribLocation(programId, Constants.A_POSITION);
         textureId = createTexture();
-
-//        //告诉opengl从缓冲区vertextData中取数据找到属性a_Position的数据
-//        GLES20.glVertexAttribPointer(aPositionLocation, POSITION_COMPONENT_COUNT, GL_FLOAT, false, 0, vertexArray.getFloatBuffer());
-//        //使能顶点数组
-//        GLES20.glEnableVertexAttribArray(aPositionLocation);
     }
 
     @Override
@@ -95,7 +89,7 @@ public class RectangleWithTexture implements Object2D {
         GLES20.glEnableVertexAttribArray(aPositionLocation);
         GLES20.glVertexAttribPointer(aPositionLocation, POSITION_COMPONENT_COUNT, GLES20.GL_FLOAT, false, 0, vertexArray.getFloatBuffer());
         GLES20.glEnableVertexAttribArray(aTextureCoordinateLoc);
-        GLES20.glVertexAttribPointer(aTextureCoordinateLoc, 2, GLES20.GL_FLOAT, false, 0, textureArray.getFloatBuffer());
+        GLES20.glVertexAttribPointer(aTextureCoordinateLoc, POSITION_COMPONENT_COUNT, GLES20.GL_FLOAT, false, 0, textureArray.getFloatBuffer());
         //设置纹理
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureId);

@@ -66,15 +66,14 @@ public class Square implements Object2D {
         uColorLocation = GLES20.glGetUniformLocation(program, U_COLOR);
         aPositionLocation = GLES20.glGetAttribLocation(program, A_POSITION);
 
-        //---------第五步: 传入数据
-        GLES20.glVertexAttribPointer(aPositionLocation, COORDS_PER_VERTEX,
-                GLES20.GL_FLOAT, false, 0, vertexBuffer);
-        GLES20.glEnableVertexAttribArray(aPositionLocation);
-
     }
 
     @Override
     public void draw() {
+        //---------第五步: 传入数据
+        GLES20.glVertexAttribPointer(aPositionLocation, COORDS_PER_VERTEX,
+                GLES20.GL_FLOAT, false, 0, vertexBuffer);
+        GLES20.glEnableVertexAttribArray(aPositionLocation);
         GLES20.glUniform4f(uColorLocation, 0.0f, 0.0f, 1.0f, 1.0f);
         GLES20.glDrawArrays(GLES20.GL_LINE_LOOP, 0, POSITION_COMPONENT_COUNT);
     }

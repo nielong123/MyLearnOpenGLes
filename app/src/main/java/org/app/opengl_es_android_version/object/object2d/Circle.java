@@ -64,16 +64,15 @@ public class Circle implements Object2D {
         uColorLocation = GLES20.glGetUniformLocation(programId, Constants.U_COLOR);
         //获取属性位置
         aPositionLocation = GLES20.glGetAttribLocation(programId, Constants.A_POSITION);
+    }
+
+    @Override
+    public void draw() {
         //告诉opengl从缓冲区vertextData中取数据找到属性a_Position的数据
         GLES20.glVertexAttribPointer(aPositionLocation,
                 POSITION_COMPONENT_COUNT, GLES20.GL_FLOAT, false, 0, vertexArray.getFloatBuffer());
         //使能顶点数组
         GLES20.glEnableVertexAttribArray(aPositionLocation);
-//        vertexArray.getFloatBuffer().position(0);
-    }
-
-    @Override
-    public void draw() {
         GLES20.glUniform4f(uColorLocation, 1.0f, 3.0f, 1.0f, 1.0f);
         GLES20.glDrawArrays(GLES20.GL_LINE_LOOP, 0, count);
     }
