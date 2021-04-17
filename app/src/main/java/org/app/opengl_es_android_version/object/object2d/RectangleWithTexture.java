@@ -27,7 +27,7 @@ public class RectangleWithTexture implements Object2D {
 
     private int aMatrixLocation;
 
-//    private int textureLoc;
+    private int textureLoc;
 
     private int programId;
 
@@ -73,6 +73,8 @@ public class RectangleWithTexture implements Object2D {
 //        opts.inScaled = false;
 //        bmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.map1, opts);
         Matrix.setIdentityM(modelMatrix, 0);
+        modelMatrix = new float[]{1, 0.2f, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
+//        modelMatrix = new float[]{1, 0.2f, 0, 0, 0.5f, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
         indexArray.position(0);
     }
 
@@ -82,7 +84,8 @@ public class RectangleWithTexture implements Object2D {
                 R.raw.texture_vertex_shader_copy, R.raw.texture_fragment_shader_copy);
         GLES20.glUseProgram(programId);
         aTextureCoordinateLocation = GLES20.glGetAttribLocation(programId, Constants.A_COORDINATE);
-//        textureLoc = GLES20.glGetUniformLocation(programId, Constants.U_TEXTURE);
+        textureLoc = GLES20.glGetUniformLocation(programId, Constants.U_TEXTURE);
+        aMatrixLocation = GLES20.glGetUniformLocation(programId, Constants.U_MATRIX);
         //获取属性位置
         aPositionLocation = GLES20.glGetAttribLocation(programId, Constants.A_POSITION);
         textureId = TextureHelper.loadTexture(context, R.mipmap.start);
@@ -100,9 +103,10 @@ public class RectangleWithTexture implements Object2D {
         GLES20.glVertexAttribPointer(aTextureCoordinateLocation, POSITION_COMPONENT_COUNT, GLES20.GL_FLOAT, false, 0, textureArray.getFloatBuffer());
         textureArray.getFloatBuffer().position(0);
         //设置纹理
+        GLES20.glUniformMatrix4fv(aMatrixLocation, 1, false, modelMatrix, 0);
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureId);
-//        GLES20.glUniform1i(textureLoc, 0);
+        GLES20.glUniform1i(textureLoc, 0);
         GLES20.glDrawElements(GLES20.GL_TRIANGLE_FAN, indexArray.limit(), GL_UNSIGNED_BYTE, indexArray);
     }
 
