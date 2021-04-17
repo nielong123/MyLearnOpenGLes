@@ -2,7 +2,6 @@ package org.app.opengl_es_android_version.object.object2d;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
 import android.opengl.GLUtils;
 import android.opengl.Matrix;
@@ -11,6 +10,7 @@ import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.contant.Constants;
 import org.app.opengl_es_android_version.data.VertexArray;
 import org.app.opengl_es_android_version.util.ShaderHelper;
+import org.app.opengl_es_android_version.util.TextureHelper;
 
 import java.nio.ByteBuffer;
 
@@ -23,16 +23,19 @@ public class RectangleWithTexture implements Object2D {
 
     private int aPositionLocation;
 
-    private int aTextureCoordinateLoc;
+    private int aTextureCoordinateLocation;
 
-    private int textureLoc;
+    private int aMatrixLocation;
+
+//    private int textureLoc;
 
     private int programId;
 
     private int textureId;
 
-    private static final float r = 0.8f;
+    private static final float r = 0.6f;
 
+    //绘图顶点
     private static final float[] VERTEX_DATA = {
             -r, r,   // top left
             -r, -r,   // bottom left
@@ -40,13 +43,14 @@ public class RectangleWithTexture implements Object2D {
             r, r  // top right
     };
 
-    private static final float c = 0.8f;
+    private static final float c = 1f;
 
+    //图片上的顶点
     private static final float[] TEXTURE_DATA = {
             0.0f, 0.0f,
-            0.0f, r,
-            r, r,
-            r, 0.0f
+            0.0f, c,
+            c, c,
+            c, 0.0f
     };
 
     private ByteBuffer indexArray = ByteBuffer.allocateDirect(6)
@@ -64,9 +68,10 @@ public class RectangleWithTexture implements Object2D {
         vertexArray = new VertexArray(VERTEX_DATA);
         textureArray = new VertexArray(TEXTURE_DATA);
 
-        BitmapFactory.Options opts = new BitmapFactory.Options();
-        opts.inPreferredConfig = Bitmap.Config.ARGB_8888;
-        bmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.map1, opts);
+//        BitmapFactory.Options opts = new BitmapFactory.Options();
+//        opts.inPreferredConfig = Bitmap.Config.ARGB_8888;
+//        opts.inScaled = false;
+//        bmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.map1, opts);
         Matrix.setIdentityM(modelMatrix, 0);
         indexArray.position(0);
     }
@@ -75,25 +80,29 @@ public class RectangleWithTexture implements Object2D {
     public void bindData(Context context) {
         programId = ShaderHelper.buildProgram(context,
                 R.raw.texture_vertex_shader_copy, R.raw.texture_fragment_shader_copy);
-
-        aTextureCoordinateLoc = GLES20.glGetAttribLocation(programId, Constants.A_COORDINATE);
-        textureLoc = GLES20.glGetUniformLocation(programId, Constants.U_TEXTURE);
+        GLES20.glUseProgram(programId);
+        aTextureCoordinateLocation = GLES20.glGetAttribLocation(programId, Constants.A_COORDINATE);
+//        textureLoc = GLES20.glGetUniformLocation(programId, Constants.U_TEXTURE);
         //获取属性位置
         aPositionLocation = GLES20.glGetAttribLocation(programId, Constants.A_POSITION);
-        textureId = createTexture();
+        textureId = TextureHelper.loadTexture(context, R.mipmap.start);
+//        textureId = TextureHelper.loadTexture(context, R.drawable.map1);
+//        textureId = createTexture();
     }
 
     @Override
     public void draw() {
-        GLES20.glUseProgram(programId);
         GLES20.glEnableVertexAttribArray(aPositionLocation);
         GLES20.glVertexAttribPointer(aPositionLocation, POSITION_COMPONENT_COUNT, GLES20.GL_FLOAT, false, 0, vertexArray.getFloatBuffer());
-        GLES20.glEnableVertexAttribArray(aTextureCoordinateLoc);
-        GLES20.glVertexAttribPointer(aTextureCoordinateLoc, POSITION_COMPONENT_COUNT, GLES20.GL_FLOAT, false, 0, textureArray.getFloatBuffer());
+        vertexArray.getFloatBuffer().position(0);
+
+        GLES20.glEnableVertexAttribArray(aTextureCoordinateLocation);
+        GLES20.glVertexAttribPointer(aTextureCoordinateLocation, POSITION_COMPONENT_COUNT, GLES20.GL_FLOAT, false, 0, textureArray.getFloatBuffer());
+        textureArray.getFloatBuffer().position(0);
         //设置纹理
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureId);
-        GLES20.glUniform1i(textureLoc, 0);
+//        GLES20.glUniform1i(textureLoc, 0);
         GLES20.glDrawElements(GLES20.GL_TRIANGLE_FAN, indexArray.limit(), GL_UNSIGNED_BYTE, indexArray);
     }
 
@@ -114,6 +123,7 @@ public class RectangleWithTexture implements Object2D {
             GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE);
             //根据以上指定的参数，生成一个2D纹理
             GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bmp, 0);
+            bmp.recycle();
             return texture[0];
         }
         return 0;
