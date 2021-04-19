@@ -49,7 +49,7 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
 //        drawObjectList.add(new Circle());
 //        drawObjectList.add(new Polyline());
 //        drawObjectList.add(new Star5P());
-        drawObjectList.add(new RectangleWithTexture(context));
+//        drawObjectList.add(new RectangleWithTexture(context));
 //        drawObjectList.add(new Rectangle1(context));
 //        drawObjectList.add(new Triangle());
 //        drawObjectList.add(new Square());

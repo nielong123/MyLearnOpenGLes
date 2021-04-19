@@ -16,10 +16,15 @@ package org.app.opengl_es_android_version.object.object2d;
 //}
 
 import android.content.Context;
+import android.opengl.Matrix;
 
 public abstract class Object2D {
 
-    float[] modelMatrix = new float[16];
+    public Object2D() {
+        Matrix.setIdentityM(modelMatrix, 0);
+    }
+
+    public float[] modelMatrix = new float[16];
 
     /**
      * 这个类中绑定纹理
