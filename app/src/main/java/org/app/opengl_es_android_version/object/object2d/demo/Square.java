@@ -12,7 +12,7 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
 
-public class Square implements Object2D {
+public class Square extends Object2D {
 
     //float类型的字节数
     private static final int BYTES_PER_FLOAT = 4;

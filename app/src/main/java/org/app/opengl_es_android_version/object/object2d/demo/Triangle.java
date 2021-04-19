@@ -12,7 +12,7 @@ import org.app.opengl_es_android_version.util.ShaderHelper;
 
 import static android.opengl.GLES20.GL_TRIANGLES;
 
-public class Triangle implements Object2D {
+public class Triangle extends Object2D {
 
     private static final int POSITION_COMPONENT_COUNT = 3;
     private static final int STRIDE = POSITION_COMPONENT_COUNT * Constants.POSITION_COMPONENT_COUNT;

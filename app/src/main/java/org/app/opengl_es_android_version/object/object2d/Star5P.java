@@ -15,7 +15,7 @@ import java.nio.ByteBuffer;
 /***
  * 在绘制圆的基础上绘制一个五角星，用于测试glDrawElement()
  */
-public class Star5P implements Object2D {
+public class Star5P extends Object2D {
 
     //因为是x和y，所以两个值代表一个属性
     private static final int POSITION_COMPONENT_COUNT = 2;

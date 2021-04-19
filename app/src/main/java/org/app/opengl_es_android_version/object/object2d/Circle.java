@@ -12,7 +12,7 @@ import org.app.opengl_es_android_version.util.ShaderHelper;
 /***
  * 用折线来绘制一个圆形
  */
-public class Circle implements Object2D {
+public class Circle extends Object2D {
 
     private String TAG = this.getClass().getSimpleName();
 

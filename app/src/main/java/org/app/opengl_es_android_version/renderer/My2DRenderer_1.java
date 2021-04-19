@@ -7,6 +7,7 @@ import android.opengl.Matrix;
 
 import org.app.opengl_es_android_version.object.object2d.Object2D;
 import org.app.opengl_es_android_version.object.object2d.RectangleWithTexture;
+import org.app.opengl_es_android_version.object.object2d.demo.CoordinateLines;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +44,7 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         GLES20.glEnable(GLES20.GL_TEXTURE_2D);
         GLES20.glDisable(GLES20.GL_DEPTH_TEST);
-//        drawObjectList.add(new CoordinateLines());
+        drawObjectList.add(new CoordinateLines());
 //        drawObjectList.add(new Rectangle());
 //        drawObjectList.add(new Circle());
 //        drawObjectList.add(new Polyline());

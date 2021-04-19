@@ -16,7 +16,7 @@ import java.nio.ByteBuffer;
 
 import static android.opengl.GLES20.GL_UNSIGNED_BYTE;
 
-public class RectangleWithTexture implements Object2D {
+public class RectangleWithTexture extends Object2D {
 
     private Bitmap bmp;
     private static final int POSITION_COMPONENT_COUNT = 2;
@@ -58,8 +58,6 @@ public class RectangleWithTexture implements Object2D {
                     0, 1, 2, 0, 2, 3
             });
 
-    //模型矩阵
-    public float[] modelMatrix = new float[16];
 
     private final VertexArray vertexArray;
     private final VertexArray textureArray;

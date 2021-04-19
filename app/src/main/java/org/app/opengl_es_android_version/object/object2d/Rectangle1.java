@@ -14,7 +14,7 @@ import java.nio.ByteBuffer;
 import static android.opengl.GLES20.GL_FLOAT;
 import static android.opengl.GLES20.GL_UNSIGNED_BYTE;
 
-public class Rectangle1 implements Object2D {
+public class Rectangle1 extends Object2D {
 
     private static final int POSITION_COMPONENT_COUNT = 2;
     private int uColorLocation;

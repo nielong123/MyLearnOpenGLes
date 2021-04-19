@@ -14,7 +14,7 @@ import static android.opengl.GLES20.GL_FLOAT;
 /***
  * 用折线来绘制一个圆形
  */
-public class Rectangle implements Object2D {
+public class Rectangle extends Object2D {
 
     //因为是x和y，所以两个值代表一个属性
     private static final int POSITION_COMPONENT_COUNT = 2;

@@ -14,7 +14,7 @@ import static android.opengl.GLES20.GL_FLOAT;
 /***
  * 绘制折线
  */
-public class Polyline implements Object2D {
+public class Polyline extends Object2D {
 
     private static final int POSITION_COMPONENT_COUNT = 2;
 

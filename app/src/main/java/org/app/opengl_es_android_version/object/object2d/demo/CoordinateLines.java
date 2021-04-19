@@ -14,7 +14,7 @@ import static android.opengl.GLES20.GL_FLOAT;
 /***
  * 用折线来绘制一个圆形
  */
-public class CoordinateLines implements Object2D {
+public class CoordinateLines extends Object2D {
 
     private static final int POSITION_COMPONENT_COUNT = 2;
 
@@ -50,11 +50,6 @@ public class CoordinateLines implements Object2D {
         uColorLocation = GLES20.glGetUniformLocation(programId, Constants.U_COLOR);
         //获取属性位置
         aPositionLocation = GLES20.glGetAttribLocation(programId, Constants.A_POSITION);
-        //告诉opengl从缓冲区vertextData中取数据找到属性a_Position的数据
-//        GLES20.glVertexAttribPointer(aPositionLocation,
-//                POSITION_COMPONENT_COUNT, GL_FLOAT, false, 0, vertexArray.getFloatBuffer());
-//        //使能顶点数组
-//        GLES20.glEnableVertexAttribArray(aPositionLocation);
     }
 
     @Override
