@@ -41,7 +41,7 @@ public class CoordinateLines extends Object2D {
 //        };
     }
 
-    float r = 1.0f;
+    float r = 3.0f;
 
     private float[] CoordinateLines = {
             -r, 0f, 0f,

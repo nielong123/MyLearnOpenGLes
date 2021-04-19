@@ -43,6 +43,7 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         GLES20.glEnable(GLES20.GL_TEXTURE_2D);
         GLES20.glEnable(GLES20.GL_DEPTH_TEST);
+
         drawObjectList.add(new CoordinateLines());
 //        drawObjectList.add(new Rectangle());
 //        drawObjectList.add(new Circle());
@@ -76,5 +77,11 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
         for (Object2D object2D : drawObjectList) {
             object2D.draw(viewProjectMatrix);
         }
+    }
+
+    public void handleTouchDown(float normalizedX, float normalizedY) {
+    }
+
+    public void handleTouchMove(float normalizedX, float normalizedY) {
     }
 }

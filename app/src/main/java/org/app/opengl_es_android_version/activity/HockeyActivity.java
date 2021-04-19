@@ -14,14 +14,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.app.opengl_es_android_version.R;
-import org.app.opengl_es_android_version.renderer.HockeyRenderer2;
+import org.app.opengl_es_android_version.renderer.HockeyRenderer3;
 
 public class HockeyActivity extends AppCompatActivity implements View.OnTouchListener {
 
     GLSurfaceView glSurfaceView;
 
-    //    HockeyRenderer3 hockeyRenderer;
-    private HockeyRenderer2 hockeyRenderer3;
+    HockeyRenderer3 hockeyRenderer3;
+//    private HockeyRenderer2 hockeyRenderer3;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class HockeyActivity extends AppCompatActivity implements View.OnTouchLis
                 || Build.MODEL.contains("Android SDK built for x86")));
         if (supportEs2) {
             glSurfaceView.setEGLContextClientVersion(2);
-            hockeyRenderer3 = new HockeyRenderer2(this);
+            hockeyRenderer3 = new HockeyRenderer3(this);
             glSurfaceView.setRenderer(hockeyRenderer3);
         } else {
             Toast.makeText(this, "不支持openGL es 2.0", Toast.LENGTH_SHORT).show();
