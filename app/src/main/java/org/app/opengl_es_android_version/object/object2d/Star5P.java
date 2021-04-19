@@ -81,4 +81,9 @@ public class Star5P extends Object2D {
         GLES20.glDrawElements(GLES20.GL_LINE_LOOP, count, GLES20.GL_UNSIGNED_BYTE, indexArray);
         GLES20.glDrawArrays(GLES20.GL_LINE_LOOP, 0, count);
     }
+
+    @Override
+    public void draw(float[] viewProjectMatrix) {
+
+    }
 }

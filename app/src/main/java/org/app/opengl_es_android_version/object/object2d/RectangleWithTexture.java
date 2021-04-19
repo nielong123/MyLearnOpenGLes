@@ -108,6 +108,11 @@ public class RectangleWithTexture extends Object2D {
         GLES20.glDrawElements(GLES20.GL_TRIANGLE_FAN, indexArray.limit(), GL_UNSIGNED_BYTE, indexArray);
     }
 
+    @Override
+    public void draw(float[] viewProjectMatrix) {
+
+    }
+
     private int createTexture() {
         int[] texture = new int[1];
         if (bmp != null && !bmp.isRecycled()) {

@@ -76,4 +76,9 @@ public class Circle extends Object2D {
         GLES20.glUniform4f(uColorLocation, 1.0f, 3.0f, 1.0f, 1.0f);
         GLES20.glDrawArrays(GLES20.GL_LINE_LOOP, 0, count);
     }
+
+    @Override
+    public void draw(float[] viewProjectMatrix) {
+
+    }
 }

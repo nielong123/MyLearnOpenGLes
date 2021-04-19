@@ -6,8 +6,8 @@ import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 
 import org.app.opengl_es_android_version.object.object2d.Object2D;
-import org.app.opengl_es_android_version.object.object2d.RectangleWithTexture;
 import org.app.opengl_es_android_version.object.object2d.demo.CoordinateLines;
+import org.app.opengl_es_android_version.util.MatrixHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,6 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
     private final float[] projectMatrix = new float[16];
     //视角与投影的乘积矩阵
     private final float[] viewProjectMatrix = new float[16];
-
     //总矩阵
     private final float[] mvpMatrix = new float[16];
 
@@ -43,7 +42,7 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         GLES20.glEnable(GLES20.GL_TEXTURE_2D);
-        GLES20.glDisable(GLES20.GL_DEPTH_TEST);
+        GLES20.glEnable(GLES20.GL_DEPTH_TEST);
         drawObjectList.add(new CoordinateLines());
 //        drawObjectList.add(new Rectangle());
 //        drawObjectList.add(new Circle());
@@ -62,10 +61,12 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
         GLES20.glViewport(0, 0, width, height);
+        MatrixHelper.perspectiveM(projectMatrix, 45, (float) width / (float) height, 1f, 100f);
         Matrix.setLookAtM(viewMatrix, 0,
-                0f, 1.2f, 2.2f, //eye
-                0f, 0f, 0f, //center
-                0f, 1f, 0f);    //up
+                4f, 4f, 4f,
+                0f, 0f, 0f,
+                0f, 1f, 0f);
+        Matrix.multiplyMM(viewProjectMatrix, 0, projectMatrix, 0, viewMatrix, 0);
     }
 
     @Override
@@ -73,7 +74,7 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
 
         for (Object2D object2D : drawObjectList) {
-            object2D.draw();
+            object2D.draw(viewProjectMatrix);
         }
     }
 }

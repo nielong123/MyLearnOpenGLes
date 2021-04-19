@@ -59,4 +59,9 @@ public class Polyline extends Object2D {
         GLES20.glLineWidth(3);
         GLES20.glDrawArrays(GLES20.GL_LINE_STRIP, 0, 3);
     }
+
+    @Override
+    public void draw(float[] viewProjectMatrix) {
+
+    }
 }

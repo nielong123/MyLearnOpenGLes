@@ -82,4 +82,9 @@ public class Rectangle extends Object2D {
         GLES20.glUniform4f(uColorLocation, 1.0f, 0.0f, 2.0f, 0.0f);
         GLES20.glDrawArrays(GLES20.GL_LINE_LOOP, 0, count);
     }
+
+    @Override
+    public void draw(float[] viewProjectMatrix) {
+
+    }
 }
