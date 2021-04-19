@@ -83,23 +83,46 @@ public class My2DActivity extends AppCompatActivity implements View.OnTouchListe
         final float normalizedX = (event.getX() / v.getWidth()) * 2 - 1;
         final float normalizedY = -((event.getY() / v.getHeight()) * 2 - 1);
 
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            glSurfaceView.queueEvent(new Runnable() {
-                @Override
-                public void run() {
-                    my2DRenderer.handleTouchDown(normalizedX, normalizedY);
-                }
-            });
-        } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-            glSurfaceView.queueEvent(new Runnable() {
-                @Override
-                public void run() {
-                    my2DRenderer.handleTouchMove(normalizedX, normalizedY);
-                }
-            });
-        } else {
-            return false;
+        switch (event.getAction()) {
+            //单点下落
+            case MotionEvent.ACTION_DOWN:
+                glSurfaceView.queueEvent(new Runnable() {
+                    @Override
+                    public void run() {
+                        my2DRenderer.handleTouchDown(normalizedX, normalizedY);
+                    }
+                });
+                break;
+            //2～n个点下落
+            case MotionEvent.ACTION_POINTER_DOWN:
+                break;
+            //第2~n个触点离开屏幕
+            case MotionEvent.ACTION_POINTER_UP:
+                break;
+            //所有触点(最后一个触点)离开屏幕
+            case MotionEvent.ACTION_UP:
+                break;
+            case MotionEvent.ACTION_MOVE:
+                glSurfaceView.queueEvent(new Runnable() {
+                    @Override
+                    public void run() {
+                        my2DRenderer.handleTouchMove(normalizedX, normalizedY);
+                    }
+                });
+                break;
         }
+//        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+
+//        } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+//            glSurfaceView.queueEvent(new Runnable() {
+//                @Override
+//                public void run() {
+//                    my2DRenderer.handleTouchMove(normalizedX, normalizedY);
+//                }
+//            });
+//        } else {
+//            return false;
+//        }
         return true;
     }
 }

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.opengl.GLES20;
 import android.opengl.GLUtils;
-import android.opengl.Matrix;
 
 import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.contant.Constants;
@@ -110,7 +109,7 @@ public class RectangleWithTexture extends Object2D {
 
     @Override
     public void draw(float[] viewProjectMatrix) {
-
+        draw();
     }
 
     private int createTexture() {

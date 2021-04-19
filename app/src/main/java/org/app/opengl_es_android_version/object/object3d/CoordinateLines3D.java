@@ -7,7 +7,6 @@ import android.opengl.Matrix;
 import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.contant.Constants;
 import org.app.opengl_es_android_version.data.VertexArray;
-import org.app.opengl_es_android_version.object.object2d.Object2D;
 import org.app.opengl_es_android_version.util.ShaderHelper;
 
 import static android.opengl.GLES20.GL_FLOAT;
@@ -15,7 +14,7 @@ import static android.opengl.GLES20.GL_FLOAT;
 /***
  * 用折线来绘制一个圆形
  */
-public class CoordinateLines3D extends Object2D {
+public class CoordinateLines3D extends Object3D {
 
     private static final int POSITION_COMPONENT_COUNT = 3;
 

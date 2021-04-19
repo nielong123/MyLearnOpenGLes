@@ -7,7 +7,6 @@ import android.opengl.Matrix;
 import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.contant.Constants;
 import org.app.opengl_es_android_version.data.VertexArray;
-import org.app.opengl_es_android_version.object.object2d.Object2D;
 import org.app.opengl_es_android_version.util.Geometry;
 import org.app.opengl_es_android_version.util.ShaderHelper;
 
@@ -16,7 +15,7 @@ import static android.opengl.GLES20.GL_FLOAT;
 /***
  * 用折线来绘制一个圆形
  */
-public class Rectangle3D extends Object2D {
+public class Rectangle3D extends Object3D {
 
     //因为是x和y，所以两个值代表一个属性
     private static final int POSITION_COMPONENT_COUNT = 3;

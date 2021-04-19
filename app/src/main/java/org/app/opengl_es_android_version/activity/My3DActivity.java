@@ -11,15 +11,15 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.app.opengl_es_android_version.R;
-import org.app.opengl_es_android_version.renderer.BallRenderer;
+import org.app.opengl_es_android_version.renderer.My3DRenderer_1;
 
-public class Ball3DActivity extends AppCompatActivity {
+public class My3DActivity extends AppCompatActivity {
 
     private GLSurfaceView glSurfaceView;
 
     private boolean rendererSet = false;
 
-    private BallRenderer ballRenderer;
+    private My3DRenderer_1 my3DRenderer1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +38,8 @@ public class Ball3DActivity extends AppCompatActivity {
                 || Build.MODEL.contains("Android SDK built for x86")));
         if (supportEs2) {
             glSurfaceView.setEGLContextClientVersion(2);
-            ballRenderer = new BallRenderer(this);
-            glSurfaceView.setRenderer(ballRenderer);
+            my3DRenderer1 = new My3DRenderer_1(this);
+            glSurfaceView.setRenderer(my3DRenderer1);
             glSurfaceView.setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
             rendererSet = true;
         } else {

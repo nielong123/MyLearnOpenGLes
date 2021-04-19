@@ -2,6 +2,7 @@ package org.app.opengl_es_android_version.object.object2d;
 
 import android.content.Context;
 import android.opengl.GLES20;
+import android.opengl.Matrix;
 
 import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.contant.Constants;
@@ -22,6 +23,7 @@ public class Rectangle extends Object2D {
     private int programId;
     private int uColorLocation;
     private int aPositionLocation;
+    private int aMatrixLocation;
 
     final private int count;
 
@@ -64,16 +66,19 @@ public class Rectangle extends Object2D {
     @Override
     public void bindData(Context context) {
         programId = ShaderHelper.buildProgram(context,
-                R.raw.simple_vertex_shader1_5, R.raw.simple_fragment_shader1_5);
+                R.raw.texture_vertex_shader_copy, R.raw.simple_fragment_shader1_5);
         GLES20.glUseProgram(programId);
         //获取uniform的位置，把位置存入uColorLocation中
         uColorLocation = GLES20.glGetUniformLocation(programId, Constants.U_COLOR);
         //获取属性位置
         aPositionLocation = GLES20.glGetAttribLocation(programId, Constants.A_POSITION);
+
+        aMatrixLocation = GLES20.glGetUniformLocation(programId, Constants.U_MATRIX);
     }
 
     @Override
     public void draw() {
+        GLES20.glUniformMatrix4fv(aMatrixLocation, 1, false, mvpMatrix, 0);
         //告诉opengl从缓冲区vertextData中取数据找到属性a_Position的数据
         GLES20.glVertexAttribPointer(
                 aPositionLocation, POSITION_COMPONENT_COUNT, GL_FLOAT, false, 0, vertexArray.getFloatBuffer());
@@ -85,6 +90,7 @@ public class Rectangle extends Object2D {
 
     @Override
     public void draw(float[] viewProjectMatrix) {
-
+        Matrix.multiplyMM(mvpMatrix, 0, viewProjectMatrix, 0, modelMatrix, 0);
+        draw();
     }
 }

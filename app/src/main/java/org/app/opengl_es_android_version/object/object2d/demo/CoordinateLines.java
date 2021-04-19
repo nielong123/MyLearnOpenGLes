@@ -17,7 +17,7 @@ import static android.opengl.GLES20.GL_FLOAT;
  */
 public class CoordinateLines extends Object2D {
 
-    private static final int POSITION_COMPONENT_COUNT = 3;
+    private static final int POSITION_COMPONENT_COUNT = 2;
 
     private int programId;
     private int aMatrixLocation;
@@ -31,7 +31,7 @@ public class CoordinateLines extends Object2D {
     public CoordinateLines() {
         super();
         vertexArray = new VertexArray(CoordinateLines);
-        count = vertexArray.getFloatBuffer().limit() / 3;
+        count = vertexArray.getFloatBuffer().limit() / POSITION_COMPONENT_COUNT;
 
 //        modelMatrix = new float[]{
 //                1, 0, 0.1f, 0,
@@ -44,24 +44,16 @@ public class CoordinateLines extends Object2D {
     float r = 3.0f;
 
     private float[] CoordinateLines = {
-            -r, 0f, 0f,
-            r, 0f, 0f,
-            0f, r, 0f,
-            0f, -r, 0f,
-            0, 0f, -r,
-            -0, 0f, r
+            -r, 0f,
+            r, 0f,
+            0f, r,
+            0f, -r
     };
-
-//    private float[] CoordinateLines = {
-//            -r, 0f,
-//            r, 0f,
-//            0, r,
-//            0, -r
-//    };
 
     @Override
     public void bindData(Context context) {
         programId = ShaderHelper.buildProgram(context,
+//                R.raw.simple_vertex_shader1_5, R.raw.simple_fragment_shader1_5);
                 R.raw.texture_vertex_shader_copy, R.raw.simple_fragment_shader1_5);
         GLES20.glUseProgram(programId);
         //获取uniform的位置，把位置存入uColorLocation中

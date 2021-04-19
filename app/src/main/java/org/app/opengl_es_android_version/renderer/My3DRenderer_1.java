@@ -5,10 +5,9 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 
-import org.app.opengl_es_android_version.object.object2d.Object2D;
-import org.app.opengl_es_android_version.object.object2d.Rectangle;
-import org.app.opengl_es_android_version.object.object2d.RectangleWithTexture;
-import org.app.opengl_es_android_version.object.object2d.demo.CoordinateLines;
+import org.app.opengl_es_android_version.object.object3d.CoordinateLines3D;
+import org.app.opengl_es_android_version.object.object3d.Object3D;
+import org.app.opengl_es_android_version.object.object3d.Rectangle3D;
 import org.app.opengl_es_android_version.util.MatrixHelper;
 
 import java.util.ArrayList;
@@ -17,11 +16,11 @@ import java.util.List;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-public class My2DRenderer_1 implements GLSurfaceView.Renderer {
+public class My3DRenderer_1 implements GLSurfaceView.Renderer {
 
     private final Context context;
 
-    List<Object2D> drawObjectList = new ArrayList<>();
+    List<Object3D> drawObjectList = new ArrayList<>();
 
     //视角矩阵
     private final float[] viewMatrix = new float[16];
@@ -32,7 +31,7 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
     //总矩阵
     private final float[] mvpMatrix = new float[16];
 
-    public My2DRenderer_1(Context context) {
+    public My3DRenderer_1(Context context) {
         this.context = context;
         Matrix.setIdentityM(viewMatrix, 0);
         Matrix.setIdentityM(projectMatrix, 0);
@@ -46,29 +45,29 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
         GLES20.glEnable(GLES20.GL_TEXTURE_2D);
         GLES20.glEnable(GLES20.GL_DEPTH_TEST);
 
-        drawObjectList.add(new CoordinateLines());
-        drawObjectList.add(new Rectangle());
+        drawObjectList.add(new CoordinateLines3D());
+        drawObjectList.add(new Rectangle3D());
 //        drawObjectList.add(new Circle());
 //        drawObjectList.add(new Polyline());
 //        drawObjectList.add(new Star5P());
-        drawObjectList.add(new RectangleWithTexture(context));
+//        drawObjectList.add(new RectangleWithTexture(context));
 //        drawObjectList.add(new Rectangle1(context));
 //        drawObjectList.add(new Triangle());
 //        drawObjectList.add(new Square());
 
-        for (Object2D object2D : drawObjectList) {
-            object2D.bindData(context);
+        for (Object3D object3D : drawObjectList) {
+            object3D.bindData(context);
         }
     }
 
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
         GLES20.glViewport(0, 0, width, height);
-//        MatrixHelper.perspectiveM(projectMatrix, 45, (float) width / (float) height, 1f, 100f);
-//        Matrix.setLookAtM(viewMatrix, 0,
-//                4f, 4f, 4f,
-//                0f, 0f, 0f,
-//                0f, 1f, 0f);
+        MatrixHelper.perspectiveM(projectMatrix, 35, (float) width / (float) height, 1f, 100f);
+        Matrix.setLookAtM(viewMatrix, 0,
+                4f, 4f, 4f,
+                0f, 0f, 0f,
+                0f, 1f, 0f);
         Matrix.multiplyMM(viewProjectMatrix, 0, projectMatrix, 0, viewMatrix, 0);
     }
 
@@ -76,8 +75,8 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
     public void onDrawFrame(GL10 gl) {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
 
-        for (Object2D object2D : drawObjectList) {
-            object2D.draw(viewProjectMatrix);
+        for (Object3D object3D : drawObjectList) {
+            object3D.draw(viewProjectMatrix);
         }
     }
 
