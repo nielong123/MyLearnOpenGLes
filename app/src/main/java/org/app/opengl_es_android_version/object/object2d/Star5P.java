@@ -23,6 +23,7 @@ public class Star5P extends Object2D {
     private int programId;
     private int uColorLocation;
     private int aPositionLocation;
+    private int uMatrixLocation;
 
     private VertexArray vertexArray;
 
@@ -68,10 +69,12 @@ public class Star5P extends Object2D {
         GLES20.glUseProgram(programId);
         uColorLocation = GLES20.glGetUniformLocation(programId, Constants.U_COLOR);
         aPositionLocation = GLES20.glGetAttribLocation(programId, Constants.A_POSITION);
+        uMatrixLocation = GLES20.glGetAttribLocation(programId, Constants.U_MATRIX);
     }
 
     @Override
     public void draw() {
+        GLES20.glUniformMatrix4fv(uMatrixLocation, 0, false, mvpMatrix, 0);
         GLES20.glVertexAttribPointer(aPositionLocation,
                 POSITION_COMPONENT_COUNT, GLES20.GL_FLOAT, false, 0, vertexArray.getFloatBuffer());
         //使能顶点数组

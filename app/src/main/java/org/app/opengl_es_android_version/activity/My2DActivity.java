@@ -16,7 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.renderer.My2DRenderer_1;
 
-public class My2DActivity extends AppCompatActivity implements View.OnTouchListener {
+import static android.opengl.GLSurfaceView.RENDERMODE_CONTINUOUSLY;
+import static android.opengl.GLSurfaceView.RENDERMODE_WHEN_DIRTY;
+
+public class My2DActivity extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener {
 
     boolean rendererSet;
 
@@ -48,6 +51,7 @@ public class My2DActivity extends AppCompatActivity implements View.OnTouchListe
         } else {
             Toast.makeText(this, "不支持openGL es 2.0", Toast.LENGTH_SHORT).show();
         }
+        findViewById(R.id.button1).setOnClickListener(this);
     }
 
 
@@ -124,5 +128,12 @@ public class My2DActivity extends AppCompatActivity implements View.OnTouchListe
 //            return false;
 //        }
         return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+        glSurfaceView.setRenderMode(RENDERMODE_WHEN_DIRTY);
+        my2DRenderer.add2DObject();
+        glSurfaceView.setRenderMode(RENDERMODE_CONTINUOUSLY);
     }
 }

@@ -5,15 +5,13 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 
-import org.app.opengl_es_android_version.data.VertexArray;
 import org.app.opengl_es_android_version.object.object2d.Object2D;
-import org.app.opengl_es_android_version.object.object2d.RectangleWithTexture;
 import org.app.opengl_es_android_version.object.object2d.Star5P;
 import org.app.opengl_es_android_version.object.object2d.demo.CoordinateLines;
 import org.app.opengl_es_android_version.object.object2d.demo.Triangle;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -24,7 +22,7 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
 
     private final Context context;
 
-    List<Object2D> drawObjectList = new ArrayList<>();
+    List<Object2D> drawObjectList = new CopyOnWriteArrayList<>();
 
     //视角矩阵
     private float[] viewMatrix = new float[16];
@@ -32,6 +30,9 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
     private final float[] projectMatrix = new float[16];
     //视角与投影的乘积矩阵
     private final float[] viewProjectMatrix = new float[16];
+
+
+    Object2D object2D;
 
 
     public My2DRenderer_1(Context context) {
@@ -51,10 +52,10 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
 //        drawObjectList.add(new Rectangle(context));
 //        drawObjectList.add(new Circle(context));
 //        drawObjectList.add(new Polyline(context));
-        drawObjectList.add(new Star5P(context));
+//        drawObjectList.add(new Star5P(context));
 //        drawObjectList.add(new Rectangle1(context));
-        drawObjectList.add(new RectangleWithTexture(context));
-//        drawObjectList.add(new Triangle(context));
+//        drawObjectList.add(new RectangleWithTexture(context));
+        drawObjectList.add(new Triangle(context));
 //        drawObjectList.add(new Square(context));
     }
 
@@ -84,4 +85,15 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
 
     public void handleTouchMove(float normalizedX, float normalizedY) {
     }
+
+    public void add2DObject() {
+        if (object2D == null) {
+            object2D = new Star5P(context);
+            drawObjectList.add(object2D);
+        } else {
+            drawObjectList.remove(object2D);
+            object2D = null;
+        }
+    }
+
 }

@@ -29,7 +29,9 @@
         <activity android:name=".activity.CubeActivity" />
         <activity android:name=".activity.HockeyActivity" />
         <activity android:name=".activity.PanoramaActivity" />
-        <activity android:name=".activity.My2DActivity" />
+        <activity
+            android:name=".activity.My2DActivity"
+            android:theme="@style/FullScreen" />
         <activity android:name=".activity.My3DActivity" />
         <activity android:name=".activity.PictureTextureActivity" />
     </application>
