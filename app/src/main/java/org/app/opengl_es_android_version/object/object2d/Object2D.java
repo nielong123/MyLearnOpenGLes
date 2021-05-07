@@ -25,15 +25,15 @@ public abstract class Object2D {
 
     private boolean isBind = false;
 
+    public float[] modelMatrix = new float[16];
+
+    public float[] mvpMatrix = new float[16];
+
     public Object2D(Context context) {
         this.context = context;
         Matrix.setIdentityM(modelMatrix, 0);
         Matrix.setIdentityM(mvpMatrix, 0);
     }
-
-    public float[] modelMatrix = new float[16];
-
-    public float[] mvpMatrix = new float[16];
 
     /**
      * 这个类中绑定纹理

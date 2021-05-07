@@ -21,6 +21,7 @@ public class Triangle extends Object2D {
     private int programId;
     private int uColorLocation;
     private int aPositionLocation;
+    private int aMatrixLocation;
     private final VertexArray vertexArray;
 
     public Triangle(Context context) {
@@ -49,31 +50,23 @@ public class Triangle extends Object2D {
 
     @Override
     public void bindData(Context context) {
+        super.bindData(context);
         programId = ShaderHelper.buildProgram(context,
-                R.raw.simple_vertex_shader1_5, R.raw.simple_fragment_shader1_5);
+                R.raw.texture_vertex_shader_copy, R.raw.simple_fragment_shader1_5);
         GLES20.glUseProgram(programId);
-        //获取uniform的位置，把位置存入uColorLocation中
         uColorLocation = GLES20.glGetUniformLocation(programId, Constants.U_COLOR);
-        //获取属性位置
         aPositionLocation = GLES20.glGetAttribLocation(programId, Constants.A_POSITION);
-        //告诉opengl从缓冲区vertextData中取数据找到属性a_Position的数据
-//        GLES20.glVertexAttribPointer(aPositionLocation, POSITION_COMPONENT_COUNT, GL_FLOAT, false, 0, vertexData);
-
+        aMatrixLocation = GLES20.glGetAttribLocation(programId, Constants.U_MATRIX);
     }
 
     @Override
     public void draw() {
-        //使能顶点数组
+        GLES20.glUniformMatrix4fv(aMatrixLocation, 1, false, mvpMatrix, 0);
         GLES20.glVertexAttribPointer(aPositionLocation, 2, GLES20.GL_FLOAT,
                 false, 0, vertexArray.getFloatBuffer());
         GLES20.glEnableVertexAttribArray(aPositionLocation);
         GLES20.glUniform4f(uColorLocation, 1.0f, 3.0f, 1.0f, 1.0f);
         GLES20.glDrawArrays(GL_TRIANGLES, 0, 3);
-    }
-
-    @Override
-    public void draw(float[] viewProjectMatrix) {
-
     }
 
 }

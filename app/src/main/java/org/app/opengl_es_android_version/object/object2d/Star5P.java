@@ -66,11 +66,8 @@ public class Star5P extends Object2D {
         programId = ShaderHelper.buildProgram(context,
                 R.raw.texture_vertex_shader_copy, R.raw.simple_fragment_shader1_5);
         GLES20.glUseProgram(programId);
-        //获取uniform的位置，把位置存入uColorLocation中
         uColorLocation = GLES20.glGetUniformLocation(programId, Constants.U_COLOR);
-        //获取属性位置
         aPositionLocation = GLES20.glGetAttribLocation(programId, Constants.A_POSITION);
-        //告诉opengl从缓冲区vertextData中取数据找到属性a_Position的数据
     }
 
     @Override

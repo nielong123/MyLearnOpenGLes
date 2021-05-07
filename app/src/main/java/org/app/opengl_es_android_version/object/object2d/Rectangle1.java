@@ -19,6 +19,7 @@ public class Rectangle1 extends Object2D {
     private static final int POSITION_COMPONENT_COUNT = 2;
     private int uColorLocation;
     private int aPositionLocation;
+    private int aMatrixLocation;
 
     private int programId;
 
@@ -36,43 +37,31 @@ public class Rectangle1 extends Object2D {
                     0, 1, 2, 2, 3, 0
             });
 
-    //模型矩阵
-    public float[] modelMatrix = new float[16];
-
     private final VertexArray vertexArray;
 
     public Rectangle1(Context context) {
         super(context);
         vertexArray = new VertexArray(VERTEX_DATA);
-        Matrix.setIdentityM(modelMatrix, 0);
         indexArray.position(0);
     }
 
     @Override
     public void bindData(Context context) {
+        super.bindData(context);
         programId = ShaderHelper.buildProgram(context,
-                R.raw.simple_vertex_shader1_5, R.raw.simple_fragment_shader1_5);
+                R.raw.texture_vertex_shader_copy, R.raw.simple_fragment_shader1_5);
         GLES20.glUseProgram(programId);
-
-
-        //获取属性位置
         uColorLocation = GLES20.glGetUniformLocation(programId, Constants.U_COLOR);
-        //获取属性位置
         aPositionLocation = GLES20.glGetAttribLocation(programId, Constants.A_POSITION);
+        aMatrixLocation = GLES20.glGetUniformLocation(programId, Constants.U_MATRIX);
     }
 
     @Override
     public void draw() {
-        //告诉opengl从缓冲区vertextData中取数据找到属性a_Position的数据
+        GLES20.glUniformMatrix4fv(aMatrixLocation, 1, false, mvpMatrix, 0);
         GLES20.glVertexAttribPointer(aPositionLocation, POSITION_COMPONENT_COUNT, GL_FLOAT, false, 0, vertexArray.getFloatBuffer());
-        //使能顶点数组
         GLES20.glEnableVertexAttribArray(aPositionLocation);
-        GLES20.glUniform4f(uColorLocation, 1.0f, 3.0f, 0.6f, 1.0f);
+        GLES20.glUniform4f(uColorLocation, 1.0f, 1.0f, 0.6f, 1.0f);
         GLES20.glDrawElements(GLES20.GL_TRIANGLE_FAN, indexArray.limit(), GL_UNSIGNED_BYTE, indexArray);
-    }
-
-    @Override
-    public void draw(float[] viewProjectMatrix) {
-
     }
 }
