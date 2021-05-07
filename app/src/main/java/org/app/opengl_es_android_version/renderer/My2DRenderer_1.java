@@ -5,11 +5,12 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 
+import org.app.opengl_es_android_version.object.object2d.Circle;
 import org.app.opengl_es_android_version.object.object2d.Object2D;
+import org.app.opengl_es_android_version.object.object2d.Polyline;
 import org.app.opengl_es_android_version.object.object2d.Rectangle;
-import org.app.opengl_es_android_version.object.object2d.RectangleWithTexture;
+import org.app.opengl_es_android_version.object.object2d.Star5P;
 import org.app.opengl_es_android_version.object.object2d.demo.CoordinateLines;
-import org.app.opengl_es_android_version.util.MatrixHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,21 +45,20 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         GLES20.glEnable(GLES20.GL_TEXTURE_2D);
-//        GLES20.glEnable(GLES20.GL_DEPTH_TEST);
 
-        drawObjectList.add(new CoordinateLines());
-//        drawObjectList.add(new Rectangle());
-//        drawObjectList.add(new Circle());
-//        drawObjectList.add(new Polyline());
-//        drawObjectList.add(new Star5P());
+        drawObjectList.add(new CoordinateLines(context));
+        drawObjectList.add(new Rectangle(context));
+        drawObjectList.add(new Circle(context));
+        drawObjectList.add(new Polyline(context));
+        drawObjectList.add(new Star5P(context));
 //        drawObjectList.add(new RectangleWithTexture(context));
 //        drawObjectList.add(new Rectangle1(context));
 //        drawObjectList.add(new Triangle());
 //        drawObjectList.add(new Square());
 
-        for (Object2D object2D : drawObjectList) {
-            object2D.bindData(context);
-        }
+//        for (Object2D object2D : drawObjectList) {
+//            object2D.bindData(context);
+//        }
     }
 
     @Override

@@ -28,17 +28,10 @@ public class CoordinateLines extends Object2D {
 
     VertexArray vertexArray;
 
-    public CoordinateLines() {
-        super();
+    public CoordinateLines(Context context) {
+        super(context);
         vertexArray = new VertexArray(CoordinateLines);
         count = vertexArray.getFloatBuffer().limit() / POSITION_COMPONENT_COUNT;
-
-//        modelMatrix = new float[]{
-//                1, 0, 0.1f, 0,
-//                0, 1, 0.5f, 0,
-//                0, 0.1f, 1, 0,
-//                0, 0, 0, 1
-//        };
     }
 
     float r = 3.0f;
@@ -52,8 +45,8 @@ public class CoordinateLines extends Object2D {
 
     @Override
     public void bindData(Context context) {
+        super.bindData(context);
         programId = ShaderHelper.buildProgram(context,
-//                R.raw.simple_vertex_shader1_5, R.raw.simple_fragment_shader1_5);
                 R.raw.texture_vertex_shader_copy, R.raw.simple_fragment_shader1_5);
         GLES20.glUseProgram(programId);
         //获取uniform的位置，把位置存入uColorLocation中
@@ -77,9 +70,4 @@ public class CoordinateLines extends Object2D {
         GLES20.glDrawArrays(GLES20.GL_LINES, 0, count);
     }
 
-    @Override
-    public void draw(float[] viewProjectMatrix) {
-        Matrix.multiplyMM(mvpMatrix, 0, viewProjectMatrix, 0, modelMatrix, 0);
-        draw();
-    }
 }

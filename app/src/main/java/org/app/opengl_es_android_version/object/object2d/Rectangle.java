@@ -2,7 +2,6 @@ package org.app.opengl_es_android_version.object.object2d;
 
 import android.content.Context;
 import android.opengl.GLES20;
-import android.opengl.Matrix;
 
 import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.contant.Constants;
@@ -31,7 +30,8 @@ public class Rectangle extends Object2D {
 
     VertexArray vertexArray;
 
-    public Rectangle() {
+    public Rectangle(Context context) {
+        super(context);
         Geometry.Point point = new Geometry.Point(0f, 0f, 0f);
         rectangle = new Geometry.Rectangle(point, 1f, 1f);
         vertexArray = new VertexArray(getVertexWithRectangle(rectangle));
@@ -65,6 +65,7 @@ public class Rectangle extends Object2D {
 
     @Override
     public void bindData(Context context) {
+        super.bindData(context);
         programId = ShaderHelper.buildProgram(context,
                 R.raw.texture_vertex_shader_copy, R.raw.simple_fragment_shader1_5);
         GLES20.glUseProgram(programId);
@@ -84,13 +85,8 @@ public class Rectangle extends Object2D {
                 aPositionLocation, POSITION_COMPONENT_COUNT, GL_FLOAT, false, 0, vertexArray.getFloatBuffer());
         //使能顶点数组
         GLES20.glEnableVertexAttribArray(aPositionLocation);
-        GLES20.glUniform4f(uColorLocation, 1.0f, 0.0f, 2.0f, 0.0f);
+        GLES20.glUniform4f(uColorLocation, 1.0f, 0.0f, 1.0f, 0.0f);
         GLES20.glDrawArrays(GLES20.GL_LINE_LOOP, 0, count);
     }
 
-    @Override
-    public void draw(float[] viewProjectMatrix) {
-        Matrix.multiplyMM(mvpMatrix, 0, viewProjectMatrix, 0, modelMatrix, 0);
-        draw();
-    }
 }

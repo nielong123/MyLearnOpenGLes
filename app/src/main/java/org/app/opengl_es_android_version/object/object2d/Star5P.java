@@ -34,7 +34,8 @@ public class Star5P extends Object2D {
             });
 
 
-    public Star5P() {
+    public Star5P(Context context) {
+        super(context);
         Geometry.Point point = new Geometry.Point(0.2f, 0.1f, 0f);
         Geometry.Star5Points start = new Geometry.Star5Points(point, 0.6f);
         vertexArray = new VertexArray(getVertexWithStart(start));
@@ -61,8 +62,9 @@ public class Star5P extends Object2D {
 
     @Override
     public void bindData(Context context) {
+        super.bindData(context);
         programId = ShaderHelper.buildProgram(context,
-                R.raw.simple_vertex_shader1_5, R.raw.simple_fragment_shader1_5);
+                R.raw.texture_vertex_shader_copy, R.raw.simple_fragment_shader1_5);
         GLES20.glUseProgram(programId);
         //获取uniform的位置，把位置存入uColorLocation中
         uColorLocation = GLES20.glGetUniformLocation(programId, Constants.U_COLOR);
@@ -82,8 +84,4 @@ public class Star5P extends Object2D {
         GLES20.glDrawArrays(GLES20.GL_LINE_LOOP, 0, count);
     }
 
-    @Override
-    public void draw(float[] viewProjectMatrix) {
-
-    }
 }

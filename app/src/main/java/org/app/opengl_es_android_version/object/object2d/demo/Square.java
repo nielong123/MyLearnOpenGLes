@@ -44,7 +44,8 @@ public class Square extends Object2D {
     private static final int POSITION_COMPONENT_COUNT = 4;
 
 
-    public Square() {
+    public Square(Context context) {
+        super(context);
         vertexBuffer = ByteBuffer
                 .allocateDirect(squareCoords.length * BYTES_PER_FLOAT)
                 .order(ByteOrder.nativeOrder())

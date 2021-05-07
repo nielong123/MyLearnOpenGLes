@@ -62,7 +62,7 @@ public class RectangleWithTexture extends Object2D {
     private final VertexArray textureArray;
 
     public RectangleWithTexture(Context context) {
-        super();
+        super(context);
         vertexArray = new VertexArray(VERTEX_DATA);
         textureArray = new VertexArray(TEXTURE_DATA);
 

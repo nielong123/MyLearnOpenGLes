@@ -23,11 +23,13 @@ public class Triangle extends Object2D {
     private int aPositionLocation;
     private final VertexArray vertexArray;
 
-    public Triangle() {
+    public Triangle(Context context) {
+        super(context);
         vertexArray = new VertexArray(tableVerticesWithTriangles);
     }
 
-    public Triangle(float x1, float y1, float x2, float y2, float x3, float y3) {
+    public Triangle(Context context, float x1, float y1, float x2, float y2, float x3, float y3) {
+        super(context);
         tableVerticesWithTriangles[0] = x1;
         tableVerticesWithTriangles[1] = y1;
         tableVerticesWithTriangles[2] = x2;

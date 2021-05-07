@@ -29,10 +29,10 @@ public class Circle extends Object2D {
 
     VertexArray vertexArray;
 
-    public Circle() {
+    public Circle(Context context) {
+        super(context);
         Geometry.Point point = new Geometry.Point(0f, 0f, 0f);
         circle = new Geometry.Circle(point, 0.5f);
-//        vertexArray = new VertexArray(testData);
         vertexArray = new VertexArray(getVertexWithCircle(circle));
         count = vertexArray.getFloatBuffer().limit() / 2;
 
@@ -57,8 +57,9 @@ public class Circle extends Object2D {
 
     @Override
     public void bindData(Context context) {
+        super.bindData(context);
         programId = ShaderHelper.buildProgram(context,
-                R.raw.simple_vertex_shader1_5, R.raw.simple_fragment_shader1_5);
+                R.raw.texture_vertex_shader_copy, R.raw.simple_fragment_shader1_5);
         GLES20.glUseProgram(programId);
         //获取uniform的位置，把位置存入uColorLocation中
         uColorLocation = GLES20.glGetUniformLocation(programId, Constants.U_COLOR);
@@ -73,12 +74,12 @@ public class Circle extends Object2D {
                 POSITION_COMPONENT_COUNT, GLES20.GL_FLOAT, false, 0, vertexArray.getFloatBuffer());
         //使能顶点数组
         GLES20.glEnableVertexAttribArray(aPositionLocation);
-        GLES20.glUniform4f(uColorLocation, 1.0f, 3.0f, 1.0f, 1.0f);
+        GLES20.glUniform4f(uColorLocation, 1.0f, 0.8f, 1.0f, 1.0f);
         GLES20.glDrawArrays(GLES20.GL_LINE_LOOP, 0, count);
     }
 
-    @Override
-    public void draw(float[] viewProjectMatrix) {
-
-    }
+//    @Override
+//    public void draw(float[] viewProjectMatrix) {
+//        super.draw(viewProjectMatrix);
+//    }
 }

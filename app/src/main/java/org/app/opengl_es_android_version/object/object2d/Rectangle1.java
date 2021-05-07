@@ -42,6 +42,7 @@ public class Rectangle1 extends Object2D {
     private final VertexArray vertexArray;
 
     public Rectangle1(Context context) {
+        super(context);
         vertexArray = new VertexArray(VERTEX_DATA);
         Matrix.setIdentityM(modelMatrix, 0);
         indexArray.position(0);

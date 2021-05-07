@@ -24,7 +24,8 @@ public class Polyline extends Object2D {
 
     VertexArray vertexArray;
 
-    public Polyline() {
+    public Polyline(Context context) {
+        super(context);
         vertexArray = new VertexArray(tableVerticesWithPolyline);
     }
 
@@ -38,8 +39,9 @@ public class Polyline extends Object2D {
 
     @Override
     public void bindData(Context context) {
+        super.bindData(context);
         programId = ShaderHelper.buildProgram(context,
-                R.raw.simple_vertex_shader1_5, R.raw.simple_fragment_shader1_5);
+                R.raw.texture_vertex_shader_copy, R.raw.simple_fragment_shader1_5);
         GLES20.glUseProgram(programId);
         //获取uniform的位置，把位置存入uColorLocation中
         uColorLocation = GLES20.glGetUniformLocation(programId, Constants.U_COLOR);
@@ -60,8 +62,4 @@ public class Polyline extends Object2D {
         GLES20.glDrawArrays(GLES20.GL_LINE_STRIP, 0, 3);
     }
 
-    @Override
-    public void draw(float[] viewProjectMatrix) {
-
-    }
 }

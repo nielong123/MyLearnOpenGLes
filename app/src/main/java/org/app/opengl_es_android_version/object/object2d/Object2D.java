@@ -17,10 +17,16 @@ package org.app.opengl_es_android_version.object.object2d;
 
 import android.content.Context;
 import android.opengl.Matrix;
+import android.widget.Toast;
 
 public abstract class Object2D {
 
-    public Object2D() {
+    private Context context;
+
+    private boolean isBind = false;
+
+    public Object2D(Context context) {
+        this.context = context;
         Matrix.setIdentityM(modelMatrix, 0);
         Matrix.setIdentityM(mvpMatrix, 0);
     }
@@ -32,7 +38,9 @@ public abstract class Object2D {
     /**
      * 这个类中绑定纹理
      */
-    public abstract void bindData(Context context);
+    public void bindData(Context context) {
+        isBind = true;
+    }
 
     /***
      * 绘制
@@ -43,5 +51,11 @@ public abstract class Object2D {
      * 加入了视图投影矩阵的绘制方法
      * @param viewProjectMatrix
      */
-    public abstract void draw(float[] viewProjectMatrix);
+    public void draw(float[] viewProjectMatrix) {
+        if (!isBind) {
+            bindData(context);
+        }
+        Matrix.multiplyMM(mvpMatrix, 0, viewProjectMatrix, 0, modelMatrix, 0);
+        draw();
+    }
 }
