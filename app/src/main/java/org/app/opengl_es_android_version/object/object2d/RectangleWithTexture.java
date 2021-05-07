@@ -66,12 +66,6 @@ public class RectangleWithTexture extends Object2D {
         vertexArray = new VertexArray(VERTEX_DATA);
         textureArray = new VertexArray(TEXTURE_DATA);
 
-//        BitmapFactory.Options opts = new BitmapFactory.Options();
-//        opts.inPreferredConfig = Bitmap.Config.ARGB_8888;
-//        opts.inScaled = false;
-//        bmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.map1, opts);
-//        modelMatrix = new float[]{1, 0.2f, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
-//        modelMatrix = new float[]{1, 0.2f, 0, 0, 0.5f, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
         indexArray.position(0);
     }
 

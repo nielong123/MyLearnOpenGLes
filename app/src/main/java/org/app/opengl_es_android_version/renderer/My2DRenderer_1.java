@@ -8,6 +8,7 @@ import android.opengl.Matrix;
 import org.app.opengl_es_android_version.data.VertexArray;
 import org.app.opengl_es_android_version.object.object2d.Object2D;
 import org.app.opengl_es_android_version.object.object2d.RectangleWithTexture;
+import org.app.opengl_es_android_version.object.object2d.Star5P;
 import org.app.opengl_es_android_version.object.object2d.demo.CoordinateLines;
 import org.app.opengl_es_android_version.object.object2d.demo.Triangle;
 
@@ -50,7 +51,7 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
 //        drawObjectList.add(new Rectangle(context));
 //        drawObjectList.add(new Circle(context));
 //        drawObjectList.add(new Polyline(context));
-//        drawObjectList.add(new Star5P(context));
+        drawObjectList.add(new Star5P(context));
 //        drawObjectList.add(new Rectangle1(context));
         drawObjectList.add(new RectangleWithTexture(context));
 //        drawObjectList.add(new Triangle(context));

@@ -76,7 +76,7 @@ public class Star5P extends Object2D {
                 POSITION_COMPONENT_COUNT, GLES20.GL_FLOAT, false, 0, vertexArray.getFloatBuffer());
         //使能顶点数组
         GLES20.glEnableVertexAttribArray(aPositionLocation);
-        GLES20.glUniform4f(uColorLocation, 1.0f, 3.0f, 1.0f, 1.0f);
+        GLES20.glUniform4f(uColorLocation, 1.0f, 1.0f, 0.47f, 1.0f);
         GLES20.glDrawElements(GLES20.GL_LINE_LOOP, count, GLES20.GL_UNSIGNED_BYTE, indexArray);
         GLES20.glDrawArrays(GLES20.GL_LINE_LOOP, 0, count);
     }
