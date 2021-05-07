@@ -43,7 +43,7 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         GLES20.glEnable(GLES20.GL_TEXTURE_2D);
-        GLES20.glEnable(GLES20.GL_DEPTH_TEST);
+//        GLES20.glEnable(GLES20.GL_DEPTH_TEST);
 
         drawObjectList.add(new CoordinateLines3D());
         drawObjectList.add(new Rectangle3D());

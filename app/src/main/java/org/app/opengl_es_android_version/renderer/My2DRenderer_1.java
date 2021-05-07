@@ -44,14 +44,14 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         GLES20.glEnable(GLES20.GL_TEXTURE_2D);
-        GLES20.glEnable(GLES20.GL_DEPTH_TEST);
+//        GLES20.glEnable(GLES20.GL_DEPTH_TEST);
 
         drawObjectList.add(new CoordinateLines());
-        drawObjectList.add(new Rectangle());
+//        drawObjectList.add(new Rectangle());
 //        drawObjectList.add(new Circle());
 //        drawObjectList.add(new Polyline());
 //        drawObjectList.add(new Star5P());
-        drawObjectList.add(new RectangleWithTexture(context));
+//        drawObjectList.add(new RectangleWithTexture(context));
 //        drawObjectList.add(new Rectangle1(context));
 //        drawObjectList.add(new Triangle());
 //        drawObjectList.add(new Square());
