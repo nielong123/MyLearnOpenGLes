@@ -33,6 +33,8 @@ public class Geometry {
 
     /**
      * 圆形 = 中心点+半径
+     * <p>
+     * 球和圆暂时用同一个对象
      */
     public static class Circle {
         //中心点
@@ -40,7 +42,7 @@ public class Geometry {
         //半径
         public final float radius;
         //分度值，分度越小，圆越圆滑
-        public final float angle = 1;
+        public float angle = 1;
 
         public Circle(Point center, float radius) {
             this.center = center;

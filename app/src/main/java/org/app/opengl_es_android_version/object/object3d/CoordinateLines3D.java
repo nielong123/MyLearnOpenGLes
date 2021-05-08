@@ -18,26 +18,15 @@ public class CoordinateLines3D extends Object3D {
 
     private static final int POSITION_COMPONENT_COUNT = 3;
 
-    private int programId;
-    private int aMatrixLocation;
-    private int uColorLocation;
-    private int aPositionLocation;
+
 
     final private int count;
 
-    VertexArray vertexArray;
-
-    public CoordinateLines3D() {
-        super();
+    public CoordinateLines3D(Context context) {
+        super(context);
         vertexArray = new VertexArray(CoordinateLines);
         count = vertexArray.getFloatBuffer().limit() / 3;
 
-//        modelMatrix = new float[]{
-//                1, 0, 0.1f, 0,
-//                0, 1, 0.5f, 0,
-//                0, 0.1f, 1, 0,
-//                0, 0, 0, 1
-//        };
     }
 
     float r = 3.0f;
@@ -51,15 +40,9 @@ public class CoordinateLines3D extends Object3D {
             -0, 0f, r
     };
 
-//    private float[] CoordinateLines = {
-//            -r, 0f,
-//            r, 0f,
-//            0, r,
-//            0, -r
-//    };
-
     @Override
     public void bindData(Context context) {
+        super.bindData(context);
         programId = ShaderHelper.buildProgram(context,
                 R.raw.texture_vertex_shader_copy, R.raw.simple_fragment_shader1_5);
         GLES20.glUseProgram(programId);
@@ -73,7 +56,7 @@ public class CoordinateLines3D extends Object3D {
     }
 
     @Override
-    public void draw() {
+    protected void draw() {
         GLES20.glUniformMatrix4fv(aMatrixLocation, 1, false, mvpMatrix, 0);
         //告诉opengl从缓冲区vertextData中取数据找到属性a_Position的数据
         GLES20.glVertexAttribPointer(aPositionLocation,
@@ -84,9 +67,4 @@ public class CoordinateLines3D extends Object3D {
         GLES20.glDrawArrays(GLES20.GL_LINES, 0, count);
     }
 
-    @Override
-    public void draw(float[] viewProjectMatrix) {
-        Matrix.multiplyMM(mvpMatrix, 0, viewProjectMatrix, 0, modelMatrix, 0);
-        draw();
-    }
 }

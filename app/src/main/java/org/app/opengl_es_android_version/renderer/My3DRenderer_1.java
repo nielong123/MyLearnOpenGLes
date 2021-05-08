@@ -5,6 +5,7 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 
+import org.app.opengl_es_android_version.object.object3d.Ball3D;
 import org.app.opengl_es_android_version.object.object3d.CoordinateLines3D;
 import org.app.opengl_es_android_version.object.object3d.Object3D;
 import org.app.opengl_es_android_version.object.object3d.Rectangle3D;
@@ -45,19 +46,15 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
         GLES20.glEnable(GLES20.GL_TEXTURE_2D);
 //        GLES20.glEnable(GLES20.GL_DEPTH_TEST);
 
-        drawObjectList.add(new CoordinateLines3D());
-        drawObjectList.add(new Rectangle3D());
-//        drawObjectList.add(new Circle());
+        drawObjectList.add(new CoordinateLines3D(context));
+        drawObjectList.add(new Rectangle3D(context));
+        drawObjectList.add(new Ball3D(context));
 //        drawObjectList.add(new Polyline());
 //        drawObjectList.add(new Star5P());
 //        drawObjectList.add(new RectangleWithTexture(context));
 //        drawObjectList.add(new Rectangle1(context));
 //        drawObjectList.add(new Triangle());
 //        drawObjectList.add(new Square());
-
-        for (Object3D object3D : drawObjectList) {
-            object3D.bindData(context);
-        }
     }
 
     @Override

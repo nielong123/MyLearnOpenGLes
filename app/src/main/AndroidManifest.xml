@@ -32,7 +32,9 @@
         <activity
             android:name=".activity.My2DActivity"
             android:theme="@style/FullScreen" />
-        <activity android:name=".activity.My3DActivity" />
+        <activity
+            android:name=".activity.My3DActivity"
+            android:theme="@style/FullScreen" />
         <activity android:name=".activity.PictureTextureActivity" />
     </application>
 
