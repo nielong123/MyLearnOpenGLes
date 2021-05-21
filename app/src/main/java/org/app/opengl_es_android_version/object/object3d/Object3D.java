@@ -36,6 +36,8 @@ public abstract class Object3D {
         isBind = true;
     }
 
+    public abstract void unbind();
+
     /***
      * 绘制
      */
@@ -51,5 +53,6 @@ public abstract class Object3D {
         }
         Matrix.multiplyMM(mvpMatrix, 0, viewProjectMatrix, 0, modelMatrix, 0);
         draw();
+        unbind();
     }
 }

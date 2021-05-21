@@ -69,4 +69,11 @@ public class Triangle extends Object2D {
         GLES20.glDrawArrays(GL_TRIANGLES, 0, 3);
     }
 
+    @Override
+    public void unbind() {
+        GLES20.glDisableVertexAttribArray(uColorLocation);
+        GLES20.glDisableVertexAttribArray(aPositionLocation);
+        GLES20.glDisableVertexAttribArray(aMatrixLocation);
+    }
+
 }

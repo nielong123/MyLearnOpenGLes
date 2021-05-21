@@ -64,4 +64,11 @@ public class Rectangle1 extends Object2D {
         GLES20.glUniform4f(uColorLocation, 1.0f, 1.0f, 0.6f, 1.0f);
         GLES20.glDrawElements(GLES20.GL_TRIANGLE_FAN, indexArray.limit(), GL_UNSIGNED_BYTE, indexArray);
     }
+
+    @Override
+    public void unbind() {
+        GLES20.glDisableVertexAttribArray(uColorLocation);
+        GLES20.glDisableVertexAttribArray(aPositionLocation);
+        GLES20.glDisableVertexAttribArray(aMatrixLocation);
+    }
 }

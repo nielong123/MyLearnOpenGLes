@@ -50,6 +50,12 @@ public class Polyline extends Object2D {
     }
 
     @Override
+    public void unbind() {
+        GLES20.glDisableVertexAttribArray(uColorLocation);
+        GLES20.glDisableVertexAttribArray(aPositionLocation);
+    }
+
+    @Override
     public void draw() {
         //告诉opengl从缓冲区vertextData中取数据找到属性a_Position的数据
         GLES20.glVertexAttribPointer(aPositionLocation, POSITION_COMPONENT_COUNT, GL_FLOAT, false, 0, vertexArray.getFloatBuffer());

@@ -98,4 +98,10 @@ public class RectangleWithTexture extends Object2D {
         GLES20.glUniform1i(textureLoc, 0);
         GLES20.glDrawElements(GLES20.GL_TRIANGLE_FAN, indexArray.limit(), GL_UNSIGNED_BYTE, indexArray);
     }
+
+    @Override
+    public void unbind() {
+        GLES20.glDisableVertexAttribArray(aPositionLocation);
+        GLES20.glDisableVertexAttribArray(aMatrixLocation);
+    }
 }

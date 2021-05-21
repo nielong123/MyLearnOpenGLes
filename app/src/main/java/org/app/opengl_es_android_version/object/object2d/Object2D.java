@@ -42,6 +42,8 @@ public abstract class Object2D {
         isBind = true;
     }
 
+    public abstract void unbind();
+
     /***
      * 绘制
      */

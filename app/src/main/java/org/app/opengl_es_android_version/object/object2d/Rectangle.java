@@ -89,4 +89,11 @@ public class Rectangle extends Object2D {
         GLES20.glDrawArrays(GLES20.GL_LINE_LOOP, 0, count);
     }
 
+    @Override
+    public void unbind() {
+        GLES20.glDisableVertexAttribArray(uColorLocation);
+        GLES20.glDisableVertexAttribArray(aPositionLocation);
+        GLES20.glDisableVertexAttribArray(aMatrixLocation);
+    }
+
 }

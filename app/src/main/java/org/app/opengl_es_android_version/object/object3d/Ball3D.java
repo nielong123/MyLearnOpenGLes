@@ -120,4 +120,11 @@ public class Ball3D extends Object3D {
 //        GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, count);
 //        GLES20.glDisable(GLES20.GL_DEPTH_TEST);
     }
+
+    @Override
+    public void unbind() {
+        GLES20.glDisableVertexAttribArray(uColorLocation);
+        GLES20.glDisableVertexAttribArray(aPositionLocation);
+        GLES20.glDisableVertexAttribArray(aMatrixLocation);
+    }
 }
