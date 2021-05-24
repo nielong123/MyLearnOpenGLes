@@ -30,10 +30,10 @@ public class CoordinateLines3D extends Object3D {
     float r = 3.0f;
 
     private float[] CoordinateLines = {
-            -r, 0f, 0f,
-            r, 0f, 0f,
             0f, r, 0f,
             0f, -r, 0f,
+            -r, 0f, 0f,
+            r, 0f, 0f,
             0, 0f, -r,
             -0, 0f, r
     };
@@ -62,11 +62,11 @@ public class CoordinateLines3D extends Object3D {
         //使能顶点数组
         GLES20.glEnableVertexAttribArray(aPositionLocation);
         GLES20.glUniform4f(uColorLocation, 1.0f, 1.0f, 1.0f, 1.0f);
-        GLES20.glDrawArrays(GLES20.GL_LINES, 0, 2);
-        GLES20.glUniform4f(uColorLocation, 0.3f, 0.3f, 0.3f, 1.0f);
-        GLES20.glDrawArrays(GLES20.GL_LINES, 2, 2);
-        GLES20.glUniform4f(uColorLocation, 0.7f, 0.7f, 0.7f, 1.0f);
-        GLES20.glDrawArrays(GLES20.GL_LINES, 4, 2);
+        GLES20.glDrawArrays(GLES20.GL_LINES, 0, count);
+//        GLES20.glUniform4f(uColorLocation, 0.3f, 0.3f, 0.3f, 1.0f);
+//        GLES20.glDrawArrays(GLES20.GL_LINES, 2, 2);
+//        GLES20.glUniform4f(uColorLocation, 0.7f, 0.7f, 0.7f, 1.0f);
+//        GLES20.glDrawArrays(GLES20.GL_LINES, 4, 2);
     }
 
     @Override

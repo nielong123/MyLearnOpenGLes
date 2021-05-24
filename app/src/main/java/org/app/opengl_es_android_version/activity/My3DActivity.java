@@ -15,9 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.renderer.My3DRenderer_1;
-
-import static java.lang.Math.pow;
-import static java.lang.Math.sqrt;
+import org.app.opengl_es_android_version.util.ScreenTools;
 
 public class My3DActivity extends AppCompatActivity implements View.OnTouchListener {
 
@@ -88,25 +86,27 @@ public class My3DActivity extends AppCompatActivity implements View.OnTouchListe
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         if (motionEvent != null) {
-            final float normalizedX = toOpenGLCoord(view, motionEvent.getX(), true);
-            final float normalizedY = toOpenGLCoord(view, motionEvent.getY(), false);
+            final float normalizedX = ScreenTools.toOpenGLCoord(view, motionEvent.getX(), true);
+            final float normalizedY = ScreenTools.toOpenGLCoord(view, motionEvent.getY(), false);
             switch (motionEvent.getActionMasked()) {
+                //一个手指按下
                 case MotionEvent.ACTION_DOWN:
                     X = normalizedX;
                     Y = normalizedY;
                     break;
+                //另外一个副手指按下
                 case MotionEvent.ACTION_POINTER_DOWN:
                     isZooming = true;
-                    float x1 = toOpenGLCoord(view, motionEvent.getX(1), true);
-                    float y1 = toOpenGLCoord(view, motionEvent.getY(1), false);
-                    dis_start = computeDis(normalizedX, x1, normalizedY, y1);
-
+                    float x1 = ScreenTools.toOpenGLCoord(view, motionEvent.getX(1), true);
+                    float y1 = ScreenTools.toOpenGLCoord(view, motionEvent.getY(1), false);
+                    dis_start = ScreenTools.computeDis(normalizedX, x1, normalizedY, y1);
                     break;
+                //移动
                 case MotionEvent.ACTION_MOVE:
                     if (isZooming) {
-                        float x2 = toOpenGLCoord(view, motionEvent.getX(1), true);
-                        float y2 = toOpenGLCoord(view, motionEvent.getY(1), false);
-                        double dis = computeDis(normalizedX, x2, normalizedY, y2);
+                        float x2 = ScreenTools.toOpenGLCoord(view, motionEvent.getX(1), true);
+                        float y2 = ScreenTools.toOpenGLCoord(view, motionEvent.getY(1), false);
+                        double dis = ScreenTools.computeDis(normalizedX, x2, normalizedY, y2);
                         double scale = dis / dis_start;
                         my3DRenderer1.zoom((float) scale);
                         dis_start = dis;
@@ -116,6 +116,7 @@ public class My3DActivity extends AppCompatActivity implements View.OnTouchListe
                         Y = normalizedY;
                     }
                     break;
+                //另外一个手指抬起
                 case MotionEvent.ACTION_POINTER_UP:
                     isZooming = false;
                     X = normalizedX;
@@ -130,29 +131,4 @@ public class My3DActivity extends AppCompatActivity implements View.OnTouchListe
         return false;
     }
 
-    /**
-     * 屏幕坐标系点转OpenGL坐标系
-     *
-     * @return
-     */
-    private static float toOpenGLCoord(View view, float value, boolean isWidth) {
-        if (isWidth) {
-            return (value / (float) view.getWidth()) * 2 - 1;
-        } else {
-            return -((value / (float) view.getHeight()) * 2 - 1);
-        }
-    }
-
-    /**
-     * 计算两个点之间的距离
-     *
-     * @param x1
-     * @param x2
-     * @param y1
-     * @param y2
-     * @return
-     */
-    private static double computeDis(float x1, float x2, float y1, float y2) {
-        return sqrt(pow((x2 - x1), 2) + pow((y2 - y1), 2));
-    }
 }

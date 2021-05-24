@@ -3,7 +3,6 @@ package org.app.opengl_es_android_version.renderer;
 import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
-import android.util.Log;
 
 import org.app.opengl_es_android_version.object.object3d.Ball3D;
 import org.app.opengl_es_android_version.object.object3d.CoordinateLines3D;
@@ -86,17 +85,17 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
     }
 
     /**
-     * 改变绘图坐标系的偏移值
+     * 旋转
      *
      * @param dx
      * @param dy
      */
     public void rotate(float dx, float dy) {
         //根据当前缩放的比例调节平移参数
-        if (dy == 0) {
+        if (dx == 0 || dy == 0) {
             return;
         }
-        varyTools.rotate(1f, 0, dy, 0);
+        varyTools.rotate(1f, 0, dx, 0);
     }
 
     /**
@@ -111,9 +110,9 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
 
     public void resetViewProjection() {
         varyTools.setProjection(width, height);
-        varyTools.setCamera(4f, 4f, 4f,
-                0f, 0f, 0f,
-                0f, 1f, 0f);
+//        varyTools.setCamera(4f, 4f, 4f,
+//                0f, 0f, 0f,
+//                0f, 1f, 0f);
         varyTools.resetMatrix();
     }
 }

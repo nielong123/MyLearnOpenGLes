@@ -71,7 +71,7 @@ public class VaryTools {
     }
 
     public void resetMatrix() {
-        Matrix.setIdentityM(projectionMatrix, 0);
+        Matrix.setIdentityM(viewProjectionMatrix, 0);
     }
 
     public float[] getViewProjectionMatrix() {
