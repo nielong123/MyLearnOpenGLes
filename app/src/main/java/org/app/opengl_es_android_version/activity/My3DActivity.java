@@ -122,7 +122,6 @@ public class My3DActivity extends AppCompatActivity implements View.OnTouchListe
                     Y = normalizedY;
                     break;
                 case MotionEvent.ACTION_UP:
-                    break;
                 default:
                     break;
             }

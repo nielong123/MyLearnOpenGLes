@@ -93,7 +93,10 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
      */
     public void rotate(float dx, float dy) {
         //根据当前缩放的比例调节平移参数
-        varyTools.rotate(1f, dx, dy, 0);
+        if (dy == 0) {
+            return;
+        }
+        varyTools.rotate(1f, 0, dy, 0);
     }
 
     /**
@@ -103,11 +106,14 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
      */
     public void zoom(float scale) {
         varyTools.scale(scale, scale, scale);
-        Log.e(TAG, "zoom: ");
     }
 
 
     public void resetViewProjection() {
-        varyTools.popMatrix();
+        varyTools.setProjection(width, height);
+        varyTools.setCamera(4f, 4f, 4f,
+                0f, 0f, 0f,
+                0f, 1f, 0f);
+        varyTools.resetMatrix();
     }
 }

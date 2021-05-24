@@ -70,6 +70,10 @@ public class VaryTools {
         Matrix.orthoM(projectionMatrix, 0, left, right, bottom, top, near, far);
     }
 
+    public void resetMatrix() {
+        Matrix.setIdentityM(projectionMatrix, 0);
+    }
+
     public float[] getViewProjectionMatrix() {
         float[] ans = new float[16];
         Matrix.multiplyMM(ans, 0, viewMatrix, 0, viewProjectionMatrix, 0);
