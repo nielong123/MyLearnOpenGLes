@@ -70,7 +70,10 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
         this.width = width;
         this.height = height;
         GLES20.glViewport(0, 0, width, height);
-        resetViewProjection();
+        varyTools.setProjection(width, height);
+        varyTools.setCamera(4f, 4f, 4f,
+                0f, 0f, 0f,
+                0f, 1f, 0f);
     }
 
     @Override
@@ -88,8 +91,9 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
      * @param dx
      * @param dy
      */
-    public void move(float dx, float dy) {
+    public void rotate(float dx, float dy) {
         //根据当前缩放的比例调节平移参数
+        varyTools.rotate(1f, dx, dy, 0);
     }
 
     /**
@@ -104,9 +108,6 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
 
 
     public void resetViewProjection() {
-        varyTools.setProjection(width, height);
-        varyTools.setCamera(4f, 4f, 4f,
-                0f, 0f, 0f,
-                0f, 1f, 0f);
+        varyTools.popMatrix();
     }
 }

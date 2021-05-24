@@ -111,7 +111,7 @@ public class My3DActivity extends AppCompatActivity implements View.OnTouchListe
                         my3DRenderer1.zoom((float) scale);
                         dis_start = dis;
                     } else {
-                        my3DRenderer1.move(normalizedX - X, normalizedY - Y);
+                        my3DRenderer1.rotate(normalizedX - X, normalizedY - Y);
                         X = normalizedX;
                         Y = normalizedY;
                     }

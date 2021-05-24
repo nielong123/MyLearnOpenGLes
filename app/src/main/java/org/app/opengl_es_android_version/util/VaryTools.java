@@ -11,8 +11,8 @@ import java.util.Stack;
 
 public class VaryTools {
 
-    private float[] viewMatrix = new float[16];    //相机矩阵
-    private float[] projectionMatrix = new float[16];    //投影矩阵
+    final private float[] viewMatrix = new float[16];    //相机矩阵
+    final private float[] projectionMatrix = new float[16];    //投影矩阵
     private float[] viewProjectionMatrix = new float[16];      //原始矩阵
 
     private Stack<float[]> mStack;      //变换矩阵堆栈
