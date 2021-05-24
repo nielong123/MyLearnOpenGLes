@@ -1,5 +1,7 @@
 package org.app.opengl_es_android_version.util;
 
+import android.opengl.Matrix;
+
 public class MatrixHelper {
 
     /****
@@ -36,4 +38,7 @@ public class MatrixHelper {
         m[14] = -((2f * f * n) / (f - n));
         m[15] = 0f;
     }
+
+
+
 }

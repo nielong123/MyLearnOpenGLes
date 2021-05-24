@@ -1,3 +1,4 @@
+#version 100
 //设置工作精度
 precision mediump float;
 

@@ -88,9 +88,9 @@ public class Rectangle3D extends Object3D {
 
     @Override
     public void unbind() {
-        GLES20.glDisableVertexAttribArray(uColorLocation);
+//        GLES20.glDisableVertexAttribArray(uColorLocation);
         GLES20.glDisableVertexAttribArray(aPositionLocation);
-        GLES20.glDisableVertexAttribArray(aMatrixLocation);
+//        GLES20.glDisableVertexAttribArray(aMatrixLocation);
     }
 
 }

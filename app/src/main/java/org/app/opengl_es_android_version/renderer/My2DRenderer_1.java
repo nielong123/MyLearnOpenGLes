@@ -5,9 +5,15 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 
+import org.app.opengl_es_android_version.object.object2d.Circle;
 import org.app.opengl_es_android_version.object.object2d.Object2D;
+import org.app.opengl_es_android_version.object.object2d.Polyline;
+import org.app.opengl_es_android_version.object.object2d.Rectangle;
+import org.app.opengl_es_android_version.object.object2d.Rectangle1;
+import org.app.opengl_es_android_version.object.object2d.RectangleWithTexture;
 import org.app.opengl_es_android_version.object.object2d.Star5P;
 import org.app.opengl_es_android_version.object.object2d.demo.CoordinateLines;
+import org.app.opengl_es_android_version.object.object2d.demo.Square;
 import org.app.opengl_es_android_version.object.object2d.demo.Triangle;
 
 import java.util.List;
@@ -49,7 +55,7 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
         GLES20.glEnable(GLES20.GL_TEXTURE_2D);
 
         drawObjectList.add(new CoordinateLines(context));
-//        drawObjectList.add(new Rectangle(context));
+        drawObjectList.add(new Rectangle(context));
 //        drawObjectList.add(new Circle(context));
 //        drawObjectList.add(new Polyline(context));
 //        drawObjectList.add(new Star5P(context));
@@ -67,7 +73,10 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
 //                4f, 4f, 4f,
 //                0f, 0f, 0f,
 //                0f, 1f, 0f);
-        viewMatrix = new float[]{1, 0.2f, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
+        viewMatrix = new float[]{1, 0.2f, 0, 0,
+                                0, 1, 0, 0,
+                                0, 0, 1, 0,
+                                0, 0, 0, 1};
         Matrix.multiplyMM(viewProjectMatrix, 0, projectMatrix, 0, viewMatrix, 0);
     }
 

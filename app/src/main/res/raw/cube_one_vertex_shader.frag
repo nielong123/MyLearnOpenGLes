@@ -1,4 +1,4 @@
-
+#version 100
 
 //uniform = 全局只读,mat4  = 浮点类型的4维矩阵
 uniform mat4 u_Matrix;

@@ -3,13 +3,13 @@ package org.app.opengl_es_android_version.renderer;
 import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
-import android.opengl.Matrix;
+import android.util.Log;
 
 import org.app.opengl_es_android_version.object.object3d.Ball3D;
 import org.app.opengl_es_android_version.object.object3d.CoordinateLines3D;
 import org.app.opengl_es_android_version.object.object3d.Object3D;
 import org.app.opengl_es_android_version.object.object3d.Rectangle3D;
-import org.app.opengl_es_android_version.util.MatrixHelper;
+import org.app.opengl_es_android_version.util.VaryTools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,25 +19,33 @@ import javax.microedition.khronos.opengles.GL10;
 
 public class My3DRenderer_1 implements GLSurfaceView.Renderer {
 
+    final String TAG = My3DRenderer_1.class.getSimpleName();
+
     private final Context context;
+
+    private int width, height;
 
     List<Object3D> drawObjectList = new ArrayList<>();
 
-    //视角矩阵
-    private final float[] viewMatrix = new float[16];
-    //投影矩阵
-    private final float[] projectMatrix = new float[16];
-    //视角与投影的乘积矩阵
-    private final float[] viewProjectMatrix = new float[16];
-    //总矩阵
-    private final float[] mvpMatrix = new float[16];
+    VaryTools varyTools;
+
+//    //视角矩阵
+//    private final float[] viewMatrix = new float[16];
+//    //投影矩阵
+//    private final float[] projectMatrix = new float[16];
+//    //视角与投影的乘积矩阵
+//    private final float[] viewProjectMatrix = new float[16];
+//    //总矩阵
+//    private final float[] mvpMatrix = new float[16];
+
 
     public My3DRenderer_1(Context context) {
         this.context = context;
-        Matrix.setIdentityM(viewMatrix, 0);
-        Matrix.setIdentityM(projectMatrix, 0);
-        Matrix.setIdentityM(viewProjectMatrix, 0);
-        Matrix.setIdentityM(mvpMatrix, 0);
+//        Matrix.setIdentityM(viewMatrix, 0);
+//        Matrix.setIdentityM(projectMatrix, 0);
+//        Matrix.setIdentityM(viewProjectMatrix, 0);
+//        Matrix.setIdentityM(mvpMatrix, 0);
+        varyTools = new VaryTools();
     }
 
     @Override
@@ -59,13 +67,10 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
 
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
+        this.width = width;
+        this.height = height;
         GLES20.glViewport(0, 0, width, height);
-        MatrixHelper.perspectiveM(projectMatrix, 35, (float) width / (float) height, 1f, 100f);
-        Matrix.setLookAtM(viewMatrix, 0,
-                4f, 4f, 4f,
-                0f, 0f, 0f,
-                0f, 1f, 0f);
-        Matrix.multiplyMM(viewProjectMatrix, 0, projectMatrix, 0, viewMatrix, 0);
+        resetViewProjection();
     }
 
     @Override
@@ -73,13 +78,35 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
 
         for (Object3D object3D : drawObjectList) {
-            object3D.draw(viewProjectMatrix);
+            object3D.draw(varyTools.getViewProjectionMatrix());
         }
     }
 
-    public void handleTouchDown(float normalizedX, float normalizedY) {
+    /**
+     * 改变绘图坐标系的偏移值
+     *
+     * @param dx
+     * @param dy
+     */
+    public void move(float dx, float dy) {
+        //根据当前缩放的比例调节平移参数
     }
 
-    public void handleTouchMove(float normalizedX, float normalizedY) {
+    /**
+     * 缩放视图
+     *
+     * @param scale 缩放比例
+     */
+    public void zoom(float scale) {
+        varyTools.scale(scale, scale, scale);
+        Log.e(TAG, "zoom: ");
+    }
+
+
+    public void resetViewProjection() {
+        varyTools.setProjection(width, height);
+        varyTools.setCamera(4f, 4f, 4f,
+                0f, 0f, 0f,
+                0f, 1f, 0f);
     }
 }

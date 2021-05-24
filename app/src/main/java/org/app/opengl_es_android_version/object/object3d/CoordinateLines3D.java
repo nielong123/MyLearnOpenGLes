@@ -2,7 +2,6 @@ package org.app.opengl_es_android_version.object.object3d;
 
 import android.content.Context;
 import android.opengl.GLES20;
-import android.opengl.Matrix;
 
 import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.contant.Constants;
@@ -17,7 +16,6 @@ import static android.opengl.GLES20.GL_FLOAT;
 public class CoordinateLines3D extends Object3D {
 
     private static final int POSITION_COMPONENT_COUNT = 3;
-
 
 
     final private int count;
@@ -63,15 +61,19 @@ public class CoordinateLines3D extends Object3D {
                 POSITION_COMPONENT_COUNT, GL_FLOAT, false, 0, vertexArray.getFloatBuffer());
         //使能顶点数组
         GLES20.glEnableVertexAttribArray(aPositionLocation);
-        GLES20.glUniform4f(uColorLocation, 1.0f, 1.0f, 1.0f, 0.0f);
-        GLES20.glDrawArrays(GLES20.GL_LINES, 0, count);
+        GLES20.glUniform4f(uColorLocation, 1.0f, 1.0f, 1.0f, 1.0f);
+        GLES20.glDrawArrays(GLES20.GL_LINES, 0, 2);
+        GLES20.glUniform4f(uColorLocation, 0.3f, 0.3f, 0.3f, 1.0f);
+        GLES20.glDrawArrays(GLES20.GL_LINES, 2, 2);
+        GLES20.glUniform4f(uColorLocation, 0.7f, 0.7f, 0.7f, 1.0f);
+        GLES20.glDrawArrays(GLES20.GL_LINES, 4, 2);
     }
 
     @Override
     public void unbind() {
-        GLES20.glDisableVertexAttribArray(uColorLocation);
+//        GLES20.glDisableVertexAttribArray(uColorLocation);
         GLES20.glDisableVertexAttribArray(aPositionLocation);
-        GLES20.glDisableVertexAttribArray(aMatrixLocation);
+//        GLES20.glDisableVertexAttribArray(aMatrixLocation);
     }
 
 }
