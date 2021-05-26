@@ -2,12 +2,12 @@ package org.app.opengl_es_android_version.object.object2d.demo;
 
 import android.content.Context;
 import android.opengl.GLES20;
-import android.opengl.Matrix;
 
 import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.contant.Constants;
 import org.app.opengl_es_android_version.data.VertexArray;
 import org.app.opengl_es_android_version.object.object2d.Object2D;
+import org.app.opengl_es_android_version.util.ColorHelper;
 import org.app.opengl_es_android_version.util.ShaderHelper;
 
 import static android.opengl.GLES20.GL_FLOAT;
@@ -66,8 +66,10 @@ public class CoordinateLines extends Object2D {
                 POSITION_COMPONENT_COUNT, GL_FLOAT, false, 0, vertexArray.getFloatBuffer());
         //使能顶点数组
         GLES20.glEnableVertexAttribArray(aPositionLocation);
-        GLES20.glUniform4f(uColorLocation, 1.0f, 1.0f, 1.0f, 0.0f);
-        GLES20.glDrawArrays(GLES20.GL_LINES, 0, count);
+        ColorHelper.setColor(uColorLocation, context.getColor(R.color.colorPrimary));
+        GLES20.glDrawArrays(GLES20.GL_LINES, 0, 2);
+        ColorHelper.setColor(uColorLocation, context.getColor(R.color.red1));
+        GLES20.glDrawArrays(GLES20.GL_LINES, 2, 3);
     }
 
     @Override

@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 public abstract class Object2D {
 
-    private Context context;
+    public Context context;
 
     private boolean isBind = false;
 
@@ -59,5 +59,6 @@ public abstract class Object2D {
         }
         Matrix.multiplyMM(mvpMatrix, 0, viewProjectMatrix, 0, modelMatrix, 0);
         draw();
+        unbind();
     }
 }

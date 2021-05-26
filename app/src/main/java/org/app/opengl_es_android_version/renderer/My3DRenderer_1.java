@@ -28,16 +28,6 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
 
     VaryTools varyTools;
 
-//    //视角矩阵
-//    private final float[] viewMatrix = new float[16];
-//    //投影矩阵
-//    private final float[] projectMatrix = new float[16];
-//    //视角与投影的乘积矩阵
-//    private final float[] viewProjectMatrix = new float[16];
-//    //总矩阵
-//    private final float[] mvpMatrix = new float[16];
-
-
     public My3DRenderer_1(Context context) {
         this.context = context;
 //        Matrix.setIdentityM(viewMatrix, 0);
