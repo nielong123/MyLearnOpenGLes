@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="demo_3d_function_list">
+        <item>还原视角</item>
+        <item>小球开始旋转</item>
+        <item>小球停止旋转</item>
+        <item>复原小球位置</item>
+        <item>  ""</item>
+    </string-array>
+
+</resources>

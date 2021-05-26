@@ -4,9 +4,9 @@ import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 
-import org.app.opengl_es_android_version.object.object3d.Ball3D;
 import org.app.opengl_es_android_version.object.object3d.CoordinateLines3D;
 import org.app.opengl_es_android_version.object.object3d.Object3D;
+import org.app.opengl_es_android_version.object.object3d.Planet;
 import org.app.opengl_es_android_version.object.object3d.Rectangle3D;
 import org.app.opengl_es_android_version.util.VaryTools;
 
@@ -28,13 +28,13 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
 
     VaryTools varyTools;
 
+    Planet earth, moon;
+
     public My3DRenderer_1(Context context) {
         this.context = context;
-//        Matrix.setIdentityM(viewMatrix, 0);
-//        Matrix.setIdentityM(projectMatrix, 0);
-//        Matrix.setIdentityM(viewProjectMatrix, 0);
-//        Matrix.setIdentityM(mvpMatrix, 0);
         varyTools = new VaryTools();
+        earth = new Planet(context);
+        moon = new Planet(context, 1f, 1f, 1.5f, 0.3f);
     }
 
     @Override
@@ -45,7 +45,8 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
 
         drawObjectList.add(new CoordinateLines3D(context));
         drawObjectList.add(new Rectangle3D(context));
-        drawObjectList.add(new Ball3D(context));
+        drawObjectList.add(earth);
+        drawObjectList.add(moon);
 //        drawObjectList.add(new Polyline());
 //        drawObjectList.add(new Star5P());
 //        drawObjectList.add(new RectangleWithTexture(context));
@@ -100,9 +101,6 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
 
     public void resetViewProjection() {
         varyTools.setProjection(width, height);
-//        varyTools.setCamera(4f, 4f, 4f,
-//                0f, 0f, 0f,
-//                0f, 1f, 0f);
         varyTools.resetMatrix();
     }
 }

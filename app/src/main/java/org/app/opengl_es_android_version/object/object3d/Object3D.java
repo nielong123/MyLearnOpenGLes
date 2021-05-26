@@ -47,12 +47,18 @@ public abstract class Object3D {
      * 加入了视图投影矩阵的绘制方法
      * @param viewProjectMatrix
      */
-    public void draw(float[] viewProjectMatrix) {
+    public void draw(final float[] viewProjectMatrix) {
+
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
         if (!isBind) {
             bindData(context);
         }
         Matrix.multiplyMM(mvpMatrix, 0, viewProjectMatrix, 0, modelMatrix, 0);
         draw();
         unbind();
+//            }
+//        }).start();
     }
 }

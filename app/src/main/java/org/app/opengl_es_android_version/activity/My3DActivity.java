@@ -6,12 +6,14 @@ import android.content.pm.ConfigurationInfo;
 import android.opengl.GLSurfaceView;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatSpinner;
 
 import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.renderer.My3DRenderer_1;
@@ -19,8 +21,11 @@ import org.app.opengl_es_android_version.util.ScreenTools;
 
 public class My3DActivity extends AppCompatActivity implements View.OnTouchListener {
 
+    private final String TAG = My3DRenderer_1.class.getSimpleName();
+
     private GLSurfaceView glSurfaceView;
-    private Button button1;
+    private AppCompatSpinner functionListSp;
+
 
     private boolean rendererSet = false;
 
@@ -33,10 +38,11 @@ public class My3DActivity extends AppCompatActivity implements View.OnTouchListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cube);
+        setContentView(R.layout.activity_3d_demo);
         glSurfaceView = findViewById(R.id.glSurfaceView);
-        button1 = findViewById(R.id.button1);
-        button1.setOnClickListener(testListener);
+        functionListSp = findViewById(R.id.functionListSp);
+        functionListSp.setOnItemSelectedListener(spTestListener);
+
         glSurfaceView.setOnTouchListener(this);
 
         ActivityManager activityManager =
@@ -75,13 +81,6 @@ public class My3DActivity extends AppCompatActivity implements View.OnTouchListe
             glSurfaceView.onPause();
         }
     }
-
-    public View.OnClickListener testListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            my3DRenderer1.resetViewProjection();
-        }
-    };
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -130,5 +129,32 @@ public class My3DActivity extends AppCompatActivity implements View.OnTouchListe
         }
         return false;
     }
+
+    AdapterView.OnItemSelectedListener spTestListener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            switch (position) {
+                case 0:
+                    my3DRenderer1.resetViewProjection();
+                    break;
+                case 1:
+//                    my3DRenderer1.resetViewProjection();
+                    break;
+                case 2:
+//                    my3DRenderer1.resetViewProjection();
+                    break;
+                case 3:
+//                    my3DRenderer1.resetViewProjection();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+            Log.e(TAG, "onNothingSelected: ");
+        }
+    };
 
 }

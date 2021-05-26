@@ -20,7 +20,13 @@ public class Ball3D extends Object3D {
     public Ball3D(Context context) {
         super(context);
         circle = new Geometry.Circle(new Geometry.Point(0.0f, 0.0f, 0.0f), 0.6f);
-//        circle = new Geometry.Circle(new Geometry.Point(0.4f, 0.4f, 0.12f), 0.8f);
+        circle.angle = 20;
+        count = initVertex();
+    }
+
+    public Ball3D(Context context, float x, float y, float z, float radius) {
+        super(context);
+        circle = new Geometry.Circle(new Geometry.Point(x, y, z), radius);
         circle.angle = 20;
         count = initVertex();
     }
@@ -115,16 +121,11 @@ public class Ball3D extends Object3D {
                 false, 3 * 4, vertexArray.getFloatBuffer());
 
         GLES20.glEnableVertexAttribArray(aPositionLocation);
-//        GLES20.glEnable(GLES20.GL_DEPTH_TEST);
         GLES20.glDrawArrays(GLES20.GL_LINE_STRIP, 0, count);
-//        GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, count);
-//        GLES20.glDisable(GLES20.GL_DEPTH_TEST);
     }
 
     @Override
     public void unbind() {
-//        GLES20.glDisableVertexAttribArray(uColorLocation);
         GLES20.glDisableVertexAttribArray(aPositionLocation);
-//        GLES20.glDisableVertexAttribArray(aMatrixLocation);
     }
 }

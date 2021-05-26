@@ -15,6 +15,7 @@ public class VaryTools {
     final private float[] projectionMatrix = new float[16];    //投影矩阵
     private float[] viewProjectionMatrix = new float[16];      //原始矩阵
 
+    //和这个变量相关的方法不知道有什么用
     private Stack<float[]> mStack;      //变换矩阵堆栈
 
     public VaryTools() {
@@ -53,6 +54,7 @@ public class VaryTools {
         Matrix.scaleM(viewProjectionMatrix, 0, x, y, z);
     }
 
+    //初始化投影
     public void setProjection(int width, int height) {
         MatrixHelper.perspectiveM(projectionMatrix, 35, (float) width / (float) height, 1f, 100f);
     }
@@ -74,6 +76,7 @@ public class VaryTools {
         Matrix.setIdentityM(viewProjectionMatrix, 0);
     }
 
+    //获取投影和视图矩阵的乘积
     public float[] getViewProjectionMatrix() {
         float[] ans = new float[16];
         Matrix.multiplyMM(ans, 0, viewMatrix, 0, viewProjectionMatrix, 0);
