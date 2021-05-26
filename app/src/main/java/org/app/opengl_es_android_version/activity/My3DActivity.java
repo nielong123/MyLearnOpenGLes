@@ -138,13 +138,13 @@ public class My3DActivity extends AppCompatActivity implements View.OnTouchListe
                     my3DRenderer1.resetViewProjection();
                     break;
                 case 1:
-//                    my3DRenderer1.resetViewProjection();
+                    my3DRenderer1.startMoonRotating();
                     break;
                 case 2:
-//                    my3DRenderer1.resetViewProjection();
+                    my3DRenderer1.stopMoonRotating();
                     break;
                 case 3:
-//                    my3DRenderer1.resetViewProjection();
+                    my3DRenderer1.getMoonCoordinate();
                     break;
                 default:
                     break;

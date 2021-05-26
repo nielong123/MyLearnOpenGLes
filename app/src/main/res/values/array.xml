@@ -4,7 +4,8 @@
         <item>还原视角</item>
         <item>小球开始旋转</item>
         <item>小球停止旋转</item>
-        <item>复原小球位置</item>
+        <item>获取小球坐标</item>
+        <item>复位小球位置</item>
         <item>  ""</item>
     </string-array>
 

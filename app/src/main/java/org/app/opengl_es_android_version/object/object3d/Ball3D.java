@@ -2,10 +2,12 @@ package org.app.opengl_es_android_version.object.object3d;
 
 import android.content.Context;
 import android.opengl.GLES20;
+import android.opengl.Matrix;
 
 import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.contant.Constants;
 import org.app.opengl_es_android_version.data.VertexArray;
+import org.app.opengl_es_android_version.util.ColorHelper;
 import org.app.opengl_es_android_version.util.Geometry;
 import org.app.opengl_es_android_version.util.ShaderHelper;
 
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 public class Ball3D extends Object3D {
 
     Geometry.Circle circle;
+    int color = -1;
 
     private int count;
 
@@ -26,6 +29,14 @@ public class Ball3D extends Object3D {
 
     public Ball3D(Context context, float x, float y, float z, float radius) {
         super(context);
+        circle = new Geometry.Circle(new Geometry.Point(x, y, z), radius);
+        circle.angle = 20;
+        count = initVertex();
+    }
+
+    public Ball3D(Context context, float x, float y, float z, float radius, int color) {
+        super(context);
+        this.color = color;
         circle = new Geometry.Circle(new Geometry.Point(x, y, z), radius);
         circle.angle = 20;
         count = initVertex();
@@ -114,7 +125,7 @@ public class Ball3D extends Object3D {
     @Override
     protected void draw() {
 
-        GLES20.glUniform4f(uColorLocation, 0.12f, 0.3f, 0.34f, 0.0f);
+        ColorHelper.setColor(uColorLocation, color);
         GLES20.glUniformMatrix4fv(aMatrixLocation, 1, false, mvpMatrix, 0);
 
         GLES20.glVertexAttribPointer(aPositionLocation, 3, GLES20.GL_FLOAT,
@@ -127,5 +138,16 @@ public class Ball3D extends Object3D {
     @Override
     public void unbind() {
         GLES20.glDisableVertexAttribArray(aPositionLocation);
+    }
+
+    public Geometry.Point getCenterPoint() {
+        return circle.center;
+    }
+
+    public Geometry.Point getCoordinate() {
+        float[] resultVec = new float[4];
+        float[] rhsVec = new float[]{circle.center.x, circle.center.y, circle.center.z, 0};
+        Matrix.multiplyMV(resultVec, 0, modelMatrix, 0, rhsVec, 0);
+        return new Geometry.Point(resultVec[0], resultVec[1], resultVec[2]);
     }
 }
