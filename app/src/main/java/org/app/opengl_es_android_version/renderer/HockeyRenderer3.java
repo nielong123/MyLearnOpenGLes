@@ -32,7 +32,7 @@ public class HockeyRenderer3 implements GLSurfaceView.Renderer {
     private TextureShaderProgram textureShaderProgram;
     private ColorShaderProgram colorShaderProgram;
 
-    int textureId;
+    private int textureId;
 
     //模型，视图，投影矩阵的乘积
     private final float[] modelViewProjectionMatrix = new float[16];
@@ -63,9 +63,7 @@ public class HockeyRenderer3 implements GLSurfaceView.Renderer {
 
         table = new Table();
         mallet = new Mallet(0.08f, 0.15f, 32);
-//        mallet = new Mallet(0.0f, 0.0f);
         puck = new Puck(0.03f, 0.01f, 32);
-//        puck = new Puck(0f, 0f);
 
         textureShaderProgram = new TextureShaderProgram(context);
         colorShaderProgram = new ColorShaderProgram(context);
@@ -107,13 +105,13 @@ public class HockeyRenderer3 implements GLSurfaceView.Renderer {
         Matrix.translateM(mallet.modelMatrix, 0, mallet.position.x, mallet.position.y, mallet.position.z);
         Matrix.multiplyMM(modelViewProjectionMatrix, 0, viewProjectionMatrix, 0, mallet.modelMatrix, 0);
         colorShaderProgram.userProgram();
-        colorShaderProgram.setUniforms(modelViewProjectionMatrix, 1f, 0f, 0f);
+        colorShaderProgram.setUniforms(modelViewProjectionMatrix, context.getColor(R.color.red1));
         mallet.bindData(colorShaderProgram);
         mallet.draw();
 
         Matrix.multiplyMM(modelViewProjectionMatrix, 0, viewProjectionMatrix, 0, puck.modelMatrix, 0);
         colorShaderProgram.userProgram();
-        colorShaderProgram.setUniforms(modelViewProjectionMatrix, 0f, 1f, 0f);
+        colorShaderProgram.setUniforms(modelViewProjectionMatrix, context.getColor(R.color.green1));
         puck.bindData(colorShaderProgram);
         puck.draw();
     }

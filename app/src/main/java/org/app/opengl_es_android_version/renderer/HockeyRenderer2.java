@@ -4,7 +4,6 @@ import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
-import android.util.Log;
 
 import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.object.Mallet;
@@ -92,23 +91,15 @@ public class HockeyRenderer2 implements GLSurfaceView.Renderer {
 
         Matrix.multiplyMM(modelViewProjectionMatrix, 0, viewProjectionMatrix, 0, mallet.modelMatrix, 0);
         colorShaderProgram.userProgram();
-        colorShaderProgram.setUniforms(modelViewProjectionMatrix, 1f, 0f, 0f);
+        colorShaderProgram.setUniforms(modelViewProjectionMatrix, context.getColor(R.color.red1));
         mallet.bindData(colorShaderProgram);
         mallet.draw();
 
         Matrix.multiplyMM(modelViewProjectionMatrix, 0, viewProjectionMatrix, 0, puck.modelMatrix, 0);
         colorShaderProgram.userProgram();
-        colorShaderProgram.setUniforms(modelViewProjectionMatrix, 0f, 1f, 0f);
+        colorShaderProgram.setUniforms(modelViewProjectionMatrix, context.getColor(R.color.green1));
         puck.bindData(colorShaderProgram);
         puck.draw();
     }
 
-    public void handleTouchDown(float normalizedX, float normalizedY) {
-        Log.d(TAG, "handleTouchDown normalizedX*normalizedY == " + normalizedX + " " + normalizedY);
-    }
-
-
-    public void handleTouchMove(float normalizedX, float normalizedY) {
-        Log.d(TAG, "handleTouchMove normalizedX*normalizedY == " + normalizedX + " " + normalizedY);
-    }
 }

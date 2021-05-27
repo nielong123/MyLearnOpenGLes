@@ -4,6 +4,7 @@ import android.content.Context;
 import android.opengl.GLES20;
 
 import org.app.opengl_es_android_version.R;
+import org.app.opengl_es_android_version.util.ColorHelper;
 
 public class ColorShaderProgram extends ShaderProgram {
 
@@ -30,8 +31,8 @@ public class ColorShaderProgram extends ShaderProgram {
         uColorLocation = GLES20.glGetUniformLocation(programId, U_COLOR);
     }
 
-    public void setUniforms(float[] matrix, float r, float g, float b) {
+    public void setUniforms(float[] matrix, int color) {
         GLES20.glUniformMatrix4fv(uMatrixLocation, 1, false, matrix, 0);
-        GLES20.glUniform4f(uColorLocation, r, g, b, 1f);
+        ColorHelper.setColor(uColorLocation, color);
     }
 }
