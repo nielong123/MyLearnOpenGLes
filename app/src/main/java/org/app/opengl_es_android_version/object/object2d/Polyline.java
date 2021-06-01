@@ -62,9 +62,7 @@ public class Polyline extends Object2D {
 //        vertexArray.getFloatBuffer().position(0);
         //使能顶点数组
         GLES20.glEnableVertexAttribArray(aPositionLocation);
-//        GLES20.glUniform4f(uColorLocation, 0.0f, 0.0f, 0.0f, 0.0f);
         GLES20.glUniform4f(uColorLocation, 1.0f, 0.3f, 1.0f, 1.0f);
-        GLES20.glLineWidth(3);
         GLES20.glDrawArrays(GLES20.GL_LINE_STRIP, 0, 3);
     }
 

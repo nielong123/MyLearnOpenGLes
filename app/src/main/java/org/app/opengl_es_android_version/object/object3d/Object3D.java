@@ -18,7 +18,7 @@ public abstract class Object3D {
 
     public float[] mvpMatrix = new float[16];
 
-    private boolean isBind = false;
+    protected boolean isBind = false;
 
 
     protected VertexArray vertexArray;

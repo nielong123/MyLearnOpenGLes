@@ -15,6 +15,7 @@ import org.app.opengl_es_android_version.object.object2d.Star5P;
 import org.app.opengl_es_android_version.object.object2d.demo.CoordinateLines;
 import org.app.opengl_es_android_version.object.object2d.demo.Square;
 import org.app.opengl_es_android_version.object.object2d.demo.Triangle;
+import org.app.opengl_es_android_version.object.object3d.TestTable;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -55,12 +56,13 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
 //        GLES20.glEnable(GLES20.GL_TEXTURE_2D);
 
         drawObjectList.add(new CoordinateLines(context));
-//        drawObjectList.add(new Rectangle(context));
+        drawObjectList.add(new Rectangle(context));
 //        drawObjectList.add(new Circle(context));
 //        drawObjectList.add(new Polyline(context));
 //        drawObjectList.add(new Rectangle1(context));
 //        drawObjectList.add(new RectangleWithTexture(context));
-        drawObjectList.add(new Star5P(context));
+//        drawObjectList.add(new Star5P(context));
+        drawObjectList.add(new TestTable(context));
 //        drawObjectList.add(new Triangle(context));
 //        drawObjectList.add(new Square(context));
     }

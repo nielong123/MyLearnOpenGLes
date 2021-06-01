@@ -26,6 +26,7 @@ public class HockeyRenderer2 implements GLSurfaceView.Renderer {
     Table table;
     Mallet mallet;
     Puck puck;
+
     TextureShaderProgram textureShaderProgram;
     ColorShaderProgram colorShaderProgram;
 

@@ -17,13 +17,12 @@ package org.app.opengl_es_android_version.object.object2d;
 
 import android.content.Context;
 import android.opengl.Matrix;
-import android.widget.Toast;
 
 public abstract class Object2D {
 
     public Context context;
 
-    private boolean isBind = false;
+    protected boolean isBind = false;
 
     public float[] modelMatrix = new float[16];
 

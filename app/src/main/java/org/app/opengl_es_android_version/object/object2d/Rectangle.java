@@ -6,6 +6,7 @@ import android.opengl.GLES20;
 import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.contant.Constants;
 import org.app.opengl_es_android_version.data.VertexArray;
+import org.app.opengl_es_android_version.util.ColorHelper;
 import org.app.opengl_es_android_version.util.Geometry;
 import org.app.opengl_es_android_version.util.ShaderHelper;
 
@@ -85,15 +86,15 @@ public class Rectangle extends Object2D {
                 aPositionLocation, POSITION_COMPONENT_COUNT, GL_FLOAT, false, 0, vertexArray.getFloatBuffer());
         //使能顶点数组
         GLES20.glEnableVertexAttribArray(aPositionLocation);
-        GLES20.glUniform4f(uColorLocation, 1.0f, 0.0f, 1.0f, 0.0f);
+        ColorHelper.setColor(uColorLocation, context.getColor(R.color.blue1));
         GLES20.glDrawArrays(GLES20.GL_LINE_LOOP, 0, count);
     }
 
     @Override
     public void unbind() {
-        GLES20.glDisableVertexAttribArray(uColorLocation);
+//        GLES20.glDisableVertexAttribArray(uColorLocation);
         GLES20.glDisableVertexAttribArray(aPositionLocation);
-        GLES20.glDisableVertexAttribArray(aMatrixLocation);
+//        GLES20.glDisableVertexAttribArray(aMatrixLocation);
     }
 
 }
