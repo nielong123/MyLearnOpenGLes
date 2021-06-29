@@ -21,21 +21,29 @@ public class TestTable2D extends Object2D {
 
     private int textureId;
 
-
     private static final int POSITION_COMPONENT_COUNT = 2;
     private static final int TEXTURE_COORDINATES_COMPONENT_COUNT = 2;
     private static final int STRIDE = (POSITION_COMPONENT_COUNT + TEXTURE_COORDINATES_COMPONENT_COUNT)
             * BYTES_PER_FLOAT;
 
-    static final float vf = 1.0f;
+    static final float vf = 0.25f;
     private static final float[] VERTEX_DATA = {
             //x,    y,      s,      t
+            0f, 0f, 0, 0,
+            -vf, -vf, 0f, 0,
+            vf, -vf, 0, 0,
+            vf, vf, 0, 0,
+            -vf, vf, 0f, 0,
+            -vf, -vf, 0f, 0,
+    };
+    private static final float[] TEXTURE_DATA = {
+            //x,    y,      s,      t
             0f, 0f, 0.5f, 0.5f,
-            -vf, -vf, 0f, 0.9f,
-            vf, -vf, 1f, 0.9f,
-            vf, vf, 1f, 0.1f,
-            -vf, vf, 0f, 0.1f,
-            -vf, -vf, 0f, 0.9f,
+            0, -0, 0f, 1f,
+            0, -0, 1f, 1f,
+            0, 0, 1f, 0f,
+            -0, 0, 0f, 0f,
+            -0, -0, 0f, 1f,
     };
 
     private final VertexArray vertexArray;
@@ -44,20 +52,26 @@ public class TestTable2D extends Object2D {
     public TestTable2D(Context context) {
         super(context);
         vertexArray = new VertexArray(VERTEX_DATA);
-        textureArray = new VertexArray(VERTEX_DATA);
+        textureArray = new VertexArray(TEXTURE_DATA);
+    }
+
+    public TestTable2D(Context context, float[] matrix) {
+        super(context);
+        vertexArray = new VertexArray(matrix);
+        textureArray = new VertexArray(TEXTURE_DATA);
     }
 
     @Override
     public void bindData(Context context) {
         super.bindData(context);
-        textureId = TextureHelper.loadTexture(context, R.drawable.map1);
         shaderProgram = new TextureShaderProgram(context);
     }
 
     @Override
     public void draw() {
 //        GLES20.glDisable(GLES20.GL_DEPTH_TEST);
-        GLES20.glEnable(GLES20.GL_TEXTURE_2D);
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT|GLES20.GL_DEPTH_BUFFER_BIT);
+        textureId = TextureHelper.loadTexture(context, R.drawable.map1);
         vertexArray.setVertexAttributePointer(
                 shaderProgram.aPositionLocation,
                 POSITION_COMPONENT_COUNT,
@@ -86,7 +100,6 @@ public class TestTable2D extends Object2D {
     public float[] getRect() {
         float[] resultMatrix = new float[16];
         Matrix.multiplyMM(resultMatrix, 0, mvpMatrix, 0, VERTEX_DATA, 0);
-        Log.e(TAG, "getRect: " + Arrays.toString(resultMatrix));
         return resultMatrix;
     }
 

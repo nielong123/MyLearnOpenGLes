@@ -6,13 +6,12 @@ import android.opengl.Matrix;
 
 import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.data.VertexArray;
-import org.app.opengl_es_android_version.object.object2d.Object2D;
 import org.app.opengl_es_android_version.program.TextureShaderProgram;
 import org.app.opengl_es_android_version.util.TextureHelper;
 
 import static org.app.opengl_es_android_version.contant.Constants.BYTES_PER_FLOAT;
 
-public class TestTable extends Object2D {
+public class TestTable3D extends Object3D {
 
     TextureShaderProgram shaderProgram;
 
@@ -39,7 +38,7 @@ public class TestTable extends Object2D {
 
     private final VertexArray vertexArray;
 
-    public TestTable(Context context) {
+    public TestTable3D(Context context) {
         super(context);
         vertexArray = new VertexArray(VERTEX_DATA);
         Matrix.setIdentityM(modelMatrix, 0);
@@ -60,6 +59,7 @@ public class TestTable extends Object2D {
 
     @Override
     public void draw() {
+//        GLES20.glDisable(GLES20.GL_DEPTH_TEST);
         GLES20.glEnable(GLES20.GL_TEXTURE_2D);
         vertexArray.setVertexAttributePointer(
                 shaderProgram.aPositionLocation,
@@ -77,6 +77,7 @@ public class TestTable extends Object2D {
         shaderProgram.setUniforms(mvpMatrix, textureId);
         GLES20.glDrawArrays(GLES20.GL_TRIANGLE_FAN, 0, 6);
         GLES20.glDisable(GLES20.GL_TEXTURE_2D);
+//        GLES20.glEnable(GLES20.GL_DEPTH_TEST);
     }
 
 }

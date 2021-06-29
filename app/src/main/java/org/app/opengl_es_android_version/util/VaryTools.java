@@ -84,4 +84,11 @@ public class VaryTools {
         return ans;
     }
 
+    //平移变换
+    public static float[] getNewTransMatrix(float[] matrix, float x, float y) {
+        float[] resultMatrix = Arrays.copyOf(matrix, 16);
+        Matrix.translateM(resultMatrix, 0, x, y, 0);
+        return resultMatrix;
+    }
+
 }

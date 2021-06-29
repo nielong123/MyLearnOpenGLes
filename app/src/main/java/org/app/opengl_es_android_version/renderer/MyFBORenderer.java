@@ -1,16 +1,17 @@
 package org.app.opengl_es_android_version.renderer;
 
 import android.content.Context;
-import android.graphics.Rect;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
+import android.opengl.Matrix;
 
+import org.app.opengl_es_android_version.object.Shape_FBO;
 import org.app.opengl_es_android_version.object.object2d.Object2D;
 import org.app.opengl_es_android_version.object.object2d.Rectangle;
 import org.app.opengl_es_android_version.object.object2d.Star5P;
 import org.app.opengl_es_android_version.object.object2d.TestTable2D;
-import org.app.opengl_es_android_version.util.Geometry;
-import org.app.opengl_es_android_version.util.VaryTools;
+import org.app.opengl_es_android_version.object.object2d.demo.CoordinateLines;
+import org.app.opengl_es_android_version.util.MatrixHelper;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -20,66 +21,64 @@ import javax.microedition.khronos.opengles.GL10;
 
 import static android.opengl.GLES20.GL_COLOR_BUFFER_BIT;
 
-public class My2DRenderer_1 implements GLSurfaceView.Renderer {
-
-    final String TAG = My2DRenderer_1.class.getSimpleName();
-
-    private Rect screenRect = new Rect(-1, 1, 1, -1);
+public class MyFBORenderer implements GLSurfaceView.Renderer {
 
     private final Context context;
 
-    VaryTools varyTools;
-
     List<Object2D> drawObjectList = new CopyOnWriteArrayList<>();
+
+    //视角矩阵
+    private float[] viewMatrix = new float[16];
+    //投影矩阵
+    private final float[] projectMatrix = new float[16];
+    //视角与投影的乘积矩阵
+    private final float[] viewProjectMatrix = new float[16];
+
+    public static int screenWidth, screenHeight;
+
 
     Object2D object2D;
 
-    Rectangle rectangle;
+
+    Shape_FBO shape_fbo;
 
 
-    public My2DRenderer_1(Context context) {
+    public MyFBORenderer(Context context) {
         this.context = context;
-        varyTools = new VaryTools();
+        Matrix.setIdentityM(viewMatrix, 0);
+        Matrix.setIdentityM(projectMatrix, 0);
+        Matrix.setIdentityM(viewProjectMatrix, 0);
     }
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         GLES20.glClear(GL_COLOR_BUFFER_BIT);
-
-        rectangle = new Rectangle(context,
-                new Geometry.Rectangle(new Geometry.Point(0, 0, 0), 0.75f, 0.75f));
-
-        TestTable2D testTable2D = new TestTable2D(context);
-//        TestTable2D testTable2D1 = new TestTable2D(context,
-//                VaryTools.getNewTransMatrix(testTable2D.getRect(), 0.5f, 0));
+        shape_fbo = new Shape_FBO(context);
 
 //        drawObjectList.add(new CoordinateLines(context));
+        drawObjectList.add(shape_fbo);
+//        drawObjectList.add(new Rectangle(context));
 //        drawObjectList.add(new Circle(context));
 //        drawObjectList.add(new Polyline(context));
 //        drawObjectList.add(new Rectangle1(context));
 //        drawObjectList.add(new RectangleWithTexture(context));
 //        drawObjectList.add(new Star5P(context));
-        drawObjectList.add(testTable2D);
-        drawObjectList.add(rectangle);
-//        drawObjectList.add(testTable2D1);
 //        drawObjectList.add(new Triangle(context));
 //        drawObjectList.add(new Square(context));
     }
 
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
+        screenWidth = width;
+        screenHeight = height;
         GLES20.glViewport(0, 0, width, height);
-//        MatrixHelper.perspectiveM(projectMatrix, 45, (float) width / (float) height, 1f, 100f);
-//        Matrix.setLookAtM(viewMatrix, 0,
-//                4f, 4f, 4f,
-//                0f, 0f, 0f,
-//                0f, 1f, 0f);
-//        viewMatrix = new float[]{1, 0.2f, 0, 0,
-//                0, 1, 0, 0,
-//                0, 0, 1, 0,
-//                0, 0, 0, 1};
-//        Matrix.multiplyMM(viewProjectMatrix, 0, projectMatrix, 0, viewMatrix, 0);
+        MatrixHelper.perspectiveM(projectMatrix, 45, (float) width / (float) height, 1f, 100f);
+        Matrix.setLookAtM(viewMatrix, 0,
+                4f, 4f, 4f,
+                0f, 0f, 0f,
+                0f, 1f, 0f);
+        Matrix.multiplyMM(viewProjectMatrix, 0, projectMatrix, 0, viewMatrix, 0);
     }
 
     @Override
@@ -87,7 +86,7 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
         GLES20.glClear(GL_COLOR_BUFFER_BIT);
 
         for (Object2D object2D : drawObjectList) {
-            object2D.draw(varyTools.getViewProjectionMatrix());
+            object2D.draw(viewProjectMatrix);
         }
     }
 
@@ -95,8 +94,6 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
     }
 
     public void handleTouchMove(float normalizedX, float normalizedY) {
-        varyTools.translate(normalizedX / 10, normalizedY / 10, 0);
-//        Log.e(TAG, "handleTouchMove: normalizedX = " + normalizedX + " normalizedY = " + normalizedY);
     }
 
     public void add2DObject() {
@@ -108,10 +105,5 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
             object2D = null;
         }
     }
-
-    public void resetMatrix() {
-        varyTools.resetMatrix();
-    }
-
 
 }

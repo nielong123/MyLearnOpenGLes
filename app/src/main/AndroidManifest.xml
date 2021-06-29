@@ -37,6 +37,8 @@
             android:name=".activity.My3DActivity"
             android:theme="@style/FullScreen" />
         <activity android:name=".activity.PictureTextureActivity" />
+        <activity android:name=".activity.FBOActivity" />
+        <activity android:name=".object.fbo.FboTestActivity" />
     </application>
 
 </manifest>

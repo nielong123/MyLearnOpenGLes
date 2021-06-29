@@ -59,6 +59,7 @@ public class My3DActivity extends AppCompatActivity implements View.OnTouchListe
             glSurfaceView.setEGLContextClientVersion(2);
             my3DRenderer1 = new My3DRenderer_1(this);
             glSurfaceView.setRenderer(my3DRenderer1);
+//            glSurfaceView.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
             glSurfaceView.setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
             rendererSet = true;
         } else {

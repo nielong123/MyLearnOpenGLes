@@ -39,6 +39,12 @@ public class Rectangle extends Object2D {
         count = vertexArray.getFloatBuffer().limit() / 2;
     }
 
+    public Rectangle(Context context, Geometry.Rectangle rect) {
+        super(context);
+        vertexArray = new VertexArray(getVertexWithRectangle(rect));
+        count = vertexArray.getFloatBuffer().limit() / 2;
+    }
+
 
     private float[] getVertexWithRectangle(Geometry.Rectangle rectangle) {
 
@@ -86,7 +92,8 @@ public class Rectangle extends Object2D {
                 aPositionLocation, POSITION_COMPONENT_COUNT, GL_FLOAT, false, 0, vertexArray.getFloatBuffer());
         //使能顶点数组
         GLES20.glEnableVertexAttribArray(aPositionLocation);
-        ColorHelper.setColor(uColorLocation, context.getColor(R.color.blue1));
+        ColorHelper.setColor(uColorLocation, context.getColor(R.color.red1));
+        GLES20.glDisable(GLES20.GL_TEXTURE_2D);
         GLES20.glDrawArrays(GLES20.GL_LINE_LOOP, 0, count);
     }
 

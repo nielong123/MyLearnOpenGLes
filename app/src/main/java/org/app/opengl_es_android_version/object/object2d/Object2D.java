@@ -22,7 +22,7 @@ public abstract class Object2D {
 
     public Context context;
 
-    protected boolean isBind = false;
+    private boolean isBind = false;
 
     public float[] modelMatrix = new float[16];
 

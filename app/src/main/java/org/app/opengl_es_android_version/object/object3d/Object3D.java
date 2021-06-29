@@ -13,6 +13,7 @@ public abstract class Object3D {
     protected int aMatrixLocation;
     protected int uColorLocation;
     protected int aPositionLocation;
+    protected int aTextureCoord;
 
     public float[] modelMatrix = new float[16];
 
@@ -49,16 +50,11 @@ public abstract class Object3D {
      */
     public void draw(final float[] viewProjectMatrix) {
 
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
         if (!isBind) {
             bindData(context);
         }
         Matrix.multiplyMM(mvpMatrix, 0, viewProjectMatrix, 0, modelMatrix, 0);
         draw();
         unbind();
-//            }
-//        }).start();
     }
 }

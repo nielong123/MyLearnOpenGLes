@@ -6,10 +6,13 @@ import android.opengl.GLSurfaceView;
 import android.util.Log;
 
 import org.app.opengl_es_android_version.R;
+import org.app.opengl_es_android_version.object.Shape_FBO;
 import org.app.opengl_es_android_version.object.object3d.CoordinateLines3D;
 import org.app.opengl_es_android_version.object.object3d.Object3D;
 import org.app.opengl_es_android_version.object.object3d.Planet;
 import org.app.opengl_es_android_version.object.object3d.Rectangle3D;
+import org.app.opengl_es_android_version.object.object3d.TestFbo3D;
+import org.app.opengl_es_android_version.object.object3d.TestTable3D;
 import org.app.opengl_es_android_version.util.Geometry;
 import org.app.opengl_es_android_version.util.VaryTools;
 
@@ -54,13 +57,13 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-//        GLES20.glEnable(GLES20.GL_TEXTURE_2D);
 //        GLES20.glEnable(GLES20.GL_DEPTH_TEST);
 
         drawObjectList.add(new CoordinateLines3D(context));
-        drawObjectList.add(new Rectangle3D(context));
+        drawObjectList.add(new TestFbo3D(context));
         drawObjectList.add(earth);
         drawObjectList.add(moon);
+//        drawObjectList.add(new TestTable3D(context));
 //        drawObjectList.add(new Polyline());
 //        drawObjectList.add(new Star5P());
 //        drawObjectList.add(new RectangleWithTexture(context));

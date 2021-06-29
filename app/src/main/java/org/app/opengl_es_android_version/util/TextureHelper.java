@@ -28,7 +28,7 @@ public class TextureHelper {
             GLES20.glDeleteTextures(1, textureObjectIds, 0);
             return 0;
         }
-
+        GLES20.glEnable(GLES20.GL_TEXTURE_2D);
         //告诉OpenGL后面纹理调用应该是应用于哪个纹理对象
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureObjectIds[0]);
 
@@ -49,7 +49,7 @@ public class TextureHelper {
         bitmap.recycle();
 
         //解除纹理操作的绑定
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0);
+//        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0);
 
         return textureObjectIds[0];
     }

@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.renderer.My2DRenderer_1;
 
-import static android.opengl.GLSurfaceView.RENDERMODE_CONTINUOUSLY;
 import static android.opengl.GLSurfaceView.RENDERMODE_WHEN_DIRTY;
 
 public class My2DActivity extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener {
@@ -33,6 +32,7 @@ public class My2DActivity extends AppCompatActivity implements View.OnTouchListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cube);
         glSurfaceView = findViewById(R.id.glSurfaceView);
+        glSurfaceView.setOnTouchListener(this);
         ActivityManager activityManager =
                 (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         ConfigurationInfo deviceConfigurationInfo =
@@ -47,6 +47,7 @@ public class My2DActivity extends AppCompatActivity implements View.OnTouchListe
             glSurfaceView.setEGLContextClientVersion(2);
             my2DRenderer = new My2DRenderer_1(this);
             glSurfaceView.setRenderer(my2DRenderer);
+            glSurfaceView.setRenderMode(RENDERMODE_WHEN_DIRTY);
             rendererSet = true;
         } else {
             Toast.makeText(this, "不支持openGL es 2.0", Toast.LENGTH_SHORT).show();
@@ -79,6 +80,8 @@ public class My2DActivity extends AppCompatActivity implements View.OnTouchListe
      * @param event
      * @return
      */
+    float oldX, oldY;
+
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         if (event == null) {
@@ -105,35 +108,35 @@ public class My2DActivity extends AppCompatActivity implements View.OnTouchListe
                 break;
             //所有触点(最后一个触点)离开屏幕
             case MotionEvent.ACTION_UP:
+                oldY = 0;
+                oldX = 0;
                 break;
             case MotionEvent.ACTION_MOVE:
+                if (oldY == 0 && oldX == 0) {
+                    oldY = event.getY();
+                    oldX = event.getX();
+                    return false;
+                }
+                final float transX = event.getX() - oldX;
+                final float transY = event.getY() - oldY;
                 glSurfaceView.queueEvent(new Runnable() {
                     @Override
                     public void run() {
-                        my2DRenderer.handleTouchMove(normalizedX, normalizedY);
+                        my2DRenderer.handleTouchMove(transX / 100, -transY / 100);
+                        glSurfaceView.requestRender();
                     }
                 });
+                oldX = event.getX();
+                oldY = event.getY();
                 break;
         }
-//        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-
-//        } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-//            glSurfaceView.queueEvent(new Runnable() {
-//                @Override
-//                public void run() {
-//                    my2DRenderer.handleTouchMove(normalizedX, normalizedY);
-//                }
-//            });
-//        } else {
-//            return false;
-//        }
         return true;
     }
 
     @Override
     public void onClick(View v) {
-        glSurfaceView.setRenderMode(RENDERMODE_WHEN_DIRTY);
-        my2DRenderer.add2DObject();
-        glSurfaceView.setRenderMode(RENDERMODE_CONTINUOUSLY);
+        my2DRenderer.resetMatrix();
+//        my2DRenderer.add2DObject();
+        glSurfaceView.requestRender();
     }
 }
