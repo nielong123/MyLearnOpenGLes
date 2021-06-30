@@ -21,18 +21,18 @@ public class Rectangle3D extends Object3D {
 
     final private int count;
 
-    Geometry.Rectangle rectangle;
+    Geometry.Rect rectangle;
 
     public Rectangle3D(Context context) {
         super(context);
         Geometry.Point point = new Geometry.Point(0f, 0f, 0f);
-        rectangle = new Geometry.Rectangle(point, 1f, 1f);
+        rectangle = new Geometry.Rect(point, 1f, 1f);
         vertexArray = new VertexArray(getVertexWithRectangle(rectangle));
         count = vertexArray.getFloatBuffer().limit() / 3;
     }
 
 
-    private float[] getVertexWithRectangle(Geometry.Rectangle rectangle) {
+    private float[] getVertexWithRectangle(Geometry.Rect rectangle) {
 
         float[] vertexs = new float[12];
 

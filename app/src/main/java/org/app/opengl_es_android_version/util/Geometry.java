@@ -85,16 +85,25 @@ public class Geometry {
     /***
      * 矩形，中心点 + 高 + 宽
      */
-    public static class Rectangle {
+    public static class Rect {
 
-        public final Point point;
-        public final float height;
-        public final float width;
+        public Point point;
+        public float height;
+        public float width;
 
-        public Rectangle(Point point, float height, float width) {
+        public float top, left, bottom, right;
+
+        public Rect(Point point, float height, float width) {
             this.point = point;
             this.height = height;
             this.width = width;
+        }
+
+        public Rect(float left, float top, float right, float bottom) {
+            this.left = left;
+            this.right = right;
+            this.top = top;
+            this.bottom = bottom;
         }
     }
 

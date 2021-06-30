@@ -27,26 +27,26 @@ public class Rectangle extends Object2D {
 
     final private int count;
 
-    Geometry.Rectangle rectangle;
+    Geometry.Rect rectangle;
 
     VertexArray vertexArray;
 
     public Rectangle(Context context) {
         super(context);
         Geometry.Point point = new Geometry.Point(0f, 0f, 0f);
-        rectangle = new Geometry.Rectangle(point, 1f, 1f);
+        rectangle = new Geometry.Rect(point, 1f, 1f);
         vertexArray = new VertexArray(getVertexWithRectangle(rectangle));
         count = vertexArray.getFloatBuffer().limit() / 2;
     }
 
-    public Rectangle(Context context, Geometry.Rectangle rect) {
+    public Rectangle(Context context, Geometry.Rect rect) {
         super(context);
         vertexArray = new VertexArray(getVertexWithRectangle(rect));
         count = vertexArray.getFloatBuffer().limit() / 2;
     }
 
 
-    private float[] getVertexWithRectangle(Geometry.Rectangle rectangle) {
+    private float[] getVertexWithRectangle(Geometry.Rect rectangle) {
 
         float[] vertexs = new float[8];
 
@@ -86,6 +86,7 @@ public class Rectangle extends Object2D {
 
     @Override
     public void draw() {
+        GLES20.glDisable(GLES20.GL_TEXTURE_2D);
         GLES20.glUniformMatrix4fv(aMatrixLocation, 1, false, mvpMatrix, 0);
         //告诉opengl从缓冲区vertextData中取数据找到属性a_Position的数据
         GLES20.glVertexAttribPointer(
@@ -93,7 +94,6 @@ public class Rectangle extends Object2D {
         //使能顶点数组
         GLES20.glEnableVertexAttribArray(aPositionLocation);
         ColorHelper.setColor(uColorLocation, context.getColor(R.color.red1));
-        GLES20.glDisable(GLES20.GL_TEXTURE_2D);
         GLES20.glDrawArrays(GLES20.GL_LINE_LOOP, 0, count);
     }
 

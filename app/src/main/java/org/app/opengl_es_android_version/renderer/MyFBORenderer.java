@@ -58,7 +58,7 @@ public class MyFBORenderer implements GLSurfaceView.Renderer {
 
 //        drawObjectList.add(new CoordinateLines(context));
         drawObjectList.add(shape_fbo);
-//        drawObjectList.add(new Rectangle(context));
+//        drawObjectList.add(new Rect(context));
 //        drawObjectList.add(new Circle(context));
 //        drawObjectList.add(new Polyline(context));
 //        drawObjectList.add(new Rectangle1(context));

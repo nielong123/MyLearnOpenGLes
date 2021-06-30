@@ -1,17 +1,16 @@
 package org.app.opengl_es_android_version.renderer;
 
 import android.content.Context;
-import android.graphics.Rect;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 
 import org.app.opengl_es_android_version.object.object2d.Object2D;
-import org.app.opengl_es_android_version.object.object2d.Rectangle;
 import org.app.opengl_es_android_version.object.object2d.Star5P;
 import org.app.opengl_es_android_version.object.object2d.TestTable2D;
 import org.app.opengl_es_android_version.util.Geometry;
 import org.app.opengl_es_android_version.util.VaryTools;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -24,8 +23,6 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
 
     final String TAG = My2DRenderer_1.class.getSimpleName();
 
-    private Rect screenRect = new Rect(-1, 1, 1, -1);
-
     private final Context context;
 
     VaryTools varyTools;
@@ -33,8 +30,6 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
     List<Object2D> drawObjectList = new CopyOnWriteArrayList<>();
 
     Object2D object2D;
-
-    Rectangle rectangle;
 
 
     public My2DRenderer_1(Context context) {
@@ -47,12 +42,18 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         GLES20.glClear(GL_COLOR_BUFFER_BIT);
 
-        rectangle = new Rectangle(context,
-                new Geometry.Rectangle(new Geometry.Point(0, 0, 0), 0.75f, 0.75f));
+//        rectangle = new Rect(context,
+//                new Geometry.Rect(new Geometry.Point(0, 0, 0), 0.75f, 0.75f));
 
-        TestTable2D testTable2D = new TestTable2D(context);
-//        TestTable2D testTable2D1 = new TestTable2D(context,
-//                VaryTools.getNewTransMatrix(testTable2D.getRect(), 0.5f, 0));
+//        TestTable2D testTable2D = new TestTable2D(context);
+//        for (Geometry.Rect rect : cutScreen()) {
+//            drawObjectList.add(new TestTable2D(context, rect));
+//        }
+        drawObjectList.add(new TestTable2D(context));
+//        List<Rect> rectList = new ArrayList<>();
+//        rectList.add(new Rect(0, 1, 1, 0));
+//        rectList.add(new Rect(-1, 1, 0, 0));
+//        drawObjectList.add(new MultipleTestTable2D(context, rectList));
 
 //        drawObjectList.add(new CoordinateLines(context));
 //        drawObjectList.add(new Circle(context));
@@ -60,8 +61,8 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
 //        drawObjectList.add(new Rectangle1(context));
 //        drawObjectList.add(new RectangleWithTexture(context));
 //        drawObjectList.add(new Star5P(context));
-        drawObjectList.add(testTable2D);
-        drawObjectList.add(rectangle);
+
+//        drawObjectList.add(rectangle);
 //        drawObjectList.add(testTable2D1);
 //        drawObjectList.add(new Triangle(context));
 //        drawObjectList.add(new Square(context));
@@ -113,5 +114,22 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
         varyTools.resetMatrix();
     }
 
+    private List<Geometry.Rect> cutScreen() {
+        final int slice = 3;
+        final float width = 2;
+        final float height = 2;
+        List<Geometry.Rect> rectList = new ArrayList<>();
+        for (int i = 1; i < slice + 1; i++) {
+            float top = height * i / slice - height / 2;
+            float bottom = height * (i - 1) / slice - height / 2;
+            for (int j = 1; j < slice + 1; j++) {
+                float left = width * i / slice - width / 2;
+                float right = width * (i - 1) / slice - width / 2;
+                rectList.add(new Geometry.Rect(left, top, right, bottom));
+            }
+        }
+
+        return rectList;
+    }
 
 }
