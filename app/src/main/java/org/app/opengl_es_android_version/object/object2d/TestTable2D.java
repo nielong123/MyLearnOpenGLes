@@ -21,8 +21,9 @@ public class TestTable2D extends Object2D {
 
     private static final int POSITION_COMPONENT_COUNT = 2;
     private static final int TEXTURE_COORDINATES_COMPONENT_COUNT = 2;
-    private static final int STRIDE = (POSITION_COMPONENT_COUNT + TEXTURE_COORDINATES_COMPONENT_COUNT)
+    private static final int VERTEX_STRIDE = (POSITION_COMPONENT_COUNT + TEXTURE_COORDINATES_COMPONENT_COUNT)
             * BYTES_PER_FLOAT;
+    private static final int TEXTURE_STRIDE = TEXTURE_COORDINATES_COMPONENT_COUNT * BYTES_PER_FLOAT;
 
     static final float vf = 0.25f;
     private static final float[] VERTEX_DATA = {
@@ -38,13 +39,22 @@ public class TestTable2D extends Object2D {
     };
     private static final float[] TEXTURE_DATA = {
             //x,    y,      s,      t
-            0f, 0f, 0.5f, 0.5f,
-            0, -0, 0f, 1f,
-            0, -0, 1f, 1f,
-            0, 0, 1f, 0f,
-            -0, 0, 0f, 0f,
-            -0, -0, 0f, 1f,
+            0.5f, 0.5f,
+            0f, 1f,
+            1f, 1f,
+            1f, 0f,
+            0f, 0f,
+            0f, 1f,
     };
+//    private static final float[] TEXTURE_DATA = {
+//            //x,    y,      s,      t
+//            0f, 0f, 0.5f, 0.5f,
+//            0, -0, 0f, 1f,
+//            0, -0, 1f, 1f,
+//            0, 0, 1f, 0f,
+//            -0, 0, 0f, 0f,
+//            -0, -0, 0f, 1f,
+//    };
 
     private final VertexArray vertexArray;
     private final VertexArray textureArray;
@@ -65,27 +75,29 @@ public class TestTable2D extends Object2D {
     public void bindData(Context context) {
         super.bindData(context);
         shaderProgram = new TextureShaderProgram(context);
+        textureId = TextureHelper.loadTexture(context, R.drawable.map1);
     }
 
     @Override
     public void draw() {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
-        textureId = TextureHelper.loadTexture(context, R.drawable.map1);
+
         vertexArray.setVertexAttributePointer(
                 shaderProgram.aPositionLocation,
                 POSITION_COMPONENT_COUNT,
-                STRIDE,
+                VERTEX_STRIDE,
                 0
         );
         textureArray.setVertexAttributePointer(
                 shaderProgram.aTextureCoordinatesLocation,
                 TEXTURE_COORDINATES_COMPONENT_COUNT,
-                STRIDE,
-                POSITION_COMPONENT_COUNT
+                TEXTURE_STRIDE,
+                0
         );
         shaderProgram.userProgram();
         shaderProgram.setUniforms(mvpMatrix, textureId);
         GLES20.glDrawArrays(GLES20.GL_TRIANGLE_FAN, 0, 6);
+//        GLES20.glDrawArrays(GLES20.GL_TRIANGLE_FAN, 7, 13);
         GLES20.glDisable(GLES20.GL_TEXTURE_2D);
     }
 
