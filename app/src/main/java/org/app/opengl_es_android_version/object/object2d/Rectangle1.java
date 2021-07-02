@@ -67,8 +67,6 @@ public class Rectangle1 extends Object2D {
 
     @Override
     public void unbind() {
-        GLES20.glDisableVertexAttribArray(uColorLocation);
         GLES20.glDisableVertexAttribArray(aPositionLocation);
-        GLES20.glDisableVertexAttribArray(aMatrixLocation);
     }
 }

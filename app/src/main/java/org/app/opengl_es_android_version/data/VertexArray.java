@@ -47,10 +47,10 @@ public class VertexArray {
      */
     public void enableVertexAttributePointer(int attributeLocation,
                                              int componentCount, int stride, int dataOffset) {
+        floatBuffer.position(dataOffset);
         GLES20.glVertexAttribPointer(attributeLocation, componentCount, GLES20.GL_FLOAT,
                 false, stride, floatBuffer);
         GLES20.glEnableVertexAttribArray(attributeLocation);
-        floatBuffer.position(0);
     }
 
     public FloatBuffer getFloatBuffer() {

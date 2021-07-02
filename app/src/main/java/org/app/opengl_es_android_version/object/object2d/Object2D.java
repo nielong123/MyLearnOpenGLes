@@ -18,6 +18,8 @@ package org.app.opengl_es_android_version.object.object2d;
 import android.content.Context;
 import android.opengl.Matrix;
 
+import org.app.opengl_es_android_version.program.TextureShaderProgram;
+
 public abstract class Object2D {
 
     public Context context;
@@ -27,6 +29,8 @@ public abstract class Object2D {
     public float[] modelMatrix = new float[16];
 
     public float[] mvpMatrix = new float[16];
+
+    protected TextureShaderProgram shaderProgram;
 
     public Object2D(Context context) {
         this.context = context;
@@ -59,5 +63,9 @@ public abstract class Object2D {
         Matrix.multiplyMM(mvpMatrix, 0, viewProjectMatrix, 0, modelMatrix, 0);
         draw();
         unbind();
+    }
+
+    public void setTextureShaderProgram(TextureShaderProgram shaderProgram) {
+        this.shaderProgram = shaderProgram;
     }
 }

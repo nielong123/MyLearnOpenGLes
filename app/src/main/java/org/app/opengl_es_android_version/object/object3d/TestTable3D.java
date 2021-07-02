@@ -60,7 +60,7 @@ public class TestTable3D extends Object3D {
     @Override
     public void draw() {
 //        GLES20.glDisable(GLES20.GL_DEPTH_TEST);
-        GLES20.glEnable(GLES20.GL_TEXTURE_2D);
+//        GLES20.glEnable(GLES20.GL_TEXTURE_2D);
         vertexArray.setVertexAttributePointer(
                 shaderProgram.aPositionLocation,
                 POSITION_COMPONENT_COUNT,
@@ -76,7 +76,7 @@ public class TestTable3D extends Object3D {
         shaderProgram.userProgram();
         shaderProgram.setUniforms(mvpMatrix, textureId);
         GLES20.glDrawArrays(GLES20.GL_TRIANGLE_FAN, 0, 6);
-        GLES20.glDisable(GLES20.GL_TEXTURE_2D);
+//        GLES20.glDisable(GLES20.GL_TEXTURE_2D);
 //        GLES20.glEnable(GLES20.GL_DEPTH_TEST);
     }
 

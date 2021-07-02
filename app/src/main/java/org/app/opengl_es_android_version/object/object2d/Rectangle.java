@@ -86,7 +86,7 @@ public class Rectangle extends Object2D {
 
     @Override
     public void draw() {
-        GLES20.glDisable(GLES20.GL_TEXTURE_2D);
+//        GLES20.glDisable(GLES20.GL_TEXTURE_2D);
         GLES20.glUniformMatrix4fv(aMatrixLocation, 1, false, mvpMatrix, 0);
         //告诉opengl从缓冲区vertextData中取数据找到属性a_Position的数据
         GLES20.glVertexAttribPointer(

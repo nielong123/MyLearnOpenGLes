@@ -21,18 +21,20 @@
             android:value="true" />
 
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".activity.CubeActivity" />
         <activity android:name=".activity.HockeyActivity" />
         <activity android:name=".activity.PanoramaActivity" />
         <activity
             android:name=".activity.My2DActivity"
-            android:theme="@style/FullScreen" />
+            android:theme="@style/FullScreen" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activity.My3DActivity"
             android:theme="@style/FullScreen" />

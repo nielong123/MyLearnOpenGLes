@@ -30,7 +30,7 @@ public class TextureShaderProgram extends ShaderProgram {
     public void setUniforms(float[] matrix, int textureId) {
         // 传入变化矩阵到shaderProgram
         GLES20.glUniformMatrix4fv(uMatrixLocation, 1, false, matrix, 0);
-        //激活纹理单元0
+//        //激活纹理单元0
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
         //绑定纹理对象ID
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureId);

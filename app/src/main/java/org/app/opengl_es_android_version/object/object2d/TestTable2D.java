@@ -26,9 +26,8 @@ public class TestTable2D extends Object2D {
     private static final int TEXTURE_STRIDE = TEXTURE_COORDINATES_COMPONENT_COUNT * BYTES_PER_FLOAT;
 
     static final float vf = 0.25f;
+    static final float vf1 = 0.15f;
     private static final float[] VERTEX_DATA = {
-            -0.6666666f, -0.6666666f, 0.0f, 0.0f, -0.3333333f, -1.0f, 0.0f, 0.0f, -1.0f, -1.0f, 0.0f, 0.0f, -1.0f, -0.3333333f, 0.0f, 0.0f, -0.3333333f, -0.3333333f, 0.0f, 0.0f, -0.3333333f, -1.0f, 0.0f, 0.0f,
-
             //x,    y,      s,      t
             0f, 0f, 0, 0,
             -vf, -vf, 0f, 0,
@@ -36,7 +35,36 @@ public class TestTable2D extends Object2D {
             vf, vf, 0, 0,
             -vf, vf, 0f, 0,
             -vf, -vf, 0f, 0,
+
+//            0f, 0f, 0, 0,
+//            -vf1, -vf1, 0f, 0,
+//            vf1, -vf1, 0, 0,
+//            vf1, vf1, 0, 0,
+//            -vf1, vf1, 0f, 0,
+//            -vf1, -vf1, 0f, 0,
+
+//            -0.6666666f, -0.6666666f, 0.0f, 0.0f, -0.3333333f, -1.0f, 0.0f, 0.0f, -1.0f, -1.0f, 0.0f, 0.0f, -1.0f, -0.3333333f, 0.0f, 0.0f, -0.3333333f, -0.3333333f, 0.0f, 0.0f, -0.3333333f, -1.0f, 0.0f, 0.0f,
     };
+
+    private static final float[] VERTEX_DATA1 = {
+            //x,    y,      s,      t
+//            0f, 0f, 0, 0,
+//            -vf, -vf, 0f, 0,
+//            vf, -vf, 0, 0,
+//            vf, vf, 0, 0,
+//            -vf, vf, 0f, 0,
+//            -vf, -vf, 0f, 0,
+
+//            0f, 0f, 0, 0,
+//            -vf1, -vf1, 0f, 0,
+//            vf1, -vf1, 0, 0,
+//            vf1, vf1, 0, 0,
+//            -vf1, vf1, 0f, 0,
+//            -vf1, -vf1, 0f, 0,
+
+            -0.6666666f, -0.6666666f, 0.0f, 0.0f, -0.3333333f, -1.0f, 0.0f, 0.0f, -1.0f, -1.0f, 0.0f, 0.0f, -1.0f, -0.3333333f, 0.0f, 0.0f, -0.3333333f, -0.3333333f, 0.0f, 0.0f, -0.3333333f, -1.0f, 0.0f, 0.0f,
+    };
+
     private static final float[] TEXTURE_DATA = {
             //x,    y,      s,      t
             0.5f, 0.5f,
@@ -46,15 +74,6 @@ public class TestTable2D extends Object2D {
             0f, 0f,
             0f, 1f,
     };
-//    private static final float[] TEXTURE_DATA = {
-//            //x,    y,      s,      t
-//            0f, 0f, 0.5f, 0.5f,
-//            0, -0, 0f, 1f,
-//            0, -0, 1f, 1f,
-//            0, 0, 1f, 0f,
-//            -0, 0, 0f, 0f,
-//            -0, -0, 0f, 1f,
-//    };
 
     private final VertexArray vertexArray;
     private final VertexArray textureArray;
@@ -67,7 +86,7 @@ public class TestTable2D extends Object2D {
 
     public TestTable2D(Context context, Geometry.Rect rect) {
         super(context);
-        vertexArray = new VertexArray(getVertexData(rect));
+        vertexArray = new VertexArray(VERTEX_DATA1);
         textureArray = new VertexArray(TEXTURE_DATA);
     }
 
@@ -82,23 +101,25 @@ public class TestTable2D extends Object2D {
     public void draw() {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
 
-        vertexArray.setVertexAttributePointer(
+        vertexArray.enableVertexAttributePointer(
                 shaderProgram.aPositionLocation,
                 POSITION_COMPONENT_COUNT,
                 VERTEX_STRIDE,
                 0
         );
-        textureArray.setVertexAttributePointer(
+        textureArray.enableVertexAttributePointer(
                 shaderProgram.aTextureCoordinatesLocation,
                 TEXTURE_COORDINATES_COMPONENT_COUNT,
                 TEXTURE_STRIDE,
                 0
         );
+
         shaderProgram.userProgram();
         shaderProgram.setUniforms(mvpMatrix, textureId);
-        GLES20.glDrawArrays(GLES20.GL_TRIANGLE_FAN, 0, 6);
-//        GLES20.glDrawArrays(GLES20.GL_TRIANGLE_FAN, 7, 13);
-        GLES20.glDisable(GLES20.GL_TEXTURE_2D);
+
+        GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 6);
+//        GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 6, 6);
+//        GLES20.glDisable(GLES20.GL_TEXTURE_2D);
     }
 
     @Override
