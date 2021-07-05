@@ -44,7 +44,7 @@ public class MultipleTestTable2D extends Object2D {
         textureArray = new VertexArray(TEXTURE_DATA);
     }
 
-    public void setTextureShaderProgram(TextureShaderProgram textureShaderProgram){
+    public void setTextureShaderProgram(TextureShaderProgram textureShaderProgram) {
         this.shaderProgram = textureShaderProgram;
     }
 
@@ -73,9 +73,8 @@ public class MultipleTestTable2D extends Object2D {
         );
         shaderProgram.userProgram();
         shaderProgram.setUniforms(mvpMatrix, textureId);
-//        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureId);
         GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 6);
-//        GLES20.glDisable(GLES20.GL_TEXTURE_2D);
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, GLES20.GL_NONE);
         ErrorUtils.getError();
     }
 

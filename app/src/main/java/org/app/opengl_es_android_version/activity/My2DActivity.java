@@ -97,6 +97,9 @@ public class My2DActivity extends AppCompatActivity implements View.OnTouchListe
                     @Override
                     public void run() {
                         my2DRenderer.handleTouchDown(normalizedX, normalizedY);
+                        my2DRenderer.handleTouchMove(-1,
+                                -1,
+                                MotionEvent.ACTION_DOWN);
                     }
                 });
                 break;
@@ -110,6 +113,9 @@ public class My2DActivity extends AppCompatActivity implements View.OnTouchListe
             case MotionEvent.ACTION_UP:
                 oldY = 0;
                 oldX = 0;
+                my2DRenderer.handleTouchMove(-1,
+                        -1,
+                        MotionEvent.ACTION_UP);
                 break;
             case MotionEvent.ACTION_MOVE:
                 if (oldY == 0 && oldX == 0) {
@@ -122,7 +128,9 @@ public class My2DActivity extends AppCompatActivity implements View.OnTouchListe
                 glSurfaceView.queueEvent(new Runnable() {
                     @Override
                     public void run() {
-                        my2DRenderer.handleTouchMove(transX / 100, -transY / 100);
+                        my2DRenderer.handleTouchMove(transX / 100,
+                                -transY / 100,
+                                MotionEvent.ACTION_MOVE);
                         glSurfaceView.requestRender();
                     }
                 });
