@@ -6,13 +6,10 @@ import android.opengl.GLSurfaceView;
 import android.util.Log;
 
 import org.app.opengl_es_android_version.R;
-import org.app.opengl_es_android_version.object.Shape_FBO;
 import org.app.opengl_es_android_version.object.object3d.CoordinateLines3D;
 import org.app.opengl_es_android_version.object.object3d.Object3D;
 import org.app.opengl_es_android_version.object.object3d.Planet;
-import org.app.opengl_es_android_version.object.object3d.Rectangle3D;
-import org.app.opengl_es_android_version.object.object3d.TestFbo3D;
-import org.app.opengl_es_android_version.object.object3d.TestTable3D;
+import org.app.opengl_es_android_version.program.MyColorShaderProgram;
 import org.app.opengl_es_android_version.util.Geometry;
 import org.app.opengl_es_android_version.util.VaryTools;
 
@@ -30,6 +27,8 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
 
     private int width, height;
 
+    MyColorShaderProgram colorShaderProgram;
+
     List<Object3D> drawObjectList = new ArrayList<>();
 
     VaryTools varyTools;
@@ -41,26 +40,29 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
     public My3DRenderer_1(Context context) {
         this.context = context;
         varyTools = new VaryTools();
-        earth = new Planet(context,
-                viewCenterPoint.x,
-                viewCenterPoint.y,
-                viewCenterPoint.z,
-                0.5f);
-        moon = new Planet(context,
-                viewCenterPoint.x + 1f,
-                viewCenterPoint.x + 1f,
-                viewCenterPoint.z + 1.5f,
-                0.3f,
-                context.getColor(R.color.colorPrimaryDark));
     }
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        colorShaderProgram = new MyColorShaderProgram(context);
+
+        earth = new Planet(viewCenterPoint.x,
+                viewCenterPoint.y,
+                viewCenterPoint.z,
+                0.5f,
+                colorShaderProgram);
+        moon = new Planet(
+                viewCenterPoint.x + 1f,
+                viewCenterPoint.x + 1f,
+                viewCenterPoint.z + 1.5f,
+                0.3f,
+                context.getColor(R.color.colorPrimaryDark),
+                colorShaderProgram);
 //        GLES20.glEnable(GLES20.GL_DEPTH_TEST);
 
-        drawObjectList.add(new CoordinateLines3D(context));
-        drawObjectList.add(new TestFbo3D(context));
+        drawObjectList.add(new CoordinateLines3D(colorShaderProgram));
+//        drawObjectList.add(new TestFbo3D(context));
         drawObjectList.add(earth);
         drawObjectList.add(moon);
 //        drawObjectList.add(new TestTable3D(context));
@@ -139,4 +141,5 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
         Log.e(TAG, "getMoonCoordinate: x = " + coordinate.x +
                 "  y = " + coordinate.y + "  z = " + coordinate.z);
     }
+
 }

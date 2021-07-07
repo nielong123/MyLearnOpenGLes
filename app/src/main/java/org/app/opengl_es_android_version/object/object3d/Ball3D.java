@@ -4,12 +4,10 @@ import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
 
-import org.app.opengl_es_android_version.R;
-import org.app.opengl_es_android_version.contant.Constants;
 import org.app.opengl_es_android_version.data.VertexArray;
+import org.app.opengl_es_android_version.program.MyColorShaderProgram;
 import org.app.opengl_es_android_version.util.ColorHelper;
 import org.app.opengl_es_android_version.util.Geometry;
-import org.app.opengl_es_android_version.util.ShaderHelper;
 
 import java.util.ArrayList;
 
@@ -20,22 +18,22 @@ public class Ball3D extends Object3D {
 
     private int count;
 
-    public Ball3D(Context context) {
-        super(context);
+    public Ball3D(MyColorShaderProgram colorShaderProgram) {
+        super(colorShaderProgram);
         circle = new Geometry.Circle(new Geometry.Point(0.0f, 0.0f, 0.0f), 0.6f);
         circle.angle = 20;
         count = initVertex();
     }
 
-    public Ball3D(Context context, float x, float y, float z, float radius) {
-        super(context);
+    public Ball3D(float x, float y, float z, float radius, MyColorShaderProgram colorShaderProgram) {
+        super(colorShaderProgram);
         circle = new Geometry.Circle(new Geometry.Point(x, y, z), radius);
         circle.angle = 20;
         count = initVertex();
     }
 
-    public Ball3D(Context context, float x, float y, float z, float radius, int color) {
-        super(context);
+    public Ball3D(float x, float y, float z, float radius, int color, MyColorShaderProgram colorShaderProgram) {
+        super(colorShaderProgram);
         this.color = color;
         circle = new Geometry.Circle(new Geometry.Point(x, y, z), radius);
         circle.angle = 20;
@@ -114,30 +112,25 @@ public class Ball3D extends Object3D {
     @Override
     public void bindData(Context context) {
         super.bindData(context);
-        programId = ShaderHelper.buildProgram(context,
-                R.raw.texture_vertex_shader_copy, R.raw.simple_fragment_shader1_5);
-        GLES20.glUseProgram(programId);
-        uColorLocation = GLES20.glGetUniformLocation(programId, Constants.U_COLOR);
-        aPositionLocation = GLES20.glGetAttribLocation(programId, Constants.A_POSITION);
-        aMatrixLocation = GLES20.glGetUniformLocation(programId, Constants.U_MATRIX);
+
     }
 
     @Override
     protected void draw() {
 
-        ColorHelper.setColor(uColorLocation, color);
-        GLES20.glUniformMatrix4fv(aMatrixLocation, 1, false, mvpMatrix, 0);
+        ColorHelper.setColor(colorShaderProgram.uColorLocation, color);
+        GLES20.glUniformMatrix4fv(colorShaderProgram.uMatrixLocation, 1, false, mvpMatrix, 0);
 
-        GLES20.glVertexAttribPointer(aPositionLocation, 3, GLES20.GL_FLOAT,
+        GLES20.glVertexAttribPointer(colorShaderProgram.aPositionLocation, 3, GLES20.GL_FLOAT,
                 false, 3 * 4, vertexArray.getFloatBuffer());
 
-        GLES20.glEnableVertexAttribArray(aPositionLocation);
+        GLES20.glEnableVertexAttribArray(colorShaderProgram.aPositionLocation);
         GLES20.glDrawArrays(GLES20.GL_LINE_STRIP, 0, count);
     }
 
     @Override
     public void unbind() {
-        GLES20.glDisableVertexAttribArray(aPositionLocation);
+        GLES20.glDisableVertexAttribArray(colorShaderProgram.aPositionLocation);
     }
 
     public Geometry.Point getCenterPoint() {

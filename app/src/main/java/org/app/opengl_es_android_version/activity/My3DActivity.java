@@ -59,8 +59,7 @@ public class My3DActivity extends AppCompatActivity implements View.OnTouchListe
             glSurfaceView.setEGLContextClientVersion(2);
             my3DRenderer1 = new My3DRenderer_1(this);
             glSurfaceView.setRenderer(my3DRenderer1);
-//            glSurfaceView.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
-            glSurfaceView.setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
+            glSurfaceView.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
             rendererSet = true;
         } else {
             Toast.makeText(this, "不支持openGL es 2.0", Toast.LENGTH_SHORT).show();
@@ -109,9 +108,11 @@ public class My3DActivity extends AppCompatActivity implements View.OnTouchListe
                         double dis = ScreenTools.computeDis(normalizedX, x2, normalizedY, y2);
                         double scale = dis / dis_start;
                         my3DRenderer1.zoom((float) scale);
+                        glSurfaceView.requestRender();
                         dis_start = dis;
                     } else {
                         my3DRenderer1.rotate(normalizedX - X, normalizedY - Y);
+                        glSurfaceView.requestRender();
                         X = normalizedX;
                         Y = normalizedY;
                     }

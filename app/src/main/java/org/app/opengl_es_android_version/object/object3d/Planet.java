@@ -1,8 +1,9 @@
 package org.app.opengl_es_android_version.object.object3d;
 
-import android.content.Context;
 import android.opengl.Matrix;
 import android.os.Handler;
+
+import org.app.opengl_es_android_version.program.MyColorShaderProgram;
 
 public class Planet extends Ball3D {
 
@@ -10,16 +11,16 @@ public class Planet extends Ball3D {
 
     long rotateSpeed;
 
-    public Planet(Context context) {
-        super(context);
+    public Planet(MyColorShaderProgram colorShaderProgram) {
+        super(colorShaderProgram);
     }
 
-    public Planet(Context context, float x, float y, float z, float radius) {
-        super(context, x, y, z, radius);
+    public Planet(float x, float y, float z, float radius, MyColorShaderProgram colorShaderProgram) {
+        super(x, y, z, radius, colorShaderProgram);
     }
 
-    public Planet(Context context, float x, float y, float z, float radius, int color) {
-        super(context, x, y, z, radius, color);
+    public Planet(float x, float y, float z, float radius, int color, MyColorShaderProgram colorShaderProgram) {
+        super(x, y, z, radius, color, colorShaderProgram);
     }
 
     public void startRotating(float centerX, float centerY, float centerZ, long speed) {

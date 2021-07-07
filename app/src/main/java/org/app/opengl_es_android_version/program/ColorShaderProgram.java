@@ -9,14 +9,13 @@ import org.app.opengl_es_android_version.util.ColorHelper;
 public class ColorShaderProgram extends ShaderProgram {
 
     protected static final String U_MATRIX = "u_Matrix";
-    public final int uMatrixLocation;
-
     protected static final String A_POSITION = "a_Position";
     protected static final String A_COLOR = "a_Color";
+    protected static final String U_COLOR = "u_Color";
+
+    public final int uMatrixLocation;
     public final int aPositionLocation;
     public final int aColorLocation;
-
-    protected static final String U_COLOR = "u_Color";
     public final int uColorLocation;
 
 
@@ -24,10 +23,8 @@ public class ColorShaderProgram extends ShaderProgram {
         super(context, R.raw.simple_vertex_shader, R.raw.simple_fragment_shader);
 
         uMatrixLocation = GLES20.glGetUniformLocation(programId, U_MATRIX);
-
         aColorLocation = GLES20.glGetAttribLocation(programId, A_COLOR);
         aPositionLocation = GLES20.glGetAttribLocation(programId, A_POSITION);
-
         uColorLocation = GLES20.glGetUniformLocation(programId, U_COLOR);
     }
 
