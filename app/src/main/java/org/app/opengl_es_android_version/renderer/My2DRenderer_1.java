@@ -136,7 +136,7 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
     }
 
     private List<Geometry.Rect> cutScreen() {
-        final int slice = 5;
+        final int slice = 4;
         final float width = 3;
         final float height = 3;
         List<Geometry.Rect> rectList = new ArrayList<>();
