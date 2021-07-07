@@ -6,9 +6,11 @@ import android.opengl.GLSurfaceView;
 import android.util.Log;
 
 import org.app.opengl_es_android_version.R;
+import org.app.opengl_es_android_version.object.object2d.Star5P;
 import org.app.opengl_es_android_version.object.object3d.CoordinateLines3D;
 import org.app.opengl_es_android_version.object.object3d.Object3D;
 import org.app.opengl_es_android_version.object.object3d.Planet;
+import org.app.opengl_es_android_version.object.object3d.TestTable3D;
 import org.app.opengl_es_android_version.program.MyColorShaderProgram;
 import org.app.opengl_es_android_version.util.Geometry;
 import org.app.opengl_es_android_version.util.VaryTools;
@@ -65,7 +67,7 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
 //        drawObjectList.add(new TestFbo3D(context));
         drawObjectList.add(earth);
         drawObjectList.add(moon);
-//        drawObjectList.add(new TestTable3D(context));
+        drawObjectList.add(new TestTable3D(colorShaderProgram));
 //        drawObjectList.add(new Polyline());
 //        drawObjectList.add(new Star5P());
 //        drawObjectList.add(new RectangleWithTexture(context));
