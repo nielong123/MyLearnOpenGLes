@@ -5,11 +5,7 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 
-import org.app.opengl_es_android_version.object.Shape_FBO;
 import org.app.opengl_es_android_version.object.object2d.Object2D;
-import org.app.opengl_es_android_version.object.object2d.Rectangle;
-import org.app.opengl_es_android_version.object.object2d.Star5P;
-import org.app.opengl_es_android_version.object.object2d.TestTable2D;
 import org.app.opengl_es_android_version.object.object2d.demo.CoordinateLines;
 import org.app.opengl_es_android_version.util.MatrixHelper;
 
@@ -40,7 +36,7 @@ public class MyFBORenderer implements GLSurfaceView.Renderer {
     Object2D object2D;
 
 
-    Shape_FBO shape_fbo;
+//    Shape_FBO shape_fbo;
 
 
     public MyFBORenderer(Context context) {
@@ -54,10 +50,10 @@ public class MyFBORenderer implements GLSurfaceView.Renderer {
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         GLES20.glClear(GL_COLOR_BUFFER_BIT);
-        shape_fbo = new Shape_FBO(context);
+//        shape_fbo = new Shape_FBO(context);
 
 //        drawObjectList.add(new CoordinateLines(context));
-        drawObjectList.add(shape_fbo);
+//        drawObjectList.add(shape_fbo);
 //        drawObjectList.add(new Rect(context));
 //        drawObjectList.add(new Circle(context));
 //        drawObjectList.add(new Polyline(context));
@@ -98,7 +94,7 @@ public class MyFBORenderer implements GLSurfaceView.Renderer {
 
     public void add2DObject() {
         if (object2D == null) {
-            object2D = new Star5P(context);
+//            object2D = new Star5P(context);
             drawObjectList.add(object2D);
         } else {
             drawObjectList.remove(object2D);

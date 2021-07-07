@@ -16,11 +16,9 @@ public abstract class Object3D {
 
     protected MyColorShaderProgram colorShaderProgram;
 
-
     protected VertexArray vertexArray;
 
-    public Object3D(MyColorShaderProgram colorShaderProgram) {
-        this.colorShaderProgram = colorShaderProgram;
+    public Object3D() {
         Matrix.setIdentityM(modelMatrix, 0);
         Matrix.setIdentityM(mvpMatrix, 0);
     }
@@ -48,5 +46,11 @@ public abstract class Object3D {
         Matrix.multiplyMM(mvpMatrix, 0, viewProjectMatrix, 0, modelMatrix, 0);
         draw();
         unbind();
+    }
+
+    public Object3D setColorShaderProgram(MyColorShaderProgram colorShaderProgram) {
+        this.colorShaderProgram = colorShaderProgram;
+        this.context = colorShaderProgram.getContext();
+        return this;
     }
 }

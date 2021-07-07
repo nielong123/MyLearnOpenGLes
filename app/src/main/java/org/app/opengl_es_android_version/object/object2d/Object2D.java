@@ -18,22 +18,22 @@ package org.app.opengl_es_android_version.object.object2d;
 import android.content.Context;
 import android.opengl.Matrix;
 
+import org.app.opengl_es_android_version.program.MyColorShaderProgram;
 import org.app.opengl_es_android_version.program.TextureShaderProgram;
 
 public abstract class Object2D {
 
     public Context context;
 
-    private boolean isBind = false;
-
     public float[] modelMatrix = new float[16];
-
     public float[] mvpMatrix = new float[16];
 
     protected TextureShaderProgram shaderProgram;
+    protected MyColorShaderProgram colorShaderProgram;
 
-    public Object2D(Context context) {
-        this.context = context;
+    boolean isBind;
+
+    public Object2D() {
         Matrix.setIdentityM(modelMatrix, 0);
         Matrix.setIdentityM(mvpMatrix, 0);
     }
@@ -42,7 +42,7 @@ public abstract class Object2D {
      * 这个类中绑定纹理
      */
     public void bindData(Context context) {
-        isBind = true;
+
     }
 
     public abstract void unbind();
@@ -57,8 +57,9 @@ public abstract class Object2D {
      * @param viewProjectMatrix
      */
     public void draw(float[] viewProjectMatrix) {
-        if (!isBind) {
+        if(!isBind){
             bindData(context);
+            isBind = true;
         }
         Matrix.multiplyMM(mvpMatrix, 0, viewProjectMatrix, 0, modelMatrix, 0);
         draw();
@@ -67,5 +68,12 @@ public abstract class Object2D {
 
     public void setTextureShaderProgram(TextureShaderProgram shaderProgram) {
         this.shaderProgram = shaderProgram;
+    }
+
+    public Object2D setColorShaderProgram(MyColorShaderProgram colorShaderProgram) {
+        this.colorShaderProgram = colorShaderProgram;
+        this.context = colorShaderProgram.getContext();
+
+        return this;
     }
 }

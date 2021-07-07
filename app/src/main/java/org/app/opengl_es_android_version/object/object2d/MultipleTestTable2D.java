@@ -31,14 +31,14 @@ public class MultipleTestTable2D extends Object2D {
     private final VertexArray textureArray;
 
     public MultipleTestTable2D(Context context, int textureId, float[] vertexData) {
-        super(context);
+        super();
         this.textureId = textureId;
         vertexArray = new VertexArray(vertexData);
         textureArray = new VertexArray(TEXTURE_DATA);
     }
 
     public MultipleTestTable2D(Context context, int textureId, Geometry.Rect rect) {
-        super(context);
+        super();
         this.textureId = textureId;
         vertexArray = new VertexArray(getVertexData(rect));
         textureArray = new VertexArray(TEXTURE_DATA);

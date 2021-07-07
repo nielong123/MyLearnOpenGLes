@@ -39,12 +39,12 @@ public class TestTable3D extends Object3D {
 
     private final VertexArray vertexArray;
 
-    public TestTable3D(MyColorShaderProgram colorShaderProgram) {
-        super(colorShaderProgram);
+    public TestTable3D(Context context) {
+        super();
         vertexArray = new VertexArray(VERTEX_DATA);
         Matrix.setIdentityM(modelMatrix, 0);
-        textureId = TextureHelper.loadTexture(colorShaderProgram.context, R.drawable.map1);
-        shaderProgram = new TextureShaderProgram(colorShaderProgram.context);
+        textureId = TextureHelper.loadTexture(context, R.drawable.map1);
+        shaderProgram = new TextureShaderProgram(context);
     }
 
     @Override

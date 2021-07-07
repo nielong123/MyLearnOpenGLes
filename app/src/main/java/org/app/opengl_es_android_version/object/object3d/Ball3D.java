@@ -5,7 +5,6 @@ import android.opengl.GLES20;
 import android.opengl.Matrix;
 
 import org.app.opengl_es_android_version.data.VertexArray;
-import org.app.opengl_es_android_version.program.MyColorShaderProgram;
 import org.app.opengl_es_android_version.util.ColorHelper;
 import org.app.opengl_es_android_version.util.Geometry;
 
@@ -18,22 +17,22 @@ public class Ball3D extends Object3D {
 
     private int count;
 
-    public Ball3D(MyColorShaderProgram colorShaderProgram) {
-        super(colorShaderProgram);
+    public Ball3D() {
+        super();
         circle = new Geometry.Circle(new Geometry.Point(0.0f, 0.0f, 0.0f), 0.6f);
         circle.angle = 20;
         count = initVertex();
     }
 
-    public Ball3D(float x, float y, float z, float radius, MyColorShaderProgram colorShaderProgram) {
-        super(colorShaderProgram);
+    public Ball3D(float x, float y, float z, float radius) {
+        super();
         circle = new Geometry.Circle(new Geometry.Point(x, y, z), radius);
         circle.angle = 20;
         count = initVertex();
     }
 
-    public Ball3D(float x, float y, float z, float radius, int color, MyColorShaderProgram colorShaderProgram) {
-        super(colorShaderProgram);
+    public Ball3D(float x, float y, float z, float radius, int color) {
+        super();
         this.color = color;
         circle = new Geometry.Circle(new Geometry.Point(x, y, z), radius);
         circle.angle = 20;
@@ -118,9 +117,8 @@ public class Ball3D extends Object3D {
     @Override
     protected void draw() {
 
-        ColorHelper.setColor(colorShaderProgram.uColorLocation, color);
-        GLES20.glUniformMatrix4fv(colorShaderProgram.uMatrixLocation, 1, false, mvpMatrix, 0);
-
+        ColorHelper.setColor(colorShaderProgram.aColorLocation, color);
+        GLES20.glUniformMatrix4fv(colorShaderProgram.aMatrixLocation, 1, false, mvpMatrix, 0);
         GLES20.glVertexAttribPointer(colorShaderProgram.aPositionLocation, 3, GLES20.GL_FLOAT,
                 false, 3 * 4, vertexArray.getFloatBuffer());
 

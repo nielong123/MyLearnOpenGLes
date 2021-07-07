@@ -23,13 +23,15 @@ public class CoordinateLines extends Object2D {
     private int aMatrixLocation;
     private int uColorLocation;
     private int aPositionLocation;
+    Context context;
 
     final private int count;
 
     VertexArray vertexArray;
 
     public CoordinateLines(Context context) {
-        super(context);
+        super();
+        this.context = context;
         vertexArray = new VertexArray(CoordinateLines);
         count = vertexArray.getFloatBuffer().limit() / POSITION_COMPONENT_COUNT;
     }
@@ -46,7 +48,7 @@ public class CoordinateLines extends Object2D {
     @Override
     public void bindData(Context context) {
         super.bindData(context);
-        programId = ShaderHelper.buildProgram(context,
+        programId = ShaderHelper.buildProgram(this.context,
                 R.raw.texture_vertex_shader_copy, R.raw.simple_fragment_shader1_5);
         GLES20.glUseProgram(programId);
         //获取uniform的位置，把位置存入uColorLocation中

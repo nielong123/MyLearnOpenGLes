@@ -6,7 +6,6 @@ import android.opengl.GLSurfaceView;
 import android.util.Log;
 
 import org.app.opengl_es_android_version.R;
-import org.app.opengl_es_android_version.object.object2d.Star5P;
 import org.app.opengl_es_android_version.object.object3d.CoordinateLines3D;
 import org.app.opengl_es_android_version.object.object3d.Object3D;
 import org.app.opengl_es_android_version.object.object3d.Planet;
@@ -52,28 +51,21 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
         earth = new Planet(viewCenterPoint.x,
                 viewCenterPoint.y,
                 viewCenterPoint.z,
-                0.5f,
-                colorShaderProgram);
+                0.5f);
+        earth.setColorShaderProgram(colorShaderProgram);
         moon = new Planet(
                 viewCenterPoint.x + 1f,
                 viewCenterPoint.x + 1f,
                 viewCenterPoint.z + 1.5f,
                 0.3f,
-                context.getColor(R.color.colorPrimaryDark),
-                colorShaderProgram);
-//        GLES20.glEnable(GLES20.GL_DEPTH_TEST);
+                context.getColor(R.color.colorPrimaryDark));
+        moon.setColorShaderProgram(colorShaderProgram);
 
-        drawObjectList.add(new CoordinateLines3D(colorShaderProgram));
+        drawObjectList.add(new CoordinateLines3D().setColorShaderProgram(colorShaderProgram));
 //        drawObjectList.add(new TestFbo3D(context));
         drawObjectList.add(earth);
         drawObjectList.add(moon);
-        drawObjectList.add(new TestTable3D(colorShaderProgram));
-//        drawObjectList.add(new Polyline());
-//        drawObjectList.add(new Star5P());
-//        drawObjectList.add(new RectangleWithTexture(context));
-//        drawObjectList.add(new Rectangle1(context));
-//        drawObjectList.add(new Triangle());
-//        drawObjectList.add(new Square());
+        drawObjectList.add(new TestTable3D(context).setColorShaderProgram(colorShaderProgram));
     }
 
     @Override

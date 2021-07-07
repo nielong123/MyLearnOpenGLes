@@ -10,7 +10,7 @@ public class Constants {
     public static final int BYTES_PER_INT = 8;
 
 
-    public static final String U_COLOR = "u_Color";
+    public static final String A_COLOR = "a_Color";
 
     public static final String A_POSITION = "a_Position";
 
@@ -27,5 +27,5 @@ public class Constants {
     public static final String V_TEXTURE = "vTexture";
 
 
-
+    public static final String U_COLOR = "u_color";
 }
