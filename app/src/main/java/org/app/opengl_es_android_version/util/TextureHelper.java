@@ -65,10 +65,10 @@ public class TextureHelper {
         final int[] textureObjectIds = new int[textureNum];
         GLES20.glGenTextures(textureNum, textureObjectIds, 0);
 
-        if (textureObjectIds[0] == 0) {
-            Log.e(TAG, "Could not generate a new OpenGL texture object!");
-            return null;
-        }
+//        if (textureObjectIds[0] == 0) {
+//            Log.e(TAG, "Could not generate a new OpenGL texture object!");
+//            return null;
+//        }
 
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inScaled = false;   //指定需要的是原始数据，非压缩数据

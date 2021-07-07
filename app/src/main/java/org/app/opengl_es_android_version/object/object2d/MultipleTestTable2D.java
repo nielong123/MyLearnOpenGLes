@@ -30,14 +30,14 @@ public class MultipleTestTable2D extends Object2D {
     private final VertexArray vertexArray;
     private final VertexArray textureArray;
 
-    public MultipleTestTable2D(Context context, int textureId, float[] vertexData) {
+    public MultipleTestTable2D(int textureId, float[] vertexData) {
         super();
         this.textureId = textureId;
         vertexArray = new VertexArray(vertexData);
         textureArray = new VertexArray(TEXTURE_DATA);
     }
 
-    public MultipleTestTable2D(Context context, int textureId, Geometry.Rect rect) {
+    public MultipleTestTable2D(int textureId, Geometry.Rect rect) {
         super();
         this.textureId = textureId;
         vertexArray = new VertexArray(getVertexData(rect));
@@ -45,7 +45,7 @@ public class MultipleTestTable2D extends Object2D {
     }
 
     public void setTextureShaderProgram(TextureShaderProgram textureShaderProgram) {
-        this.shaderProgram = textureShaderProgram;
+        this.textureShaderProgram = textureShaderProgram;
     }
 
     @Override
@@ -59,20 +59,20 @@ public class MultipleTestTable2D extends Object2D {
 //        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
 
         vertexArray.enableVertexAttributePointer(
-                shaderProgram.aPositionLocation,
+                textureShaderProgram.aPositionLocation,
                 POSITION_COMPONENT_COUNT,
                 16,
                 0
         );
 
         textureArray.enableVertexAttributePointer(
-                shaderProgram.aTextureCoordinatesLocation,
+                textureShaderProgram.aTextureCoordinatesLocation,
                 TEXTURE_COORDINATES_COMPONENT_COUNT,
                 8,
                 0
         );
-        shaderProgram.userProgram();
-        shaderProgram.setUniforms(mvpMatrix, textureId);
+        textureShaderProgram.userProgram();
+        textureShaderProgram.setUniforms(mvpMatrix, textureId);
         GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 6);
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, GLES20.GL_NONE);
         ErrorUtils.getError();
@@ -80,8 +80,8 @@ public class MultipleTestTable2D extends Object2D {
 
     @Override
     public void unbind() {
-        GLES20.glDisableVertexAttribArray(shaderProgram.aPositionLocation);
-        GLES20.glDisableVertexAttribArray(shaderProgram.aTextureCoordinatesLocation);
+        GLES20.glDisableVertexAttribArray(textureShaderProgram.aPositionLocation);
+        GLES20.glDisableVertexAttribArray(textureShaderProgram.aTextureCoordinatesLocation);
     }
 
     public float[] getRect() {

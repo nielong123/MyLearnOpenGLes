@@ -65,7 +65,7 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
 //        drawObjectList.add(new TestFbo3D(context));
         drawObjectList.add(earth);
         drawObjectList.add(moon);
-        drawObjectList.add(new TestTable3D(context).setColorShaderProgram(colorShaderProgram));
+//        drawObjectList.add(new TestTable3D(context).setColorShaderProgram(colorShaderProgram));
     }
 
     @Override

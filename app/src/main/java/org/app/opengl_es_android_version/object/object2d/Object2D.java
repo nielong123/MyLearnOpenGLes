@@ -28,7 +28,7 @@ public abstract class Object2D {
     public float[] modelMatrix = new float[16];
     public float[] mvpMatrix = new float[16];
 
-    protected TextureShaderProgram shaderProgram;
+    protected TextureShaderProgram textureShaderProgram;
     protected MyColorShaderProgram colorShaderProgram;
 
     boolean isBind;
@@ -41,6 +41,7 @@ public abstract class Object2D {
     /**
      * 这个类中绑定纹理
      */
+    @Deprecated
     public void bindData(Context context) {
 
     }
@@ -67,7 +68,7 @@ public abstract class Object2D {
     }
 
     public void setTextureShaderProgram(TextureShaderProgram shaderProgram) {
-        this.shaderProgram = shaderProgram;
+        this.textureShaderProgram = shaderProgram;
     }
 
     public Object2D setColorShaderProgram(MyColorShaderProgram colorShaderProgram) {

@@ -24,10 +24,6 @@ final public class MyColorShaderProgram extends ShaderProgram {
         aColorLocation = GLES20.glGetUniformLocation(programId, Constants.A_COLOR);
     }
 
-//    public void setUniforms(float[] matrix, int color) {
-//        GLES20.glUniformMatrix4fv(uMatrixLocation, 1, false, matrix, 0);
-//        ColorHelper.setColor(aColorLocation, color);
-//    }
 
     public Context getContext() {
         return context;
