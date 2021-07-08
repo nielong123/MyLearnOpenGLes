@@ -43,12 +43,6 @@ public class Rectangle1 extends Object2D {
     @Override
     public void bindData(Context context) {
         super.bindData(context);
-//        programId = ShaderHelper.buildProgram(context,
-//                R.raw.texture_vertex_shader_copy, R.raw.simple_fragment_shader1_5);
-//        GLES20.glUseProgram(programId);
-//        uColorLocation = GLES20.glGetUniformLocation(programId, Constants.U_COLOR);
-//        aPositionLocation = GLES20.glGetAttribLocation(programId, Constants.A_POSITION);
-//        aMatrixLocation = GLES20.glGetUniformLocation(programId, Constants.U_MATRIX);
     }
 
     @Override

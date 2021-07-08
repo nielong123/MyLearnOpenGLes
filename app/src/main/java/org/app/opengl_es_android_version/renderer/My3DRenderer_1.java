@@ -3,13 +3,14 @@ package org.app.opengl_es_android_version.renderer;
 import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
+import android.os.Handler;
 import android.util.Log;
 
 import org.app.opengl_es_android_version.R;
+import org.app.opengl_es_android_version.activity.My3DActivity;
 import org.app.opengl_es_android_version.object.object3d.CoordinateLines3D;
 import org.app.opengl_es_android_version.object.object3d.Object3D;
 import org.app.opengl_es_android_version.object.object3d.Planet;
-import org.app.opengl_es_android_version.object.object3d.TestTable3D;
 import org.app.opengl_es_android_version.program.MyColorShaderProgram;
 import org.app.opengl_es_android_version.util.Geometry;
 import org.app.opengl_es_android_version.util.VaryTools;
@@ -35,6 +36,8 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
     VaryTools varyTools;
 
     Planet earth, moon;
+
+    final long earthRotateSpeed = 50l;
 
     Geometry.Point viewCenterPoint = new Geometry.Point(0.5f, 0.5f, 0.5f);
 
@@ -122,12 +125,11 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
     }
 
     public void startMoonRotating() {
-        Geometry.Point earthCenter = earth.getCenterPoint();
-        moon.startRotating(earthCenter.x, 0, earthCenter.z, 50l);
+        handler.postDelayed(runnable, earthRotateSpeed);
     }
 
     public void stopMoonRotating() {
-        moon.stopRotating();
+        handler.removeCallbacks(runnable);
     }
 
     public void getMoonCoordinate() {
@@ -135,5 +137,18 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
         Log.e(TAG, "getMoonCoordinate: x = " + coordinate.x +
                 "  y = " + coordinate.y + "  z = " + coordinate.z);
     }
+
+    Handler handler = new Handler();
+
+    Runnable runnable = new Runnable() {
+
+        @Override
+        public void run() {
+            Geometry.Point earthCenter = earth.getCenterPoint();
+            moon.startRotating(earthCenter.x, 0, earthCenter.z);
+            handler.postDelayed(this, earthRotateSpeed);
+            ((My3DActivity) context).handler.sendEmptyMessage(0);
+        }
+    };
 
 }

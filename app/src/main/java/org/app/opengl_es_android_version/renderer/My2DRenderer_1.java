@@ -3,22 +3,19 @@ package org.app.opengl_es_android_version.renderer;
 import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
+import android.util.Log;
 
-import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.object.object2d.Circle;
-import org.app.opengl_es_android_version.object.object2d.MultipleTestTable2D;
 import org.app.opengl_es_android_version.object.object2d.Object2D;
 import org.app.opengl_es_android_version.object.object2d.Polyline;
 import org.app.opengl_es_android_version.object.object2d.Rectangle;
 import org.app.opengl_es_android_version.object.object2d.Rectangle1;
 import org.app.opengl_es_android_version.object.object2d.Star5P;
-import org.app.opengl_es_android_version.object.object2d.TestTable2D;
 import org.app.opengl_es_android_version.object.object2d.demo.CoordinateLines;
 import org.app.opengl_es_android_version.object.object2d.demo.Triangle;
 import org.app.opengl_es_android_version.program.MyColorShaderProgram;
 import org.app.opengl_es_android_version.program.TextureShaderProgram;
 import org.app.opengl_es_android_version.util.Geometry;
-import org.app.opengl_es_android_version.util.TextureHelper;
 import org.app.opengl_es_android_version.util.VaryTools;
 
 import java.util.ArrayList;
@@ -29,6 +26,7 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 import static android.opengl.GLES20.GL_COLOR_BUFFER_BIT;
+import static android.opengl.GLES20.GL_TEXTURE_2D;
 
 public class My2DRenderer_1 implements GLSurfaceView.Renderer {
 
@@ -42,9 +40,7 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
 
     Object2D object2D;
 
-    private static final float vf = 0.5f;
-    private static final float vf1 = 0.2f;
-
+    int width, height;
 
     public My2DRenderer_1(Context context) {
         this.context = context;
@@ -78,39 +74,76 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
         drawObjectList.add(new Circle().setColorShaderProgram(colorShaderProgram));
         drawObjectList.add(new Polyline().setColorShaderProgram(colorShaderProgram));
         drawObjectList.add(new Rectangle1().setColorShaderProgram(colorShaderProgram));
-//        drawObjectList.add(new RectangleWithTexture(context));
         drawObjectList.add(new Star5P().setColorShaderProgram(colorShaderProgram));
 
         drawObjectList.add(new Rectangle().setColorShaderProgram(colorShaderProgram));
 
-        TestTable2D testTable2D = new TestTable2D();
-        testTable2D.setTextureShaderProgram(textureShaderProgram);
-        testTable2D.setTextureId(TextureHelper.loadTexture(context, R.drawable.jsy));
-        drawObjectList.add(testTable2D);
+//        TestTable2D testTable2D = new TestTable2D();
+//        testTable2D.setTextureShaderProgram(textureShaderProgram);
+//        testTable2D.setTextureId(TextureHelper.loadTexture(context, R.drawable.jsy));
+//        drawObjectList.add(testTable2D);
     }
 
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
+        this.width = width;
+        this.height = height;
         GLES20.glViewport(0, 0, width, height);
     }
 
+    int[] fboId = {0};
+    int[] fboTextureId = {0};
+
     @Override
     public void onDrawFrame(GL10 gl) {
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
-//        for (Object2D object2D : drawObjectList) {
-//            object2D.draw(varyTools.getViewProjectionMatrix());
-//        }
 
-        if (textureIds != null) {
-            GLES20.glDeleteTextures(textureIds.length, textureIds, 0);
-        }
-        textureIds = new int[]{};
-        textureIds = TextureHelper.loadMultipleTexture(context, R.drawable.jsy, rects.size());
-        for (int i = 0; i < rects.size(); i++) {
-            Object2D object2D = new MultipleTestTable2D(textureIds[i], rects.get(i));
-            object2D.setTextureShaderProgram(textureShaderProgram);
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
+
+        initFbo();
+
+        for (Object2D object2D : drawObjectList) {
             object2D.draw(varyTools.getViewProjectionMatrix());
         }
+
+        GLES20.glDeleteFramebuffers(1, fboId, 0);
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
+
+//        if (textureIds != null) {
+//            GLES20.glDeleteTextures(textureIds.length, textureIds, 0);
+//        }
+//        textureIds = new int[]{};
+//        textureIds = TextureHelper.loadMultipleTexture(context, R.drawable.jsy, rects.size());
+//        for (int i = 0; i < rects.size(); i++) {
+//            Object2D object2D = new MultipleTestTable2D(textureIds[i], rects.get(i));
+//            object2D.setTextureShaderProgram(textureShaderProgram);
+//            object2D.draw(varyTools.getViewProjectionMatrix());
+//        }
+    }
+
+
+    private boolean initFbo() {
+        // 创建并初始化 FBO 纹理
+        GLES20.glGenTextures(1, fboTextureId, 0);
+        GLES20.glBindTexture(GL_TEXTURE_2D, fboTextureId[0]);
+        GLES20.glTexParameterf(GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE);
+        GLES20.glTexParameterf(GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE);
+        GLES20.glTexParameteri(GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR);
+        GLES20.glTexParameteri(GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR);
+        GLES20.glBindTexture(GL_TEXTURE_2D, GLES20.GL_NONE);
+
+        // 创建并初始化 FBO
+        GLES20.glGenFramebuffers(1, fboId, 0);
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, fboId[0]);
+        GLES20.glBindTexture(GL_TEXTURE_2D, fboTextureId[0]);
+        GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER, GLES20.GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, fboTextureId[0], 0);
+        GLES20.glTexImage2D(GL_TEXTURE_2D, 0, GLES20.GL_RGBA, width, height, 0, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, null);
+        if (GLES20.glCheckFramebufferStatus(GLES20.GL_FRAMEBUFFER) != GLES20.GL_FRAMEBUFFER_COMPLETE) {
+            Log.e(TAG, "FBOSample::CreateFrameBufferObj glCheckFramebufferStatus status != GL_FRAMEBUFFER_COMPLETE");
+            return false;
+        }
+        GLES20.glBindTexture(GL_TEXTURE_2D, GLES20.GL_NONE);
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, GLES20.GL_NONE);
+        return true;
     }
 
     public void handleTouchDown(float normalizedX, float normalizedY) {

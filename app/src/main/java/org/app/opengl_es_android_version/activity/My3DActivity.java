@@ -6,6 +6,8 @@ import android.content.pm.ConfigurationInfo;
 import android.opengl.GLSurfaceView;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,7 +25,7 @@ public class My3DActivity extends AppCompatActivity implements View.OnTouchListe
 
     private final String TAG = My3DRenderer_1.class.getSimpleName();
 
-    private GLSurfaceView glSurfaceView;
+    public GLSurfaceView glSurfaceView;
     private AppCompatSpinner functionListSp;
 
 
@@ -131,6 +133,14 @@ public class My3DActivity extends AppCompatActivity implements View.OnTouchListe
         }
         return false;
     }
+
+    public Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            My3DActivity.this.glSurfaceView.requestRender();
+        }
+    };
 
     AdapterView.OnItemSelectedListener spTestListener = new AdapterView.OnItemSelectedListener() {
         @Override
