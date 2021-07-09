@@ -116,14 +116,15 @@ public class Ball3D extends Object3D {
 
     @Override
     protected void draw() {
-
         ColorHelper.setColor(colorShaderProgram.aColorLocation, color);
         GLES20.glUniformMatrix4fv(colorShaderProgram.aMatrixLocation, 1, false, mvpMatrix, 0);
         GLES20.glVertexAttribPointer(colorShaderProgram.aPositionLocation, 3, GLES20.GL_FLOAT,
                 false, 3 * 4, vertexArray.getFloatBuffer());
 
         GLES20.glEnableVertexAttribArray(colorShaderProgram.aPositionLocation);
+        GLES20.glEnable(GLES20.GL_DEPTH_TEST);
         GLES20.glDrawArrays(GLES20.GL_LINE_STRIP, 0, count);
+        GLES20.glDisable(GLES20.GL_DEPTH_TEST);
     }
 
     @Override

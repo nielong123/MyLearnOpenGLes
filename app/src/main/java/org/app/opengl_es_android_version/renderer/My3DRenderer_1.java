@@ -11,7 +11,10 @@ import org.app.opengl_es_android_version.activity.My3DActivity;
 import org.app.opengl_es_android_version.object.object3d.CoordinateLines3D;
 import org.app.opengl_es_android_version.object.object3d.Object3D;
 import org.app.opengl_es_android_version.object.object3d.Planet;
+import org.app.opengl_es_android_version.object.object3d.Rectangle3D;
+import org.app.opengl_es_android_version.object.object3d.TestTable3D;
 import org.app.opengl_es_android_version.program.MyColorShaderProgram;
+import org.app.opengl_es_android_version.program.TextureShaderProgram;
 import org.app.opengl_es_android_version.util.Geometry;
 import org.app.opengl_es_android_version.util.VaryTools;
 
@@ -30,6 +33,7 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
     private int width, height;
 
     MyColorShaderProgram colorShaderProgram;
+    TextureShaderProgram textureShaderProgram;
 
     List<Object3D> drawObjectList = new ArrayList<>();
 
@@ -50,6 +54,9 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         colorShaderProgram = new MyColorShaderProgram(context);
+        textureShaderProgram = new TextureShaderProgram(context);
+
+        drawObjectList.add(new CoordinateLines3D().setColorShaderProgram(colorShaderProgram));
 
         earth = new Planet(viewCenterPoint.x,
                 viewCenterPoint.y,
@@ -64,11 +71,12 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
                 context.getColor(R.color.colorPrimaryDark));
         moon.setColorShaderProgram(colorShaderProgram);
 
-        drawObjectList.add(new CoordinateLines3D().setColorShaderProgram(colorShaderProgram));
 //        drawObjectList.add(new TestFbo3D(context));
         drawObjectList.add(earth);
         drawObjectList.add(moon);
-//        drawObjectList.add(new TestTable3D(context).setColorShaderProgram(colorShaderProgram));
+
+        drawObjectList.add(new Rectangle3D().setColorShaderProgram(colorShaderProgram));
+        drawObjectList.add(new TestTable3D(context).setTextureShaderProgram(textureShaderProgram));
     }
 
     @Override
@@ -88,7 +96,7 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
 
     @Override
     public void onDrawFrame(GL10 gl) {
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
 
         for (Object3D object3D : drawObjectList) {
             object3D.draw(varyTools.getViewProjectionMatrix());
@@ -122,6 +130,7 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
     public void resetViewProjection() {
         varyTools.setProjection(width, height);
         varyTools.resetMatrix();
+        ((My3DActivity) context).handler.sendEmptyMessage(0);
     }
 
     public void startMoonRotating() {

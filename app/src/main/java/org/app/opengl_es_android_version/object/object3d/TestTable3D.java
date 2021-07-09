@@ -6,15 +6,11 @@ import android.opengl.Matrix;
 
 import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.data.VertexArray;
-import org.app.opengl_es_android_version.program.MyColorShaderProgram;
-import org.app.opengl_es_android_version.program.TextureShaderProgram;
 import org.app.opengl_es_android_version.util.TextureHelper;
 
 import static org.app.opengl_es_android_version.contant.Constants.BYTES_PER_FLOAT;
 
 public class TestTable3D extends Object3D {
-
-    TextureShaderProgram shaderProgram;
 
     private int textureId;
 
@@ -44,7 +40,7 @@ public class TestTable3D extends Object3D {
         vertexArray = new VertexArray(VERTEX_DATA);
         Matrix.setIdentityM(modelMatrix, 0);
         textureId = TextureHelper.loadTexture(context, R.drawable.map1);
-        shaderProgram = new TextureShaderProgram(context);
+//        shaderProgram = new TextureShaderProgram(context);
     }
 
     @Override
@@ -54,31 +50,31 @@ public class TestTable3D extends Object3D {
 
     @Override
     public void unbind() {
-        GLES20.glDisableVertexAttribArray(shaderProgram.aPositionLocation);
-        GLES20.glDisableVertexAttribArray(shaderProgram.aTextureCoordinatesLocation);
+        GLES20.glDisableVertexAttribArray(textureShaderProgram.aPositionLocation);
+        GLES20.glDisableVertexAttribArray(textureShaderProgram.aTextureCoordinatesLocation);
     }
 
     @Override
     public void draw() {
-//        GLES20.glDisable(GLES20.GL_DEPTH_TEST);
         vertexArray.setVertexAttributePointer(
-                shaderProgram.aPositionLocation,
+                textureShaderProgram.aPositionLocation,
                 POSITION_COMPONENT_COUNT,
                 STRIDE,
                 0
         );
         vertexArray.setVertexAttributePointer(
-                shaderProgram.aTextureCoordinatesLocation,
+                textureShaderProgram.aTextureCoordinatesLocation,
                 TEXTURE_COORDINATES_COMPONENT_COUNT,
                 STRIDE,
                 POSITION_COMPONENT_COUNT
         );
-        shaderProgram.userProgram();
-        shaderProgram.setUniforms(mvpMatrix, textureId);
-        GLES20.glEnable(GLES20.GL_TEXTURE_2D);
+        textureShaderProgram.userProgram();
+        textureShaderProgram.setUniforms(mvpMatrix, textureId);
+//        GLES20.glEnable(GLES20.GL_TEXTURE_2D);
+        GLES20.glEnable(GLES20.GL_DEPTH_TEST);
         GLES20.glDrawArrays(GLES20.GL_TRIANGLE_FAN, 0, 6);
-        GLES20.glDisable(GLES20.GL_TEXTURE_2D);
-//        GLES20.glEnable(GLES20.GL_DEPTH_TEST);
+//        GLES20.glDisable(GLES20.GL_TEXTURE_2D);
+        GLES20.glDisable(GLES20.GL_DEPTH_TEST);
     }
 
 }

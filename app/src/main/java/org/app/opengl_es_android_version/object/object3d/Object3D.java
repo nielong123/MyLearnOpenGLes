@@ -5,6 +5,7 @@ import android.opengl.Matrix;
 
 import org.app.opengl_es_android_version.data.VertexArray;
 import org.app.opengl_es_android_version.program.MyColorShaderProgram;
+import org.app.opengl_es_android_version.program.TextureShaderProgram;
 
 public abstract class Object3D {
 
@@ -15,6 +16,7 @@ public abstract class Object3D {
     public float[] mvpMatrix = new float[16];
 
     protected MyColorShaderProgram colorShaderProgram;
+    protected TextureShaderProgram textureShaderProgram;
 
     protected VertexArray vertexArray;
 
@@ -26,6 +28,7 @@ public abstract class Object3D {
     /**
      * 这个类中绑定纹理
      */
+    @Deprecated
     public void bindData(Context context) {
     }
 
@@ -51,6 +54,11 @@ public abstract class Object3D {
     public Object3D setColorShaderProgram(MyColorShaderProgram colorShaderProgram) {
         this.colorShaderProgram = colorShaderProgram;
         this.context = colorShaderProgram.getContext();
+        return this;
+    }
+
+    public Object3D setTextureShaderProgram(TextureShaderProgram textureShaderProgram) {
+        this.textureShaderProgram = textureShaderProgram;
         return this;
     }
 }
