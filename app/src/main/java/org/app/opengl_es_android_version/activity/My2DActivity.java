@@ -3,11 +3,14 @@ package org.app.opengl_es_android_version.activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.ConfigurationInfo;
+import android.graphics.Bitmap;
 import android.opengl.GLSurfaceView;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -16,21 +19,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.renderer.My2DRenderer_1;
 
+import java.nio.ByteBuffer;
+
 import static android.opengl.GLSurfaceView.RENDERMODE_WHEN_DIRTY;
 
-public class My2DActivity extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener {
+public class My2DActivity extends AppCompatActivity implements View.OnTouchListener {
 
     boolean rendererSet;
 
+    ImageView mirrorIv;
     GLSurfaceView glSurfaceView;
 
-    //    My2DRenderer my2DRenderer;
     My2DRenderer_1 my2DRenderer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cube);
+
+        mirrorIv = findViewById(R.id.mirrorIv);
         glSurfaceView = findViewById(R.id.glSurfaceView);
         glSurfaceView.setOnTouchListener(this);
         ActivityManager activityManager =
@@ -46,15 +53,14 @@ public class My2DActivity extends AppCompatActivity implements View.OnTouchListe
         if (supportEs2) {
             glSurfaceView.setEGLContextClientVersion(2);
             my2DRenderer = new My2DRenderer_1(this);
+            my2DRenderer.setCallback(callback);
             glSurfaceView.setRenderer(my2DRenderer);
             glSurfaceView.setRenderMode(RENDERMODE_WHEN_DIRTY);
             rendererSet = true;
         } else {
             Toast.makeText(this, "不支持openGL es 2.0", Toast.LENGTH_SHORT).show();
         }
-        findViewById(R.id.button1).setOnClickListener(this);
     }
-
 
     @Override
     protected void onResume() {
@@ -71,6 +77,23 @@ public class My2DActivity extends AppCompatActivity implements View.OnTouchListe
             glSurfaceView.onPause();
         }
     }
+
+    My2DRenderer_1.Callback callback = new My2DRenderer_1.Callback() {
+        @Override
+        public void onReadPixData(final ByteBuffer data, final int width, final int height) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.e("wuwang", "callback success");
+                    Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+                    bitmap.copyPixelsFromBuffer(data);
+                    saveBitmap(bitmap);
+                    data.clear();
+                }
+            }).start();
+        }
+
+    };
 
     /***
      * 我们在着色器中需要使用归一化设备坐标，因此我们需要把触控事件坐标转换回归一化设备坐标。
@@ -141,10 +164,24 @@ public class My2DActivity extends AppCompatActivity implements View.OnTouchListe
         return true;
     }
 
-    @Override
     public void onClick(View v) {
         my2DRenderer.resetMatrix();
-//        my2DRenderer.add2DObject();
         glSurfaceView.requestRender();
+    }
+
+    public void onMakeMirror(View view) {
+        my2DRenderer.setMirror(true);
+        glSurfaceView.requestRender();
+    }
+
+    //图片保存
+    public void saveBitmap(final Bitmap b) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+//                Toast.makeText(FBOActivity.this, "保存成功->"+jpegName, Toast.LENGTH_SHORT).show();
+                mirrorIv.setImageBitmap(b);
+            }
+        });
     }
 }

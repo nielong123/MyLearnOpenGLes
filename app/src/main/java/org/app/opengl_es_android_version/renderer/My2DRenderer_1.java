@@ -3,7 +3,6 @@ package org.app.opengl_es_android_version.renderer;
 import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
-import android.util.Log;
 
 import org.app.opengl_es_android_version.object.object2d.Circle;
 import org.app.opengl_es_android_version.object.object2d.Object2D;
@@ -18,6 +17,7 @@ import org.app.opengl_es_android_version.program.TextureShaderProgram;
 import org.app.opengl_es_android_version.util.Geometry;
 import org.app.opengl_es_android_version.util.VaryTools;
 
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -40,17 +40,24 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
 
     Object2D object2D;
 
-    int width, height;
+    private ByteBuffer mBuffer;
 
-    public My2DRenderer_1(Context context) {
-        this.context = context;
-        varyTools = new VaryTools();
-    }
+    private Callback mCallback;
+
+    int width, height;
 
     List<Geometry.Rect> rects = new ArrayList<>();
     int[] textureIds = new int[]{};
     TextureShaderProgram textureShaderProgram;
     MyColorShaderProgram colorShaderProgram;
+    private int[] renderBuffer = new int[1];
+
+    private boolean isMirror = false;
+
+    public My2DRenderer_1(Context context) {
+        this.context = context;
+        varyTools = new VaryTools();
+    }
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
@@ -92,7 +99,7 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
     }
 
     int[] fboId = {0};
-    int[] fboTextureId = {0};
+    int[] fboTextureId = {0, 0};
 
     @Override
     public void onDrawFrame(GL10 gl) {
@@ -100,13 +107,17 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
 
         initFbo();
+        bindFbo();
 
         for (Object2D object2D : drawObjectList) {
             object2D.draw(varyTools.getViewProjectionMatrix());
         }
-
-        GLES20.glDeleteFramebuffers(1, fboId, 0);
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
+        if (mCallback != null && isMirror) {
+            isMirror = false;
+            GLES20.glReadPixels(0, 0, width, height, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, mBuffer);
+            mCallback.onReadPixData(mBuffer, width, height);
+        }
+        clearFbo();
 
 //        if (textureIds != null) {
 //            GLES20.glDeleteTextures(textureIds.length, textureIds, 0);
@@ -122,28 +133,53 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
 
 
     private boolean initFbo() {
-        // 创建并初始化 FBO 纹理
-        GLES20.glGenTextures(1, fboTextureId, 0);
-        GLES20.glBindTexture(GL_TEXTURE_2D, fboTextureId[0]);
-        GLES20.glTexParameterf(GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE);
-        GLES20.glTexParameterf(GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE);
-        GLES20.glTexParameteri(GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR);
-        GLES20.glTexParameteri(GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR);
-        GLES20.glBindTexture(GL_TEXTURE_2D, GLES20.GL_NONE);
-
-        // 创建并初始化 FBO
         GLES20.glGenFramebuffers(1, fboId, 0);
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, fboId[0]);
-        GLES20.glBindTexture(GL_TEXTURE_2D, fboTextureId[0]);
-        GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER, GLES20.GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, fboTextureId[0], 0);
-        GLES20.glTexImage2D(GL_TEXTURE_2D, 0, GLES20.GL_RGBA, width, height, 0, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, null);
-        if (GLES20.glCheckFramebufferStatus(GLES20.GL_FRAMEBUFFER) != GLES20.GL_FRAMEBUFFER_COMPLETE) {
-            Log.e(TAG, "FBOSample::CreateFrameBufferObj glCheckFramebufferStatus status != GL_FRAMEBUFFER_COMPLETE");
-            return false;
+        GLES20.glGenRenderbuffers(1, renderBuffer, 0);
+
+        GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER, renderBuffer[0]);
+        GLES20.glRenderbufferStorage(GLES20.GL_RENDERBUFFER,
+                GLES20.GL_DEPTH_COMPONENT16, width, height);
+        GLES20.glFramebufferRenderbuffer(GLES20.GL_FRAMEBUFFER, GLES20.GL_DEPTH_ATTACHMENT,
+                GLES20.GL_RENDERBUFFER, renderBuffer[0]);
+        GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER, 0);
+        // 创建并初始化 FBO 纹理
+        GLES20.glGenTextures(2, fboTextureId, 0);
+        for (int i = 0; i < 2; i++) {
+            GLES20.glBindTexture(GL_TEXTURE_2D, fboTextureId[i]);
+//            if (i == 0) {
+//                GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, mBitmap, 0);
+//            } else {
+            GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, width, height,
+                    0, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, null);
+//            }
+            GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_NEAREST);
+            GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR);
+            GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE);
+            GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE);
+
+            GLES20.glBindTexture(GL_TEXTURE_2D, GLES20.GL_NONE);
         }
-        GLES20.glBindTexture(GL_TEXTURE_2D, GLES20.GL_NONE);
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, GLES20.GL_NONE);
+
+        mBuffer = ByteBuffer.allocate(width * height * 4);
         return true;
+    }
+
+    private void bindFbo() {
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, renderBuffer[0]);
+        GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER, GLES20.GL_COLOR_ATTACHMENT0,
+                GLES20.GL_TEXTURE_2D, fboTextureId[1], 0);
+        GLES20.glFramebufferRenderbuffer(GLES20.GL_FRAMEBUFFER, GLES20.GL_DEPTH_ATTACHMENT,
+                GLES20.GL_RENDERBUFFER, renderBuffer[0]);
+        // 解绑纹理
+//        GLES20.glBindTexture(GL_TEXTURE_2D, GLES20.GL_NONE);
+        // 解绑 FBO
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, GLES20.GL_NONE);
+    }
+
+    private void clearFbo() {
+        GLES20.glDeleteTextures(2, fboTextureId, 0);
+        GLES20.glDeleteRenderbuffers(1, renderBuffer, 0);
+        GLES20.glDeleteFramebuffers(1, fboId, 0);
     }
 
     public void handleTouchDown(float normalizedX, float normalizedY) {
@@ -183,6 +219,20 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
         }
 
         return rectList;
+    }
+
+    public void setMirror(boolean mirror) {
+        isMirror = mirror;
+    }
+
+    public void setCallback(Callback callback) {
+        this.mCallback = callback;
+    }
+
+    public interface Callback {
+
+        void onReadPixData(ByteBuffer data, int width, int height);
+
     }
 
 }
