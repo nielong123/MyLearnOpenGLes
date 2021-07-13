@@ -6,6 +6,7 @@ import android.opengl.Matrix;
 import org.app.opengl_es_android_version.data.VertexArray;
 import org.app.opengl_es_android_version.program.MyColorShaderProgram;
 import org.app.opengl_es_android_version.program.TextureShaderProgram;
+import org.app.opengl_es_android_version.util.ErrorUtils;
 
 public abstract class Object3D {
 
@@ -49,6 +50,7 @@ public abstract class Object3D {
         Matrix.multiplyMM(mvpMatrix, 0, viewProjectMatrix, 0, modelMatrix, 0);
         draw();
         unbind();
+        ErrorUtils.getError();
     }
 
     public Object3D setColorShaderProgram(MyColorShaderProgram colorShaderProgram) {

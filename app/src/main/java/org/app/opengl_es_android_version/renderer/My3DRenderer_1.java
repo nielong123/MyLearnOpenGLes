@@ -11,8 +11,8 @@ import org.app.opengl_es_android_version.activity.My3DActivity;
 import org.app.opengl_es_android_version.object.object3d.CoordinateLines3D;
 import org.app.opengl_es_android_version.object.object3d.Object3D;
 import org.app.opengl_es_android_version.object.object3d.Planet;
+import org.app.opengl_es_android_version.object.object3d.Point3D;
 import org.app.opengl_es_android_version.object.object3d.Rectangle3D;
-import org.app.opengl_es_android_version.object.object3d.TestTable3D;
 import org.app.opengl_es_android_version.program.MyColorShaderProgram;
 import org.app.opengl_es_android_version.program.TextureShaderProgram;
 import org.app.opengl_es_android_version.util.Geometry;
@@ -53,6 +53,7 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        GLES20.glEnable(gl.GL_MULTISAMPLE);
         colorShaderProgram = new MyColorShaderProgram(context);
         textureShaderProgram = new TextureShaderProgram(context);
 
@@ -74,9 +75,19 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
 //        drawObjectList.add(new TestFbo3D(context));
         drawObjectList.add(earth);
         drawObjectList.add(moon);
+//        for (float i = 0; i < 10; i++) {
+//            Random random = new Random();
+//            float dis = (float) random.nextInt(2) / (float) random.nextInt(2) + i / (float) random.nextInt(20);
+//            drawObjectList.add(new Planet(viewCenterPoint.x + dis,
+//                    viewCenterPoint.x + dis,
+//                    viewCenterPoint.z + dis,
+//                    0.3f, context.getColor(R.color.red1))
+//                    .setColorShaderProgram(colorShaderProgram));
+//        }
 
         drawObjectList.add(new Rectangle3D().setColorShaderProgram(colorShaderProgram));
-        drawObjectList.add(new TestTable3D(context).setTextureShaderProgram(textureShaderProgram));
+        drawObjectList.add(new Point3D(2f, 2f, 2f).setColorShaderProgram(colorShaderProgram));
+//        drawObjectList.add(new TestTable3D(context).setTextureShaderProgram(textureShaderProgram));
     }
 
     @Override

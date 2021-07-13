@@ -1,11 +1,12 @@
 #version 100
 attribute vec4 a_Position;
 attribute vec2 a_TexCoordinate;
-varying vec2 v_TexCoord;
 uniform mat4 u_Matrix;
+uniform float m_pointSize;
 
 void main()
 {
-    v_TexCoord = a_TexCoordinate;
+    gl_PointSize = m_pointSize;
+//    gl_PointSize = 32.0;
     gl_Position = u_Matrix * a_Position;
 }

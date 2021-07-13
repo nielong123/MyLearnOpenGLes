@@ -5,13 +5,13 @@ import android.opengl.GLES20;
 
 import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.contant.Constants;
-import org.app.opengl_es_android_version.util.ColorHelper;
 
 final public class MyColorShaderProgram extends ShaderProgram {
 
     public final int aPositionLocation;
     public final int aMatrixLocation;
     public final int aColorLocation;
+    public final int aPointSizeLocation;
 
     private Context context;
 
@@ -22,6 +22,7 @@ final public class MyColorShaderProgram extends ShaderProgram {
         aMatrixLocation = GLES20.glGetUniformLocation(programId, Constants.U_MATRIX);
         aPositionLocation = GLES20.glGetAttribLocation(programId, Constants.A_POSITION);
         aColorLocation = GLES20.glGetUniformLocation(programId, Constants.A_COLOR);
+        aPointSizeLocation = GLES20.glGetUniformLocation(programId, Constants.A_POINTSIZE);
     }
 
 

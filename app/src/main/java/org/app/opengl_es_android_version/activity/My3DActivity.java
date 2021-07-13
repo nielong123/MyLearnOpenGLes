@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSpinner;
 
 import org.app.opengl_es_android_version.R;
+import org.app.opengl_es_android_version.config.MyConfigChooser;
 import org.app.opengl_es_android_version.renderer.My3DRenderer_1;
 import org.app.opengl_es_android_version.util.ScreenTools;
 
@@ -60,6 +61,7 @@ public class My3DActivity extends AppCompatActivity implements View.OnTouchListe
         if (supportEs2) {
             glSurfaceView.setEGLContextClientVersion(2);
             my3DRenderer1 = new My3DRenderer_1(this);
+            glSurfaceView.setEGLConfigChooser(new MyConfigChooser());
             glSurfaceView.setRenderer(my3DRenderer1);
             glSurfaceView.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
             rendererSet = true;

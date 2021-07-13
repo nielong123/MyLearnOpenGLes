@@ -7,7 +7,7 @@ import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.data.VertexArray;
 import org.app.opengl_es_android_version.util.ColorHelper;
 
-import static android.opengl.GLES20.GL_FLOAT;
+import static android.opengl.GLES20.GL_DEPTH_TEST;
 
 /***
  * 用折线来绘制一个圆形
@@ -44,16 +44,22 @@ public class CoordinateLines3D extends Object3D {
     protected void draw() {
         GLES20.glUniformMatrix4fv(colorShaderProgram.aMatrixLocation, 1, false, mvpMatrix, 0);
         //告诉opengl从缓冲区vertextData中取数据找到属性a_Position的数据
-        GLES20.glVertexAttribPointer(colorShaderProgram.aPositionLocation,
-                POSITION_COMPONENT_COUNT, GL_FLOAT, false, 0, vertexArray.getFloatBuffer());
+        vertexArray.enableVertexAttributePointer(colorShaderProgram.aPositionLocation, POSITION_COMPONENT_COUNT,
+                0, 0);
+//        GLES20.glVertexAttribPointer(colorShaderProgram.aPositionLocation,
+//                POSITION_COMPONENT_COUNT, GL_FLOAT, false, 0, vertexArray.getFloatBuffer());
         //使能顶点数组
         GLES20.glEnableVertexAttribArray(colorShaderProgram.aPositionLocation);
         ColorHelper.setColor(colorShaderProgram.aColorLocation, context.getColor(R.color.blue1));
-        GLES20.glDrawArrays(GLES20.GL_LINES, 0, count);
+        GLES20.glLineWidth(30);
+        GLES20.glEnable(GL_DEPTH_TEST);
+        GLES20.glDrawArrays(GLES20.GL_LINES, 0, 2);
+        GLES20.glLineWidth(1);
         ColorHelper.setColor(colorShaderProgram.aColorLocation, context.getColor(R.color.green1));
         GLES20.glDrawArrays(GLES20.GL_LINES, 2, 2);
         ColorHelper.setColor(colorShaderProgram.aColorLocation, context.getColor(R.color.red1));
         GLES20.glDrawArrays(GLES20.GL_LINES, 4, 2);
+        GLES20.glDisable(GL_DEPTH_TEST);
     }
 
     @Override

@@ -106,8 +106,8 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
 
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
 
-        initFbo();
-        bindFbo();
+        fboCreateTexture();
+        fboBegin();
 
         for (Object2D object2D : drawObjectList) {
             object2D.draw(varyTools.getViewProjectionMatrix());
@@ -117,7 +117,7 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
             GLES20.glReadPixels(0, 0, width, height, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, mBuffer);
             mCallback.onReadPixData(mBuffer, width, height);
         }
-        clearFbo();
+        fboEnd();
 
 //        if (textureIds != null) {
 //            GLES20.glDeleteTextures(textureIds.length, textureIds, 0);
@@ -132,7 +132,7 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
     }
 
 
-    private boolean initFbo() {
+    private boolean fboCreateTexture() {
         GLES20.glGenFramebuffers(1, fboId, 0);
         GLES20.glGenRenderbuffers(1, renderBuffer, 0);
 
@@ -161,22 +161,20 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
         }
 
         mBuffer = ByteBuffer.allocate(width * height * 4);
+
         return true;
     }
 
-    private void bindFbo() {
+    private void fboBegin() {
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, renderBuffer[0]);
         GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER, GLES20.GL_COLOR_ATTACHMENT0,
                 GLES20.GL_TEXTURE_2D, fboTextureId[1], 0);
         GLES20.glFramebufferRenderbuffer(GLES20.GL_FRAMEBUFFER, GLES20.GL_DEPTH_ATTACHMENT,
                 GLES20.GL_RENDERBUFFER, renderBuffer[0]);
-        // 解绑纹理
-//        GLES20.glBindTexture(GL_TEXTURE_2D, GLES20.GL_NONE);
-        // 解绑 FBO
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, GLES20.GL_NONE);
     }
 
-    private void clearFbo() {
+    private void fboEnd() {
         GLES20.glDeleteTextures(2, fboTextureId, 0);
         GLES20.glDeleteRenderbuffers(1, renderBuffer, 0);
         GLES20.glDeleteFramebuffers(1, fboId, 0);

@@ -3,6 +3,7 @@ package org.app.opengl_es_android_version.object.object3d;
 import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
+import android.util.Log;
 
 import org.app.opengl_es_android_version.data.VertexArray;
 import org.app.opengl_es_android_version.util.ColorHelper;
@@ -10,7 +11,11 @@ import org.app.opengl_es_android_version.util.Geometry;
 
 import java.util.ArrayList;
 
+import static org.app.opengl_es_android_version.contant.Constants.BYTES_PER_FLOAT;
+
 public class Ball3D extends Object3D {
+
+    final String TAG = Ball3D.class.getSimpleName();
 
     Geometry.Circle circle;
     int color = -1;
@@ -105,23 +110,21 @@ public class Ball3D extends Object3D {
             vertex[i] = alVertix.get(i);
         }
         vertexArray = new VertexArray(vertex);
+        Log.e(TAG, "initVertex: vertexArray " + vertexArray.getFloatBuffer().limit());
         return alVertix.size() / 3;
     }
 
     @Override
     public void bindData(Context context) {
         super.bindData(context);
-
     }
 
     @Override
     protected void draw() {
         ColorHelper.setColor(colorShaderProgram.aColorLocation, color);
         GLES20.glUniformMatrix4fv(colorShaderProgram.aMatrixLocation, 1, false, mvpMatrix, 0);
-        GLES20.glVertexAttribPointer(colorShaderProgram.aPositionLocation, 3, GLES20.GL_FLOAT,
-                false, 3 * 4, vertexArray.getFloatBuffer());
-
-        GLES20.glEnableVertexAttribArray(colorShaderProgram.aPositionLocation);
+        vertexArray.enableVertexAttributePointer(colorShaderProgram.aPositionLocation, 3,
+                0, 0);
         GLES20.glEnable(GLES20.GL_DEPTH_TEST);
         GLES20.glDrawArrays(GLES20.GL_LINE_STRIP, 0, count);
         GLES20.glDisable(GLES20.GL_DEPTH_TEST);

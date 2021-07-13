@@ -12,6 +12,8 @@ public class Constants {
 
     public static final String A_COLOR = "u_Color";
 
+    public static final String A_POINTSIZE = "m_pointSize";
+
     public static final String A_POSITION = "a_Position";
 
     public static final String A_COORDINATE = "a_TexCoordinate";
