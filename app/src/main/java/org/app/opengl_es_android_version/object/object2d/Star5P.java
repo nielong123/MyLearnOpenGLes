@@ -62,6 +62,7 @@ public class Star5P extends Object2D {
 
     @Override
     public void draw() {
+        colorShaderProgram.userProgram();
         GLES20.glUniformMatrix4fv(colorShaderProgram.aMatrixLocation, 0, false, mvpMatrix, 0);
         GLES20.glVertexAttribPointer(colorShaderProgram.aPositionLocation,
                 POSITION_COMPONENT_COUNT, GLES20.GL_FLOAT, false, 0, vertexArray.getFloatBuffer());
@@ -74,6 +75,8 @@ public class Star5P extends Object2D {
 
     @Override
     public void unbind() {
+        GLES20.glUseProgram(0);
+//        colorShaderProgram.delProgram();
         GLES20.glDisableVertexAttribArray(colorShaderProgram.aPositionLocation);
     }
 

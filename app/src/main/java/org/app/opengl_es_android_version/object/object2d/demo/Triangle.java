@@ -48,6 +48,7 @@ public class Triangle extends Object2D {
 
     @Override
     public void draw() {
+        colorShaderProgram.userProgram();
         GLES20.glUniformMatrix4fv(colorShaderProgram.aMatrixLocation, 1, false, mvpMatrix, 0);
         GLES20.glVertexAttribPointer(colorShaderProgram.aPositionLocation, 2, GLES20.GL_FLOAT,
                 false, 0, vertexArray.getFloatBuffer());
@@ -58,6 +59,7 @@ public class Triangle extends Object2D {
 
     @Override
     public void unbind() {
+        GLES20.glUseProgram(0);
         GLES20.glDisableVertexAttribArray(colorShaderProgram.aPositionLocation);
     }
 

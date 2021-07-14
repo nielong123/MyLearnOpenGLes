@@ -55,11 +55,13 @@ public class Circle extends Object2D {
 
     @Override
     public void unbind() {
+        GLES20.glUseProgram(0);
         GLES20.glDisableVertexAttribArray(colorShaderProgram.aPositionLocation);
     }
 
     @Override
     public void draw() {
+        colorShaderProgram.userProgram();
         //告诉opengl从缓冲区vertextData中取数据找到属性a_Position的数据
         GLES20.glVertexAttribPointer(colorShaderProgram.aPositionLocation,
                 POSITION_COMPONENT_COUNT, GLES20.GL_FLOAT, false, 0, vertexArray.getFloatBuffer());

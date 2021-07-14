@@ -51,13 +51,12 @@ public class MultipleTestTable2D extends Object2D {
     @Override
     public void bindData(Context context) {
         super.bindData(context);
-//        shaderProgram = new TextureShaderProgram(context);
     }
 
     @Override
     public void draw() {
-//        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
 
+        textureShaderProgram.userProgram();
         vertexArray.enableVertexAttributePointer(
                 textureShaderProgram.aPositionLocation,
                 POSITION_COMPONENT_COUNT,
@@ -80,6 +79,7 @@ public class MultipleTestTable2D extends Object2D {
 
     @Override
     public void unbind() {
+        GLES20.glUseProgram(0);
         GLES20.glDisableVertexAttribArray(textureShaderProgram.aPositionLocation);
         GLES20.glDisableVertexAttribArray(textureShaderProgram.aTextureCoordinatesLocation);
     }

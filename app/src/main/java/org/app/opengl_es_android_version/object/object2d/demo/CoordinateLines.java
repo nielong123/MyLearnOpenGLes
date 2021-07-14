@@ -4,11 +4,9 @@ import android.content.Context;
 import android.opengl.GLES20;
 
 import org.app.opengl_es_android_version.R;
-import org.app.opengl_es_android_version.contant.Constants;
 import org.app.opengl_es_android_version.data.VertexArray;
 import org.app.opengl_es_android_version.object.object2d.Object2D;
 import org.app.opengl_es_android_version.util.ColorHelper;
-import org.app.opengl_es_android_version.util.ShaderHelper;
 
 import static android.opengl.GLES20.GL_FLOAT;
 
@@ -52,6 +50,7 @@ public class CoordinateLines extends Object2D {
 
     @Override
     public void draw() {
+        colorShaderProgram.userProgram();
         GLES20.glUniformMatrix4fv(colorShaderProgram.aMatrixLocation, 1, false, mvpMatrix, 0);
         //告诉opengl从缓冲区vertextData中取数据找到属性a_Position的数据
         GLES20.glVertexAttribPointer(colorShaderProgram.aPositionLocation,
@@ -66,6 +65,7 @@ public class CoordinateLines extends Object2D {
 
     @Override
     public void unbind() {
+        GLES20.glUseProgram(0);
         GLES20.glDisableVertexAttribArray(aPositionLocation);
     }
 

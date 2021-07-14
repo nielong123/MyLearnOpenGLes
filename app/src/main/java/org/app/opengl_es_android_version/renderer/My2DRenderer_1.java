@@ -4,7 +4,9 @@ import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 
+import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.object.object2d.Circle;
+import org.app.opengl_es_android_version.object.object2d.MultipleTestTable2D;
 import org.app.opengl_es_android_version.object.object2d.Object2D;
 import org.app.opengl_es_android_version.object.object2d.Polyline;
 import org.app.opengl_es_android_version.object.object2d.Rectangle;
@@ -15,6 +17,7 @@ import org.app.opengl_es_android_version.object.object2d.demo.Triangle;
 import org.app.opengl_es_android_version.program.MyColorShaderProgram;
 import org.app.opengl_es_android_version.program.TextureShaderProgram;
 import org.app.opengl_es_android_version.util.Geometry;
+import org.app.opengl_es_android_version.util.TextureHelper;
 import org.app.opengl_es_android_version.util.VaryTools;
 
 import java.nio.ByteBuffer;
@@ -68,14 +71,6 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
         textureShaderProgram = new TextureShaderProgram(context);
         colorShaderProgram = new MyColorShaderProgram(context);
 
-//        textureIds = TextureHelper.loadMultipleTexture(context, R.drawable.jsy, rects.size());
-//        Log.e(TAG, "onSurfaceCreated: ");
-
-//        List<Rect> rectList = new ArrayList<>();
-//        rectList.add(new Geometry.Rect(0, 1, 1, 0));
-//        rectList.add(new Rect(-1, 1, 0, 0));
-//        drawObjectList.add(new MultipleTestTable2D(context, rectList));
-
         drawObjectList.add(new CoordinateLines(context).setColorShaderProgram(colorShaderProgram));
         drawObjectList.add(new Triangle().setColorShaderProgram(colorShaderProgram));
         drawObjectList.add(new Circle().setColorShaderProgram(colorShaderProgram));
@@ -85,10 +80,6 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
 
         drawObjectList.add(new Rectangle().setColorShaderProgram(colorShaderProgram));
 
-//        TestTable2D testTable2D = new TestTable2D();
-//        testTable2D.setTextureShaderProgram(textureShaderProgram);
-//        testTable2D.setTextureId(TextureHelper.loadTexture(context, R.drawable.jsy));
-//        drawObjectList.add(testTable2D);
     }
 
     @Override
@@ -109,6 +100,17 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
         fboCreateTexture();
         fboBegin();
 
+        if (textureIds != null) {
+            GLES20.glDeleteTextures(textureIds.length, textureIds, 0);
+        }
+        textureIds = new int[]{};
+        textureIds = TextureHelper.loadMultipleTexture(context, R.drawable.jsy, rects.size());
+        for (int i = 0; i < rects.size(); i++) {
+            Object2D object2D = new MultipleTestTable2D(textureIds[i], rects.get(i));
+            object2D.setTextureShaderProgram(textureShaderProgram);
+            object2D.draw(varyTools.getViewProjectionMatrix());
+        }
+
         for (Object2D object2D : drawObjectList) {
             object2D.draw(varyTools.getViewProjectionMatrix());
         }
@@ -118,17 +120,6 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
             mCallback.onReadPixData(mBuffer, width, height);
         }
         fboEnd();
-
-//        if (textureIds != null) {
-//            GLES20.glDeleteTextures(textureIds.length, textureIds, 0);
-//        }
-//        textureIds = new int[]{};
-//        textureIds = TextureHelper.loadMultipleTexture(context, R.drawable.jsy, rects.size());
-//        for (int i = 0; i < rects.size(); i++) {
-//            Object2D object2D = new MultipleTestTable2D(textureIds[i], rects.get(i));
-//            object2D.setTextureShaderProgram(textureShaderProgram);
-//            object2D.draw(varyTools.getViewProjectionMatrix());
-//        }
     }
 
 
@@ -202,9 +193,9 @@ public class My2DRenderer_1 implements GLSurfaceView.Renderer {
     }
 
     private List<Geometry.Rect> cutScreen() {
-        final int slice = 4;
-        final float width = 3;
-        final float height = 3;
+        final int slice = 3;
+        final float width = 0.8f;
+        final float height = 0.8f;
         List<Geometry.Rect> rectList = new ArrayList<>();
         for (int i = 1; i < slice + 1; i++) {
             float top = height * i / slice - height / 2;
