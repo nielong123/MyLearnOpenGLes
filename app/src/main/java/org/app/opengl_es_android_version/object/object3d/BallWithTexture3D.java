@@ -174,11 +174,14 @@ public class BallWithTexture3D extends Object3D {
         // 将最终变换矩阵写入
         ballColorProgram.setUniforms(mvpMatrix, textureId);
 
+//        GLES20.glEnable(GLES20.GL_TEXTURE);
         GLES20.glEnable(GLES20.GL_DEPTH_TEST);
         GLES20.glBindBuffer(GLES20.GL_ELEMENT_ARRAY_BUFFER, indexBuffer.getIndexBufferId());
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, numElements, GLES20.GL_UNSIGNED_SHORT, 0);
         GLES20.glBindBuffer(GLES20.GL_ELEMENT_ARRAY_BUFFER, 0);
         GLES20.glDisable(GLES20.GL_DEPTH_TEST);
+//        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0);
+//        GLES20.glDisable(GLES20.GL_TEXTURE);
     }
 
 
