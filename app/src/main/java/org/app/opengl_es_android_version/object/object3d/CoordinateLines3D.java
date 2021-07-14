@@ -42,6 +42,7 @@ public class CoordinateLines3D extends Object3D {
 
     @Override
     protected void draw() {
+        colorShaderProgram.userProgram();
         GLES20.glUniformMatrix4fv(colorShaderProgram.aMatrixLocation, 1, false, mvpMatrix, 0);
         //告诉opengl从缓冲区vertextData中取数据找到属性a_Position的数据
         vertexArray.enableVertexAttributePointer(colorShaderProgram.aPositionLocation, POSITION_COMPONENT_COUNT,
@@ -63,6 +64,7 @@ public class CoordinateLines3D extends Object3D {
     @Override
     public void unbind() {
         GLES20.glDisableVertexAttribArray(colorShaderProgram.aPositionLocation);
+        GLES20.glUseProgram(0);
     }
 
 }

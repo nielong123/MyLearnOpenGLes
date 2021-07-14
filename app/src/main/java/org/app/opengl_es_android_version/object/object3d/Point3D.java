@@ -21,12 +21,8 @@ public class Point3D extends Object3D {
     }
 
     @Override
-    public void unbind() {
-        GLES20.glDisableVertexAttribArray(colorShaderProgram.aPositionLocation);
-    }
-
-    @Override
     protected void draw() {
+        colorShaderProgram.userProgram();
         GLES20.glUniform1f(colorShaderProgram.aPointSizeLocation, 10);
         GLES20.glUniformMatrix4fv(colorShaderProgram.aMatrixLocation, 1, false, mvpMatrix, 0);
         ColorHelper.setColor(colorShaderProgram.aColorLocation, context.getColor(R.color.red1));
@@ -38,5 +34,11 @@ public class Point3D extends Object3D {
         GLES20.glDrawArrays(GLES20.GL_POINTS, 0, 2);
         GLES20.glDisable(GLES20.GL_BLEND);
         GLES20.glDisable(GLES20.GL_DEPTH_TEST);
+    }
+
+    @Override
+    public void unbind() {
+        GLES20.glDisableVertexAttribArray(colorShaderProgram.aPositionLocation);
+        GLES20.glUseProgram(0);
     }
 }

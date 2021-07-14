@@ -103,7 +103,6 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
 
         drawObjectList.add(new Rectangle3D().setColorShaderProgram(colorShaderProgram));
         drawObjectList.add(new Point3D(2f, 2f, 2f).setColorShaderProgram(colorShaderProgram));
-//        drawObjectList.add(new TestTable3D(context).setTextureShaderProgram(textureShaderProgram));
     }
 
     @Override

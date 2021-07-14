@@ -73,21 +73,19 @@ public class Rectangle3D extends Object3D {
 
     @Override
     protected void draw() {
+        colorShaderProgram.userProgram();
         GLES20.glUniformMatrix4fv(colorShaderProgram.aMatrixLocation, 1, false, mvpMatrix, 0);
         vertexArray.enableVertexAttributePointer(colorShaderProgram.aPositionLocation, POSITION_COMPONENT_COUNT, 0, 0);
-//        GLES20.glVertexAttribPointer(
-//                colorShaderProgram.aPositionLocation, POSITION_COMPONENT_COUNT, GL_FLOAT, false, 0, vertexArray.getFloatBuffer());
         //使能顶点数组
-//        GLES20.glEnableVertexAttribArray(colorShaderProgram.aPositionLocation);
         GLES20.glUniform4f(colorShaderProgram.aColorLocation, 1.0f, 0.0f, 2.0f, 0.0f);
         GLES20.glEnable(GLES20.GL_DEPTH_TEST);
         GLES20.glDrawElements(GLES20.GL_TRIANGLE_STRIP, indexArray.limit(), GL_UNSIGNED_BYTE, indexArray);
-//        GLES20.glDrawArrays(GLES20.GL_LINE_LOOP, 0, count);
         GLES20.glDisable(GLES20.GL_DEPTH_TEST);
     }
 
     @Override
     public void unbind() {
+        GLES20.glUseProgram(0);
         GLES20.glDisableVertexAttribArray(colorShaderProgram.aPositionLocation);
     }
 

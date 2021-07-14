@@ -143,7 +143,6 @@ public class BallWithTexture3D extends Object3D {
 
     private void buildProgram() {
         ballColorProgram = new BallColorProgram(context);
-        ballColorProgram.userProgram();
     }
 
     private void setAttributeStatus() {
@@ -166,22 +165,21 @@ public class BallWithTexture3D extends Object3D {
     public void unbind() {
         GLES20.glDisableVertexAttribArray(ballColorProgram.aPositionLocation);
         GLES20.glDisableVertexAttribArray(ballColorProgram.aTextureCoordinatesLocation);
+        GLES20.glUseProgram(0);
     }
 
     @Override
     protected void draw() {
         setAttributeStatus();
+        ballColorProgram.userProgram();
         // 将最终变换矩阵写入
         ballColorProgram.setUniforms(mvpMatrix, textureId);
 
-//        GLES20.glEnable(GLES20.GL_TEXTURE);
         GLES20.glEnable(GLES20.GL_DEPTH_TEST);
         GLES20.glBindBuffer(GLES20.GL_ELEMENT_ARRAY_BUFFER, indexBuffer.getIndexBufferId());
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, numElements, GLES20.GL_UNSIGNED_SHORT, 0);
         GLES20.glBindBuffer(GLES20.GL_ELEMENT_ARRAY_BUFFER, 0);
         GLES20.glDisable(GLES20.GL_DEPTH_TEST);
-//        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0);
-//        GLES20.glDisable(GLES20.GL_TEXTURE);
     }
 
 

@@ -11,8 +11,6 @@ import org.app.opengl_es_android_version.util.Geometry;
 
 import java.util.ArrayList;
 
-import static org.app.opengl_es_android_version.contant.Constants.BYTES_PER_FLOAT;
-
 public class Ball3D extends Object3D {
 
     final String TAG = Ball3D.class.getSimpleName();
@@ -121,6 +119,7 @@ public class Ball3D extends Object3D {
 
     @Override
     protected void draw() {
+        colorShaderProgram.userProgram();
         ColorHelper.setColor(colorShaderProgram.aColorLocation, color);
         GLES20.glUniformMatrix4fv(colorShaderProgram.aMatrixLocation, 1, false, mvpMatrix, 0);
         vertexArray.enableVertexAttributePointer(colorShaderProgram.aPositionLocation, 3,
@@ -128,11 +127,13 @@ public class Ball3D extends Object3D {
         GLES20.glEnable(GLES20.GL_DEPTH_TEST);
         GLES20.glDrawArrays(GLES20.GL_LINE_STRIP, 0, count);
         GLES20.glDisable(GLES20.GL_DEPTH_TEST);
+        GLES20.glActiveTexture(0);
     }
 
     @Override
     public void unbind() {
         GLES20.glDisableVertexAttribArray(colorShaderProgram.aPositionLocation);
+        GLES20.glUseProgram(0);
     }
 
     public Geometry.Point getCenterPoint() {
