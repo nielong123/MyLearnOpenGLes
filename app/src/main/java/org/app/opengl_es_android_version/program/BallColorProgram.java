@@ -33,7 +33,7 @@ public class BallColorProgram extends ShaderProgram {
         super(context, vertexShaderResourceId, fragmentShaderResourceId);
     }
 
-    public void setUniforms(float[] matrix,int textureId){
+    public void setUniforms(float[] matrix, int textureId) {
         GLES20.glUniformMatrix4fv(uMatrixLocation, 1, false, matrix, 0);
         // 激活纹理单元0
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0);

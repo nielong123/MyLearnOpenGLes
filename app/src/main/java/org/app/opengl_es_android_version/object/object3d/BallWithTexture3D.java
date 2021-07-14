@@ -35,7 +35,8 @@ public class BallWithTexture3D extends Object3D {
     private int numElements = 0; // 记录要画多少个三角形
     private int textureId;
 
-    public BallWithTexture3D(Context context, float x, float y, float z, float radius) {
+    public BallWithTexture3D(Context context,
+                             float x, float y, float z, float radius) {
         this.circle = new Geometry.Circle(new Geometry.Point(x, y, z), radius);
         this.context = context;
         initVertexData();
@@ -164,6 +165,7 @@ public class BallWithTexture3D extends Object3D {
     @Override
     public void unbind() {
         GLES20.glDisableVertexAttribArray(ballColorProgram.aPositionLocation);
+        GLES20.glDisableVertexAttribArray(ballColorProgram.aTextureCoordinatesLocation);
     }
 
     @Override

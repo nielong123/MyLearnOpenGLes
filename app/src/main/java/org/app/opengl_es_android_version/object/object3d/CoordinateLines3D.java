@@ -46,12 +46,10 @@ public class CoordinateLines3D extends Object3D {
         //告诉opengl从缓冲区vertextData中取数据找到属性a_Position的数据
         vertexArray.enableVertexAttributePointer(colorShaderProgram.aPositionLocation, POSITION_COMPONENT_COUNT,
                 0, 0);
-//        GLES20.glVertexAttribPointer(colorShaderProgram.aPositionLocation,
-//                POSITION_COMPONENT_COUNT, GL_FLOAT, false, 0, vertexArray.getFloatBuffer());
         //使能顶点数组
         GLES20.glEnableVertexAttribArray(colorShaderProgram.aPositionLocation);
         ColorHelper.setColor(colorShaderProgram.aColorLocation, context.getColor(R.color.blue1));
-        GLES20.glLineWidth(30);
+        GLES20.glLineWidth(10);
         GLES20.glEnable(GL_DEPTH_TEST);
         GLES20.glDrawArrays(GLES20.GL_LINES, 0, 2);
         GLES20.glLineWidth(1);
