@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * Created by zzr on 2018/3/23.
  */
 
-public class Ball extends Object3D {
+public class BallWithTexture3D extends Object3D {
 
     private static final int POSITION_COORDIANTE_COMPONENT_COUNT = 3; // 每个顶点的坐标数 x y z
     private static final int TEXTURE_COORDIANTE_COMPONENT_COUNT = 2; // 每个顶点的坐标数 x y z
@@ -35,7 +35,7 @@ public class Ball extends Object3D {
     private int numElements = 0; // 记录要画多少个三角形
     private int textureId;
 
-    public Ball(Context context, float x, float y, float z, float radius) {
+    public BallWithTexture3D(Context context, float x, float y, float z, float radius) {
         this.circle = new Geometry.Circle(new Geometry.Point(x, y, z), radius);
         this.context = context;
         initVertexData();
@@ -44,7 +44,7 @@ public class Ball extends Object3D {
         setAttributeStatus();
     }
 
-    public Ball(Context context) {
+    public BallWithTexture3D(Context context) {
         this.context = context;
         initVertexData();
         initTexture();
@@ -58,6 +58,10 @@ public class Ball extends Object3D {
         short offset = 0;
         ArrayList<Float> vertexList = new ArrayList<>(); // 使用list存放顶点数据
         ArrayList<Short> indexList = new ArrayList<>();// 顶点索引数组
+
+        float x = circle.center.x;
+        float y = circle.center.y;
+        float z = circle.center.z;
         for (int vAngle = 0; vAngle < 180; vAngle = vAngle + angleSpan) {
             for (int hAngle = 0; hAngle <= 360; hAngle = hAngle + angleSpan) {
                 // st纹理坐标
@@ -66,44 +70,44 @@ public class Ball extends Object3D {
                 float s1 = (hAngle + angleSpan) / 360.0f; //右下角s
                 float t1 = (vAngle + angleSpan) / 180.0f; //右下角t
                 // 左上角 0
-                float z0 = (float) (radius * Math.sin(Math.toRadians(vAngle)) * Math.cos(Math
+                float x0 = x + (float) (radius * Math.sin(Math.toRadians(vAngle)) * Math.sin(Math
                         .toRadians(hAngle)));
-                float x0 = (float) (radius * Math.sin(Math.toRadians(vAngle)) * Math.sin(Math
+                float y0 = y + (float) (radius * Math.cos(Math.toRadians(vAngle)));
+                float z0 = z + (float) (radius * Math.sin(Math.toRadians(vAngle)) * Math.cos(Math
                         .toRadians(hAngle)));
-                float y0 = (float) (radius * Math.cos(Math.toRadians(vAngle)));
                 vertexList.add(x0);
                 vertexList.add(y0);
                 vertexList.add(z0);
                 vertexList.add(s0);
                 vertexList.add(t0);
                 // 右上角 1
-                float z1 = (float) (radius * Math.sin(Math.toRadians(vAngle)) * Math.cos(Math
+                float x1 = x + (float) (radius * Math.sin(Math.toRadians(vAngle)) * Math.sin(Math
                         .toRadians(hAngle + angleSpan)));
-                float x1 = (float) (radius * Math.sin(Math.toRadians(vAngle)) * Math.sin(Math
+                float y1 = y + (float) (radius * Math.cos(Math.toRadians(vAngle)));
+                float z1 = z + (float) (radius * Math.sin(Math.toRadians(vAngle)) * Math.cos(Math
                         .toRadians(hAngle + angleSpan)));
-                float y1 = (float) (radius * Math.cos(Math.toRadians(vAngle)));
                 vertexList.add(x1);
                 vertexList.add(y1);
                 vertexList.add(z1);
                 vertexList.add(s1);
                 vertexList.add(t0);
                 // 右下角 2
-                float z2 = (float) (radius * Math.sin(Math.toRadians(vAngle + angleSpan)) * Math
-                        .cos(Math.toRadians(hAngle + angleSpan)));
-                float x2 = (float) (radius * Math.sin(Math.toRadians(vAngle + angleSpan)) * Math
+                float x2 = x + (float) (radius * Math.sin(Math.toRadians(vAngle + angleSpan)) * Math
                         .sin(Math.toRadians(hAngle + angleSpan)));
-                float y2 = (float) (radius * Math.cos(Math.toRadians(vAngle + angleSpan)));
+                float y2 = y + (float) (radius * Math.cos(Math.toRadians(vAngle + angleSpan)));
+                float z2 = z + (float) (radius * Math.sin(Math.toRadians(vAngle + angleSpan)) * Math
+                        .cos(Math.toRadians(hAngle + angleSpan)));
                 vertexList.add(x2);
                 vertexList.add(y2);
                 vertexList.add(z2);
                 vertexList.add(s1);
                 vertexList.add(t1);
                 // 左下角 3
-                float z3 = (float) (radius * Math.sin(Math.toRadians(vAngle + angleSpan)) * Math
-                        .cos(Math.toRadians(hAngle)));
-                float x3 = (float) (radius * Math.sin(Math.toRadians(vAngle + angleSpan)) * Math
+                float x3 = x + (float) (radius * Math.sin(Math.toRadians(vAngle + angleSpan)) * Math
                         .sin(Math.toRadians(hAngle)));
-                float y3 = (float) (radius * Math.cos(Math.toRadians(vAngle + angleSpan)));
+                float y3 = y + (float) (radius * Math.cos(Math.toRadians(vAngle + angleSpan)));
+                float z3 = z + (float) (radius * Math.sin(Math.toRadians(vAngle + angleSpan)) * Math
+                        .cos(Math.toRadians(hAngle)));
                 vertexList.add(x3);
                 vertexList.add(y3);
                 vertexList.add(z3);

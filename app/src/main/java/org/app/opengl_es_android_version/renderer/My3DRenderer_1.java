@@ -8,7 +8,7 @@ import android.util.Log;
 
 import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.activity.My3DActivity;
-import org.app.opengl_es_android_version.object.object3d.Ball;
+import org.app.opengl_es_android_version.object.object3d.BallWithTexture3D;
 import org.app.opengl_es_android_version.object.object3d.CoordinateLines3D;
 import org.app.opengl_es_android_version.object.object3d.Object3D;
 import org.app.opengl_es_android_version.object.object3d.Planet;
@@ -85,7 +85,7 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
                         context.getColor(R.color.green1))
                         .setColorShaderProgram(colorShaderProgram));
 
-        drawObjectList.add(new Ball(context,
+        drawObjectList.add(new BallWithTexture3D(context,
                 viewCenterPoint.x + -1.6f,
                 viewCenterPoint.x + 1.2f,
                 viewCenterPoint.z + -0.75f,
