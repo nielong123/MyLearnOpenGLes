@@ -17,9 +17,6 @@ public class Point3D extends Object3D {
         vertexData[0] = x;
         vertexData[1] = y;
         vertexData[2] = z;
-//        vertexData[3] = 0;
-//        vertexData[4] = 3;
-//        vertexData[5] = 3;
         vertexArray = new VertexArray(vertexData);
     }
 
@@ -30,16 +27,14 @@ public class Point3D extends Object3D {
 
     @Override
     protected void draw() {
-        GLES20.glUniform1f(colorShaderProgram.aPointSizeLocation, 30);
+        GLES20.glUniform1f(colorShaderProgram.aPointSizeLocation, 10);
         GLES20.glUniformMatrix4fv(colorShaderProgram.aMatrixLocation, 1, false, mvpMatrix, 0);
         ColorHelper.setColor(colorShaderProgram.aColorLocation, context.getColor(R.color.red1));
         vertexArray.enableVertexAttributePointer(colorShaderProgram.aPositionLocation, 3,
                 0, 0);
         GLES20.glEnable(GLES20.GL_BLEND);
         GLES20.glEnable(GLES20.GL_DEPTH_TEST);
-//        GLES20.glHint(GLES20.GL_S,GL_FASTEST);
         GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA);
-//        GLES20.glDrawArrays(GLES20.GL_LINES, 0, 2);
         GLES20.glDrawArrays(GLES20.GL_POINTS, 0, 2);
         GLES20.glDisable(GLES20.GL_BLEND);
         GLES20.glDisable(GLES20.GL_DEPTH_TEST);

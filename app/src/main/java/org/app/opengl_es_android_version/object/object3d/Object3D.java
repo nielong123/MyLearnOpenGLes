@@ -21,6 +21,8 @@ public abstract class Object3D {
 
     protected VertexArray vertexArray;
 
+    private boolean isBind;
+
     public Object3D() {
         Matrix.setIdentityM(modelMatrix, 0);
         Matrix.setIdentityM(mvpMatrix, 0);
@@ -31,6 +33,7 @@ public abstract class Object3D {
      */
     @Deprecated
     public void bindData(Context context) {
+        isBind = true;
     }
 
     public abstract void unbind();
@@ -45,8 +48,9 @@ public abstract class Object3D {
      * @param viewProjectMatrix
      */
     public void draw(final float[] viewProjectMatrix) {
-
-        bindData(context);
+        if (!isBind) {
+            bindData(context);
+        }
         Matrix.multiplyMM(mvpMatrix, 0, viewProjectMatrix, 0, modelMatrix, 0);
         draw();
         unbind();

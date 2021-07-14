@@ -8,6 +8,9 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
+/***
+ * VAO模版
+ */
 public class VertexArray {
 
     private final FloatBuffer floatBuffer;

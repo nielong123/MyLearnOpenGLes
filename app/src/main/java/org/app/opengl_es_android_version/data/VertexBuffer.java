@@ -8,6 +8,10 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
+
+/***
+ * VBO 模版
+ */
 public class VertexBuffer {
 
     private final int bufferId;
@@ -52,6 +56,5 @@ public class VertexBuffer {
         GLES20.glEnableVertexAttribArray(attributeLocation);
         //解绑
         GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, 0);
-
     }
 }

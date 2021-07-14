@@ -9,6 +9,10 @@ import java.nio.ByteOrder;
 import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
 
+/***
+ * IBO —— IndexBufferObject 索引缓冲区
+ * 模版
+ */
 public class IndexBuffer {
 
     public final int indexBufferId;
@@ -24,12 +28,12 @@ public class IndexBuffer {
         //绑定数据
         GLES20.glBindBuffer(GLES20.GL_ELEMENT_ARRAY_BUFFER, buffers[0]);
         //将java数据转存至native
-        ShortBuffer indexArray = ByteBuffer.allocateDirect(indexData.length * Constants.BYTES_PER_FLOAT)
+        ShortBuffer indexArray = ByteBuffer.allocateDirect(indexData.length * Constants.BYTES_PER_SHORT)
                 .order(ByteOrder.nativeOrder())
                 .asShortBuffer()
                 .put(indexData);
         indexArray.position(0);
-        GLES20.glBufferData(GLES20.GL_ELEMENT_ARRAY_BUFFER, indexArray.capacity() * Constants.BYTES_PER_FLOAT,
+        GLES20.glBufferData(GLES20.GL_ELEMENT_ARRAY_BUFFER, indexArray.capacity() * Constants.BYTES_PER_SHORT,
                 indexArray, GLES20.GL_STATIC_DRAW);
         GLES20.glBindBuffer(GLES20.GL_ELEMENT_ARRAY_BUFFER, 0);
     }
@@ -53,5 +57,9 @@ public class IndexBuffer {
         GLES20.glBufferData(GLES20.GL_ELEMENT_ARRAY_BUFFER, indexArray.capacity() * Constants.BYTES_PER_INT,
                 indexArray, GLES20.GL_STATIC_DRAW);
         GLES20.glBindBuffer(GLES20.GL_ELEMENT_ARRAY_BUFFER, 0);
+    }
+
+    public int getIndexBufferId() {
+        return indexBufferId;
     }
 }

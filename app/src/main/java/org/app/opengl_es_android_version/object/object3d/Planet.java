@@ -2,6 +2,8 @@ package org.app.opengl_es_android_version.object.object3d;
 
 import android.opengl.Matrix;
 
+import org.app.opengl_es_android_version.util.TextureHelper;
+
 public class Planet extends Ball3D {
 
     float rotateCenterX, rotateCenterY, rotateCenterZ;

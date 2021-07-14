@@ -4,6 +4,9 @@ public class Constants {
 
     public static final int POSITION_COMPONENT_COUNT = 2;
 
+    public static final int BYTES_PER_BYTE = 1;
+
+    public static final int BYTES_PER_SHORT = 2;
     //float浮点型数据对于4个字节
     public static final int BYTES_PER_FLOAT = 4;
 

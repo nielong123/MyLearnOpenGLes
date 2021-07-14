@@ -8,6 +8,7 @@ import android.util.Log;
 
 import org.app.opengl_es_android_version.R;
 import org.app.opengl_es_android_version.activity.My3DActivity;
+import org.app.opengl_es_android_version.object.object3d.Ball;
 import org.app.opengl_es_android_version.object.object3d.CoordinateLines3D;
 import org.app.opengl_es_android_version.object.object3d.Object3D;
 import org.app.opengl_es_android_version.object.object3d.Planet;
@@ -64,6 +65,9 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
                 viewCenterPoint.z,
                 0.5f);
         earth.setColorShaderProgram(colorShaderProgram);
+        earth.setTextureShaderProgram(textureShaderProgram);
+        drawObjectList.add(earth);
+
         moon = new Planet(
                 viewCenterPoint.x + 1f,
                 viewCenterPoint.x + 1f,
@@ -71,10 +75,22 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
                 0.3f,
                 context.getColor(R.color.colorPrimaryDark));
         moon.setColorShaderProgram(colorShaderProgram);
-
-//        drawObjectList.add(new TestFbo3D(context));
-        drawObjectList.add(earth);
         drawObjectList.add(moon);
+
+        drawObjectList.add(
+                new Planet(viewCenterPoint.x + -1f,
+                        viewCenterPoint.x + 1f,
+                        viewCenterPoint.z + -1.5f,
+                        0.6f,
+                        context.getColor(R.color.green1))
+                        .setColorShaderProgram(colorShaderProgram));
+
+        drawObjectList.add(new Ball(context,
+                viewCenterPoint.x + -1.6f,
+                viewCenterPoint.x + 1.2f,
+                viewCenterPoint.z + -0.75f,
+                0.4f));
+
 //        for (float i = 0; i < 10; i++) {
 //            Random random = new Random();
 //            float dis = (float) random.nextInt(2) / (float) random.nextInt(2) + i / (float) random.nextInt(20);
