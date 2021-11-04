@@ -21,7 +21,6 @@ import org.app.opengl_es_android_version.util.VaryTools;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -141,7 +140,7 @@ public class My3DRenderer_1 implements GLSurfaceView.Renderer {
         if (dx == 0 || dy == 0) {
             return;
         }
-        varyTools.rotate(1f, 0, dx, 0);
+        varyTools.rotate(1f, dy, dx, 0);
     }
 
     /**
